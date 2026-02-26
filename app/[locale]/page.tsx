@@ -30,7 +30,7 @@ export async function generateMetadata({
     tr: {
       title: "Premium Web Tasarım ve Yazılım",
       description:
-        "Aksipal ile 5 günde yayına alınan premium web siteleri, şablon paketler ve özel yazılım projeleri.",
+        "Aksipal Web Studio ile 1 günde yayına alınan premium web siteleri, şablon paketler ve özel yazılım projeleri.",
     },
     en: {
       title: "Premium Web Design and Software",

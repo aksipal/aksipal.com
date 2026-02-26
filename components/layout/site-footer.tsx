@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Instagram, Linkedin, Youtube } from "lucide-react";
 
@@ -67,7 +68,16 @@ export function SiteFooter({ locale }: SiteFooterProps) {
     <footer className="mt-20 border-t border-white/10 bg-[#07070b]/70">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div className="space-y-4 lg:col-span-2">
-          <p className="text-lg font-semibold text-white">{siteConfig.legalName}</p>
+          <div className="flex items-center gap-2">
+            <Image
+              src="/favicon.png"
+              alt="Aksipal"
+              width={32}
+              height={32}
+              className="size-8 object-contain"
+            />
+            <p className="text-lg font-semibold text-white">{siteConfig.legalName}</p>
+          </div>
           <p className="max-w-md text-sm text-zinc-400">{copy.pitch}</p>
           <a
             href={whatsappHref}

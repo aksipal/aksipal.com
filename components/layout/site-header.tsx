@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { LeadDialog } from "@/components/contact/lead-dialog";
@@ -25,9 +26,14 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <Link href={withLocale(locale, "/")} className="group inline-flex items-center gap-2">
-            <span className="inline-flex size-8 items-center justify-center rounded-lg bg-[var(--accent)]/80 text-xs font-bold text-black">
-              A
-            </span>
+            <Image
+              src="/favicon.png"
+              alt="Aksipal"
+              width={40}
+              height={40}
+              className="size-10 object-contain"
+              priority
+            />
             <div className="leading-tight">
               <p className="text-sm font-semibold tracking-[0.08em] text-zinc-100 uppercase">
                 Aksipal

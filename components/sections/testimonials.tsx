@@ -4,7 +4,7 @@ const testimonialData = {
   tr: [
     {
       quote:
-        "Aksipal ile 6 günde yayına çıktık. Reklam trafiğimiz artık boşa gitmiyor, WhatsApp talepleri net arttı.",
+        "Aksipal ile 2 günde yayına çıktık. Reklam trafiğimiz artık boşa gitmiyor, WhatsApp talepleri net arttı.",
       author: "M. Demir",
       role: "Emlak Ofisi Sahibi",
     },

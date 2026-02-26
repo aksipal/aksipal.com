@@ -1,37 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aksipal.com
 
-## Getting Started
+**Aksipal Web Systems Studio** — Türkiye’deki küçük işletmeler (emlak, taşımacılık, restoran, klinik, spor salonu, enerji, danışmanlık vb.) için premium, karanlık temalı kurumsal site ve şablon vitrini.
 
-First, run the development server:
+- **Site:** [aksipal.com](https://aksipal.com)
+- **İki hizmet kolu:** Ürünleşmiş şablon paketleri (hızlı teslim) ve özel yazılım / e-ticaret / backend projeleri.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Tech Stack
+
+| Alan | Teknoloji |
+|------|-----------|
+| Framework | **Next.js 16** (App Router) |
+| Dil | **TypeScript** (strict) |
+| Stil | **Tailwind CSS v4** |
+| Bileşenler | **Radix UI** (Dialog vb.), **Lucide React** ikonlar |
+| Validasyon | **Zod** |
+| İçerik | **MDX** (blog), **gray-matter**, **reading-time** |
+| Font | **next/font** (Inter, Space Grotesk) |
+
+Server Components varsayılan; client bileşenler yalnızca etkileşim gereken yerlerde kullanılıyor.
+
+---
+
+## Proje Yapısı
+
+```
+├── app/
+│   ├── [locale]/           # TR/EN sayfalar (ana sayfa, şablonlar, hizmetler, işler, blog, ben-kimim, iletişim)
+│   ├── sitemap.ts
+│   ├── robots.ts
+│   └── opengraph-image.tsx
+├── components/
+│   ├── ui/                 # Button, Badge, Dialog, Input, Textarea, Label
+│   ├── layout/             # Header, Footer, LanguageSwitcher, MobileStickyCta
+│   ├── sections/           # Hero, TrustBar, TemplatePreview, CaseGrid, Testimonials, FAQ, ContactCta
+│   ├── templates/          # TemplateGallery (filtreli)
+│   ├── contact/            # LeadDialog, ContactForm, SubmitButton
+│   └── blog/               # MDX bileşenleri
+├── content/blog/           # MDX yazılar (frontmatter: title, description, publishedAt, tags)
+├── lib/
+│   ├── constants.ts       # Site adı, telefon, adres, sosyal linkler
+│   ├── i18n.ts             # Locale (tr/en), nav, withLocale
+│   ├── templates.ts        # Şablon kataloğu (sector, demoUrl, fiyat)
+│   ├── cases.ts            # Referans / portfolyo verisi
+│   ├── pricing.ts          # Paket kademeleri ve ileri hizmetler
+│   ├── seo.ts              # Metadata, JSON-LD (LocalBusiness, Service, BlogPosting)
+│   ├── whatsapp.ts         # WhatsApp ön doldurulmuş mesaj linki
+│   ├── validations.ts      # İletişim formu Zod şeması
+│   ├── rate-limit.ts       # Form rate limit (in-memory)
+│   ├── leads.ts            # Lead kayıt (.data/leads.jsonl)
+│   ├── mdx.ts              # Blog slug listesi, post okuma
+│   └── actions/            # submitContactAction (server action)
+├── public/images/          # Şablon ve vaka görselleri (templates/, cases/)
+└── proxy.ts                # Locale yönlendirme (/ → /tr)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Geliştirme
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Gereksinimler
 
-## Learn More
+- **Node.js** 18+
+- **npm** (veya yarn/pnpm/bun)
 
-To learn more about Next.js, take a look at the following resources:
+### Kurulum ve Çalıştırma
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Bağımlılıkları yükle
+npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Geliştirme sunucusu (http://localhost:3000)
+npm run dev
+```
 
-## Deploy on Vercel
+Tarayıcıda `http://localhost:3000` açıldığında otomatik olarak `/tr` ana sayfaya yönlendirilir.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Diğer Komutlar
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# aksipal.com" 
+```bash
+# Production build
+npm run build
+
+# Build sonrası sunucu
+npm run start
+
+# Lint
+npm run lint
+```
+
+---
+
+## Özellikler
+
+- **i18n:** TR ve EN; dil değiştirici header’da.
+- **Şablon vitrini:** Sektöre göre filtre, her kartta “Canlı Demo” ve “Bu Şablonu Seç” (WhatsApp/iletişim modal).
+- **SEO:** Sayfa bazlı metadata, OpenGraph, Twitter kartları, canonical, `sitemap.xml`, `robots.txt`, JSON-LD (LocalBusiness, Service, BlogPosting).
+- **İletişim formu:** Server Action, Zod validasyon, honeypot, rate limit; lead’ler `.data/leads.jsonl` dosyasına yazılır.
+- **WhatsApp CTA:** Ön doldurulmuş mesaj (sektör, şablon, şehir, bütçe); mobilde sticky CTA.
+- **Dark theme:** Tek tema; premium koyu palet, cam kartlar, aurora arka plan.
+- **Performans:** Server Components ağırlıklı, hafif client bundle, `next/image` ile görsel optimizasyonu.
+
+---
+
+## Ortam Değişkenleri
+
+Varsayılan kurulumda **zorunlu env yok**. Telefon, e-posta, adres ve sosyal linkler `lib/constants.ts` içinde tanımlı; ihtiyaca göre oradan veya env ile override edilebilir.
+
+---
+
+## Dağıtım
+
+- **Vercel:** Repo’yu bağlayıp `main` branch’i deploy etmek yeterli; Next.js otomatik tanınır.
+- **Build komutu:** `npm run build`
+- **Output:** Standart Next.js standalone değil; Vercel default kullanılır.
+
+Detay için: [Next.js Deployment](https://nextjs.org/docs/app/building-your-application/deploying).
+
+---
+
+## Lisans ve İletişim
+
+© Aksipal. Tüm hakları saklıdır.
+
+- **Web:** [aksipal.com](https://aksipal.com)
+- **E-posta:** b.aksipal@gmail.com
+- **WhatsApp:** +90 507 590 23 02

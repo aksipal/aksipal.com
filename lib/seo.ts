@@ -21,7 +21,7 @@ export function createPageMetadata({
   description,
   pathname,
   locale,
-  image = "/opengraph-image.png",
+  image = "/favicon.png",
 }: PageMetadataInput): Metadata {
   const canonical = absoluteUrl(`/${locale}${pathname === "/" ? "" : pathname}`);
 
@@ -45,14 +45,14 @@ export function createPageMetadata({
       images: [
         {
           url: absoluteUrl(image),
-          width: 1200,
-          height: 630,
+          width: 512,
+          height: 512,
           alt: title,
         },
       ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title,
       description,
       images: [absoluteUrl(image)],
@@ -68,7 +68,7 @@ export function getLocalBusinessJsonLd() {
     url: siteConfig.url,
     telephone: siteConfig.phone,
     email: siteConfig.email,
-    image: absoluteUrl("/opengraph-image.png"),
+    image: absoluteUrl("/favicon.png"),
     address: {
       "@type": "PostalAddress",
       ...siteConfig.address,

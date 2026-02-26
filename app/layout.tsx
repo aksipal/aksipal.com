@@ -19,8 +19,13 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.png", sizes: "192x192", type: "image/png" },
+    ],
     apple: "/favicon.png",
+    shortcut: "/favicon.png",
   },
   title: {
     default: siteConfig.title,
@@ -47,18 +52,18 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: absoluteUrl("/opengraph-image.png"),
-        width: 1200,
-        height: 630,
+        url: absoluteUrl("/favicon.png"),
+        width: 512,
+        height: 512,
         alt: siteConfig.name,
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [absoluteUrl("/opengraph-image.png")],
+    images: [absoluteUrl("/favicon.png")],
   },
 };
 

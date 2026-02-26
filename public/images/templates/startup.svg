@@ -1,0 +1,10 @@
+<svg width="960" height="640" viewBox="0 0 960 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="640" fill="#0a0b10"/>
+  <circle cx="780" cy="90" r="190" fill="#8B5CF6" fill-opacity="0.14"/>
+  <rect x="40" y="60" width="880" height="520" rx="24" fill="#111318" stroke="#262a38"/>
+  <rect x="80" y="120" width="800" height="88" rx="16" fill="#181b24"/>
+  <rect x="80" y="240" width="260" height="200" rx="16" fill="#1a1d28"/>
+  <rect x="360" y="240" width="260" height="200" rx="16" fill="#1a1d28"/>
+  <rect x="640" y="240" width="240" height="200" rx="16" fill="#1a1d28"/>
+  <text x="80" y="500" fill="#e4e6eb" font-family="Arial,sans-serif" font-size="36" font-weight="700">Startup</text>
+</svg>

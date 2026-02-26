@@ -1,0 +1,13 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#090A10"/>
+  <circle cx="1020" cy="110" r="210" fill="#7CFF92" fill-opacity="0.12"/>
+  <circle cx="200" cy="120" r="190" fill="#5FA7FF" fill-opacity="0.14"/>
+  <rect x="100" y="130" width="1000" height="540" rx="34" fill="#111321" stroke="#2A3144"/>
+  <rect x="150" y="190" width="900" height="84" rx="16" fill="#171B2E"/>
+  <rect x="150" y="302" width="420" height="280" rx="22" fill="#161A2A"/>
+  <rect x="600" y="302" width="450" height="70" rx="12" fill="#1B2036"/>
+  <rect x="600" y="392" width="340" height="28" rx="8" fill="#1B2036"/>
+  <rect x="600" y="434" width="300" height="28" rx="8" fill="#1B2036"/>
+  <rect x="600" y="490" width="240" height="70" rx="14" fill="#7CFF92" fill-opacity="0.2"/>
+  <text x="150" y="620" fill="#ECECF4" font-family="Arial, sans-serif" font-size="44" font-weight="700">Lojistik Flow</text>
+</svg>

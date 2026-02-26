@@ -21,7 +21,7 @@ export function createPageMetadata({
   description,
   pathname,
   locale,
-  image = "/favicon.png",
+  image = "/opengraph-image.png",
 }: PageMetadataInput): Metadata {
   const canonical = absoluteUrl(`/${locale}${pathname === "/" ? "" : pathname}`);
 
@@ -45,14 +45,14 @@ export function createPageMetadata({
       images: [
         {
           url: absoluteUrl(image),
-          width: 512,
-          height: 512,
+          width: 1200,
+          height: 630,
           alt: title,
         },
       ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
       description,
       images: [absoluteUrl(image)],

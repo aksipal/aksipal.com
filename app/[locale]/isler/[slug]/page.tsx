@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ExternalLink } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { cases } from "@/lib/cases";
 import { isLocale, locales, withLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/seo";
@@ -80,7 +82,22 @@ export default async function CaseDetailPage({
         />
         <div className="space-y-8 p-6 sm:p-8">
           <header className="space-y-3">
-            <Badge>{found.sector}</Badge>
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge>{found.sector}</Badge>
+              {found.demoUrl ? (
+                <Button asChild variant="outline" size="sm">
+                  <a
+                    href={found.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5"
+                  >
+                    <ExternalLink className="size-3.5" />
+                    {locale === "tr" ? "Canlı Demo" : "View Demo"}
+                  </a>
+                </Button>
+              ) : null}
+            </div>
             <h1 className="text-4xl font-semibold tracking-tight text-white">{found.title}</h1>
             <p className="max-w-2xl text-zinc-400">{found.summary}</p>
           </header>

@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
 import { withLocale } from "@/lib/i18n";
 import { cases } from "@/lib/cases";
@@ -17,7 +19,8 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
       title: "Referans Projeler",
       subtitle:
         "Sadece estetik değil; hız, SEO ve dönüşüm metrikleriyle ölçülen sonuçlar.",
-      detail: "Vaka İncelemesi",
+      detail: "Proje Detayı",
+      demo: "Canlı Demo",
       all: "Tüm İşleri Gör",
     },
     en: {
@@ -25,6 +28,7 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
       subtitle:
         "Not only visual quality; measurable outcomes across speed, SEO and conversion.",
       detail: "View Case Study",
+      demo: "View Demo",
       all: "See All Work",
     },
   }[locale];
@@ -74,12 +78,27 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
                   </div>
                 ))}
               </div>
-              <Link
-                href={withLocale(locale, `/isler/${item.slug}`)}
-                className="inline-flex text-sm font-medium text-[var(--accent)] hover:brightness-110"
-              >
-                {copy.detail}
-              </Link>
+              <div className="flex flex-wrap items-center justify-end gap-2">
+                <Link
+                  href={withLocale(locale, `/isler/${item.slug}`)}
+                  className="inline-flex text-sm font-medium text-[var(--accent)] hover:brightness-110"
+                >
+                  {copy.detail}
+                </Link>
+                {item.demoUrl ? (
+                  <Button asChild variant="outline" size="sm">
+                    <a
+                      href={item.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5"
+                    >
+                      <ExternalLink className="size-3.5" />
+                      {copy.demo}
+                    </a>
+                  </Button>
+                ) : null}
+              </div>
             </div>
           </article>
         ))}

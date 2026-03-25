@@ -23,8 +23,8 @@ export async function generateMetadata({
     title: locale === "tr" ? "Ben Kimim" : "About",
     description:
       locale === "tr"
-        ? "Aksipal arkasındaki uzmanlık: premium frontend, platform mühendisliği ve ürün odaklı tasarım yaklaşımı."
-        : "Meet the expertise behind Aksipal: premium frontend, platform engineering, and product design.",
+        ? "6+ yıllık deneyimle modern web, backend ve entegrasyon çözümleri geliştiren Barış Akşipal'i tanıyın."
+        : "Meet Barış Akşipal: 6+ years of experience in modern web, backend and integration solutions.",
   });
 }
 
@@ -42,46 +42,46 @@ export default async function AboutPage({
     locale === "tr"
       ? [
           {
-            icon: Palette,
-            title: "Premium Minimal Tasarım",
-            text: "Gösterişli ama sade. Dikkati aksiyonlara veren görsel hiyerarşi.",
+            icon: Code2,
+            title: "Backend (Java / Python)",
+            text: "Java ve Python ile API, iş kuralları ve entegrasyon katmanları geliştiriyorum.",
           },
           {
             icon: Rocket,
-            title: "Performans Odaklı Mühendislik",
-            text: "Core Web Vitals ve gerçek kullanıcı hız verileri merkezde.",
+            title: "Frontend (React / TypeScript / Next.js)",
+            text: "React, TypeScript ve Next.js ile hızlı, modern ve dönüşüm odaklı arayüzler geliştiriyorum.",
           },
           {
-            icon: Code2,
-            title: "Ölçeklenebilir Kod Tabanı",
-            text: "Server component ağırlıklı, temiz ve sürdürülebilir mimari.",
+            icon: Palette,
+            title: "Mikroservis ve DevOps",
+            text: "Docker ve CI/CD ile sürdürülebilir, ölçeklenebilir dağıtım süreçleri.",
           },
           {
             icon: ShieldCheck,
-            title: "İş Sonucu ve Güven",
-            text: "Sadece site değil; dönüşüm hattı ve operasyonel netlik.",
+            title: "Performans ve Güvenlik",
+            text: "SEO, Core Web Vitals ve güvenli altyapı standartlarını birlikte sunarım.",
           },
         ]
       : [
           {
-            icon: Palette,
-            title: "Premium Minimal Design",
-            text: "Bold but clean visual hierarchy focused on action.",
+            icon: Code2,
+            title: "Backend (Java / Python)",
+            text: "I build APIs, business logic and integration layers with Java and Python.",
           },
           {
             icon: Rocket,
-            title: "Performance-first Engineering",
-            text: "Core Web Vitals and real-user speed metrics are core.",
+            title: "Frontend (React / TypeScript / Next.js)",
+            text: "I build fast, modern, conversion-focused interfaces with React, TypeScript and Next.js.",
           },
           {
-            icon: Code2,
-            title: "Scalable Codebase",
-            text: "Server-component-first, clean and maintainable architecture.",
+            icon: Palette,
+            title: "Microservices and DevOps",
+            text: "Docker and CI/CD based delivery for reliable scaling.",
           },
           {
             icon: ShieldCheck,
-            title: "Business Outcomes and Trust",
-            text: "Not just a website, but a reliable conversion system.",
+            title: "Performance and Security",
+            text: "SEO, Core Web Vitals and secure infrastructure by default.",
           },
         ];
 
@@ -90,17 +90,24 @@ export default async function AboutPage({
       <section className="section-shell pt-16">
         <div className="glass-card p-8 sm:p-12">
           <Badge variant="accent" className="w-fit">
-            {locale === "tr" ? "Principal Frontend + Platform Engineer" : "Principal Engineer"}
+            {locale === "tr"
+              ? "6+ Yıl Deneyim • Full-Stack Mühendislik"
+              : "6+ Years Experience • Full-Stack Engineering"}
           </Badge>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
             {locale === "tr"
-              ? "Merhaba, ben Aksipal."
-              : "Hi, I am the engineer behind Aksipal."}
+              ? "Merhaba, ben Barış Akşipal."
+              : "Hi, I'm Barış Akşipal."}
           </h1>
           <p className="mt-4 max-w-3xl text-zinc-400">
             {locale === "tr"
-              ? "Küçük işletmeler için premium algı oluşturan web deneyimleri tasarlıyor, gerektiğinde backend ve entegrasyon katmanını da uçtan uca kuruyorum. Hedefim: hızlı yayına çıkış + yüksek güven + net dönüşüm."
-              : "I design premium web experiences for small businesses and deliver backend/integration layers when needed. The goal is always fast launch, trust and measurable conversion."}
+              ? "6+ yıldır web ve yazılım projeleri geliştiriyorum. Backend tarafında Java ve Python ile sağlam servisler kuruyor, frontend tarafında React, TypeScript ve Next.js ile modern arayüzler geliştiriyorum. Hedefim: hızlı teslim, güven ve ölçülebilir sonuç."
+              : "For 6+ years, I have built web and software projects. On the backend, I build robust services with Java and Python; on the frontend, I deliver modern interfaces with React, TypeScript and Next.js. My focus is fast delivery, trust and measurable results."}
+          </p>
+          <p className="mt-3 text-sm text-zinc-500">
+            {locale === "tr"
+              ? "6+ yıl deneyim • 40+ ürün/servis yayını"
+              : "6+ years of experience • 40+ product/service launches"}
           </p>
         </div>
 

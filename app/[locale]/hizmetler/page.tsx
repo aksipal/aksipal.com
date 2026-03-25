@@ -6,9 +6,9 @@ import { FaqSection } from "@/components/sections/faq";
 import { PricingSection } from "@/components/sections/pricing";
 import { isLocale } from "@/lib/i18n";
 import {
-  advancedServices,
-  processSteps,
-  revisionPolicy,
+  getEnterpriseServices,
+  getProcessSteps,
+  getRevisionPolicy,
 } from "@/lib/pricing";
 import { createPageMetadata, getServiceJsonLd } from "@/lib/seo";
 
@@ -28,8 +28,8 @@ export async function generateMetadata({
     title: locale === "tr" ? "Hizmetler ve Paketler" : "Services and Packages",
     description:
       locale === "tr"
-        ? "Hızlı şablon paketleri ve e-ticaret/backend/entegrasyon gibi özel yazılım çözümleri."
-        : "Fast template packages and custom solutions for e-commerce, backend and integrations.",
+        ? "Sektöre özel şablon paketleri, kurumsal uygulama geliştirme ve özel mühendislik çözümleri."
+        : "Sector-specific template packages, enterprise application development and custom engineering solutions.",
   });
 }
 
@@ -44,39 +44,62 @@ export default async function ServicesPage({
   }
 
   const jsonLd = getServiceJsonLd();
+  const enterprise = getEnterpriseServices(locale);
+  const steps = getProcessSteps(locale);
+  const policy = getRevisionPolicy(locale);
 
   return (
     <>
       <PricingSection locale={locale} />
 
+      {/* Daha Büyük İşler */}
       <section className="section-shell mt-20">
-        <div className="glass-card p-8">
+        <div className="space-y-3">
           <h2 className="text-3xl font-semibold tracking-tight text-white">
-            {locale === "tr"
-              ? "B) Özel Yazılım / E-ticaret / Backend / Otomasyon"
-              : "B) Custom Software / E-commerce / Backend / Automation"}
+            {locale === "tr" ? "Daha Büyük İşler" : "Enterprise Projects"}
           </h2>
-          <p className="mt-3 max-w-2xl text-zinc-400">
+          <p className="max-w-2xl text-zinc-400">
             {locale === "tr"
-              ? "Kapsamı keşif ile netleştirip hedefe uygun mimari ve teslim planı oluşturuyorum. Teklif proje detayına göre hazırlanır."
-              : "Scope is clarified via discovery and converted into a tailored architecture and delivery plan."}
+              ? "E-ticaret, kurumsal uygulama veya özel mühendislik projeleriniz için uçtan uca geliştirme ve anahtar teslim çözümler."
+              : "End-to-end development and turnkey solutions for e-commerce, enterprise applications or custom engineering projects."}
           </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {advancedServices.map((service) => (
-              <article key={service.id} className="rounded-2xl border border-white/10 bg-black/30 p-5">
-                <h3 className="text-lg font-semibold text-zinc-100">{service.title}</h3>
-                <p className="mt-2 text-sm text-zinc-400">{service.description}</p>
-                <ul className="mt-3 space-y-1.5 text-sm text-zinc-300">
-                  {service.outputs.map((output) => (
-                    <li key={output}>• {output}</li>
+        </div>
+
+        <div className="mt-8 grid gap-5 lg:grid-cols-3">
+          {enterprise.map((service) => (
+            <article
+              key={service.id}
+              className="glass-card flex flex-col justify-between p-6"
+            >
+              <div>
+                <h3 className="text-xl font-semibold text-zinc-100">
+                  {service.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                  {service.description}
+                </p>
+                <ul className="mt-4 space-y-1.5 text-sm text-zinc-300">
+                  {service.highlights.map((h) => (
+                    <li key={h}>• {h}</li>
                   ))}
                 </ul>
-              </article>
-            ))}
-          </div>
+              </div>
+              <div className="mt-5 border-t border-white/10 pt-4">
+                <p className="text-2xl font-semibold text-[var(--accent)]">
+                  {service.price}
+                </p>
+                {service.priceNote ? (
+                  <p className="mt-1 text-xs text-zinc-500">
+                    {service.priceNote}
+                  </p>
+                ) : null}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
+      {/* Süreç + Revizyon */}
       <section className="section-shell mt-20">
         <div className="grid gap-5 lg:grid-cols-2">
           <article className="glass-card p-6">
@@ -84,7 +107,7 @@ export default async function ServicesPage({
               {locale === "tr" ? "Süreç" : "Process"}
             </h3>
             <ol className="mt-4 space-y-2 text-sm text-zinc-300">
-              {processSteps.map((step, idx) => (
+              {steps.map((step, idx) => (
                 <li key={step}>
                   <span className="mr-2 text-zinc-500">0{idx + 1}.</span>
                   {step}
@@ -96,8 +119,12 @@ export default async function ServicesPage({
             <h3 className="text-xl font-semibold text-zinc-100">
               {locale === "tr" ? "Revizyon Politikası" : "Revision Policy"}
             </h3>
-            <p className="mt-4 text-sm leading-7 text-zinc-300">{revisionPolicy.template}</p>
-            <p className="mt-3 text-sm leading-7 text-zinc-400">{revisionPolicy.custom}</p>
+            <p className="mt-4 text-sm leading-7 text-zinc-300">
+              {policy.template}
+            </p>
+            <p className="mt-3 text-sm leading-7 text-zinc-400">
+              {policy.custom}
+            </p>
           </article>
         </div>
       </section>

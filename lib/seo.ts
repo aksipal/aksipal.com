@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { advancedServices, packageTiers } from "@/lib/pricing";
+import { enterpriseServices, packageTiers } from "@/lib/pricing";
 import { siteConfig } from "@/lib/constants";
 import type { Locale } from "@/lib/i18n";
 
@@ -87,7 +87,7 @@ export function getServiceJsonLd() {
     description: tier.description,
   }));
 
-  const customServices = advancedServices.map((service) => ({
+  const customServices = enterpriseServices.map((service) => ({
     "@type": "Service",
     name: service.title,
     description: service.description,

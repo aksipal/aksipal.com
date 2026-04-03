@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 
 import { ContactForm } from "@/components/contact/contact-form";
 import { siteConfig, seoKeywordsTr } from "@/lib/constants";
-import { submitContactAction } from "@/lib/actions/contact";
 import { isLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/seo";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
@@ -91,7 +90,7 @@ export default async function ContactPage({
           </div>
         </aside>
 
-        <ContactForm locale={locale} action={submitContactAction} />
+        <ContactForm locale={locale} />
       </div>
     </section>
   );

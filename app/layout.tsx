@@ -19,12 +19,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   icons: {
-    icon: [
-      { url: "/favicon.png", type: "image/png", sizes: "any" },
-      { url: "/favicon.png", sizes: "48x48", type: "image/png" },
-      { url: "/favicon.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon.png", sizes: "192x192", type: "image/png" },
-    ],
+    icon: [{ url: "/favicon.png", type: "image/png", sizes: "32x32" }],
     apple: "/favicon.png",
     shortcut: "/favicon.png",
   },

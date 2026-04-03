@@ -17,8 +17,8 @@ export function PricingSection({ locale }: PricingSectionProps) {
         </h1>
         <p className="text-zinc-400">
           {locale === "tr"
-            ? "Sektöre özel şablon paketlerinden kurumsal yazılım çözümlerine kadar her ölçekte hizmet sunuyoruz."
-            : "We deliver services at every scale — from sector-specific template packages to enterprise software solutions."}
+            ? "Hazır web sitesi şablonlarından kurumsal yazılıma: web sitesi satın al veya özel proje—her ölçekte SEO uyumlu teslim."
+            : "From template packages to enterprise software—SEO-ready delivery at every scale."}
         </p>
       </div>
 

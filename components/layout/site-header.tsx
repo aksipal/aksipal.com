@@ -38,7 +38,7 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
               <p className="text-sm font-semibold tracking-[0.08em] text-zinc-100 uppercase">
                 Aksipal
               </p>
-              <p className="text-[11px] text-zinc-400">Web Systems Studio</p>
+              <p className="text-[11px] text-zinc-400">Web Studio</p>
             </div>
           </Link>
 

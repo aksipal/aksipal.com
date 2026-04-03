@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         destination: "/favicon.png",
         permanent: true,
       },
+      {
+        source: "/:locale/ben-kimim",
+        destination: "/:locale/hakkimda",
+        permanent: true,
+      },
     ];
   },
 };

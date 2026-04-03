@@ -1,6 +1,6 @@
 # Aksipal.com
 
-**Aksipal Web Systems Studio** — Türkiye’deki küçük işletmeler (emlak, taşımacılık, restoran, klinik, spor salonu, enerji, danışmanlık vb.) için premium, karanlık temalı kurumsal site ve şablon vitrini.
+**Aksipal Web Studio** — Türkiye’deki küçük işletmeler (emlak, taşımacılık, restoran, klinik, spor salonu, enerji, danışmanlık vb.) için premium, karanlık temalı kurumsal site ve şablon vitrini.
 
 - **Site:** [aksipal.com](https://aksipal.com)
 - **İki hizmet kolu:** Ürünleşmiş şablon paketleri (hızlı teslim) ve özel yazılım / e-ticaret / backend projeleri.
@@ -27,7 +27,7 @@ Server Components varsayılan; client bileşenler yalnızca etkileşim gereken y
 
 ```
 ├── app/
-│   ├── [locale]/           # TR/EN sayfalar (ana sayfa, şablonlar, hizmetler, işler, blog, ben-kimim, iletişim)
+│   ├── [locale]/           # TR/EN sayfalar (ana sayfa, şablonlar, hizmetler, işler, blog, hakkimda, iletişim)
 │   ├── sitemap.ts
 │   ├── robots.ts
 │   └── opengraph-image.tsx

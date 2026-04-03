@@ -1,0 +1,182 @@
+---
+title: "Google'da Çıkmak İçin Kurumsal Web Sitesi Nasıl Olmalı?"
+description: "Google'da üst sıralara çıkmak için kurumsal web sitesi nasıl olmalı? Mobil uyumluluk, hız, SEO altyapısı, schema markup ve yerel arama rehberi."
+publishedAt: "2026-04-01"
+tags:
+  - SEO
+  - Mobil Uyumluluk
+  - Kurumsal Web Sitesi
+  - Google Sıralama
+coverImage: "/images/blog/googleda-cikmak-icin-kurumsal-site.png"
+keywords:
+  - seo uyumlu web sitesi
+  - mobil uyumlu web sitesi
+  - Google'da üst sıralara çıkmak
+  - hızlı web sitesi
+  - kurumsal site SEO
+  - Google sıralama faktörleri
+  - web sitesi hızı
+  - core web vitals
+faq:
+  - q: "Google'da üst sıralara çıkmak için ne yapmalıyım?"
+    a: "Mobil uyumlu, hızlı açılan, doğru metadata ve yapısal veri içeren bir site olmalı. Google Business Profile uyumu, iç linkleme ve kaliteli içerik de kritik faktörlerdir."
+  - q: "Core Web Vitals nedir ve neden önemlidir?"
+    a: "Core Web Vitals, Google'ın kullanıcı deneyimini ölçtüğü 3 metrikten oluşur: LCP (yükleme hızı), CLS (görsel stabilite) ve INP (etkileşim yanıtı). Bu metrikler arama sıralamalarını etkiler."
+  - q: "Yapısal veri (Schema) neden önemlidir?"
+    a: "Schema markup, arama motorlarına sitenizin ne hakkında olduğunu anlatır. LocalBusiness, Organization ve FAQ gibi şemalar zengin sonuçlar (rich results) elde etmenizi sağlar."
+  - q: "SEO uyumlu web sitesi yaptırmak ne kadar sürer?"
+    a: "Hazır şablon tabanlı SEO uyumlu siteler 2-5 günde, özel tasarım projeler ise 2-6 haftada teslim edilir."
+  - q: "Google Business Profile ile web sitem uyumlu mu?"
+    a: "Web sitenizde iletişim bilgileri, adres, telefon ve harita bilgileri Google Business Profile'daki bilgilerle tutarlı olmalıdır. Bu tutarlılık yerel aramalarda sıralamayı artırır."
+  - q: "Popup ve ağır animasyonlar SEO'yu etkiler mi?"
+    a: "Evet. Tam sayfa popup'lar ve kontrolsüz animasyonlar hem kullanıcı deneyimini bozar hem CLS ve INP metriklerini olumsuz etkiler. Google bu durumu cezalandırabilir."
+---
+
+Google arama sonuçlarında üst sıralarda çıkmak her işletme sahibinin istediği şeydir. Ama çoğu firma web sitesini yaptırdıktan sonra "neden Google'da çıkmıyorum?" diye sorar.
+
+Bu yazıda Google'ın 2026'da kurumsal web sitelerinden ne beklediğini, teknik olmayan bir dille açıklıyoruz.
+
+## Mobil Öncelikli İndeksleme Nedir?
+
+Google, sitenizi değerlendirirken önce **mobil versiyonuna** bakar. Masaüstünde mükemmel görünen ama mobilde bozulan bir site, arama sonuçlarında geriler.
+
+Bu ne anlama gelir:
+
+- Tasarım mobil-öncelikli (mobile-first) düşünülmeli
+- Menüler, butonlar ve formlar parmakla rahat kullanılabilmeli
+- Yazılar ve görseller mobil ekranda okunabilir boyutta olmalı
+
+## Neden Responsive Tasarım Şart?
+
+Responsive (duyarlı) tasarım, sitenizin her ekran boyutuna otomatik uyum sağlamasıdır.
+
+Türkiye'de web trafiğinin **%70'inden fazlası** mobil cihazlardan gelir. Responsive olmayan bir site:
+
+- Ziyaretçilerin çoğunu kaybeder
+- Google'da sıralama düşer
+- Reklam bütçesi boşa harcanır
+
+Next.js ve Tailwind CSS gibi modern teknolojilerle responsive tasarım doğal olarak sağlanır.
+
+## Site Hızı ve Core Web Vitals
+
+Google, sitenizin hızını 3 temel metrikle ölçer:
+
+### LCP (Largest Contentful Paint)
+Sayfadaki en büyük içeriğin ne kadar sürede yüklendiği. **Hedef: 2.5 saniyenin altı.**
+
+### CLS (Cumulative Layout Shift)
+Sayfa yüklenirken içeriklerin kayıp kaymadığı. **Hedef: 0.1'in altı.**
+
+### INP (Interaction to Next Paint)
+Kullanıcının tıklama veya dokunma sonrası sitenin ne kadar hızlı yanıt verdiği. **Hedef: 200ms'nin altı.**
+
+Bu metrikleri iyileştirmek için:
+
+- Görselleri `next/image` ile optimize edin (otomatik boyutlandırma ve lazy loading)
+- Gereksiz JavaScript yükünü azaltın
+- Font dosyalarını önceden yükleyin (`preconnect`)
+- CSS'i kritik yolda tutun, gereksiz animasyonları azaltın
+
+## Title ve Meta Description Nasıl Olmalı?
+
+Her sayfanın benzersiz bir `title` ve `meta description` etiketi olmalıdır.
+
+**İyi bir title etiketi:**
+- 50-60 karakter
+- Hedef anahtar kelimeyi içerir
+- Tıklanmayı teşvik eder
+- Marka adını sonuna ekler
+
+**İyi bir meta description:**
+- 120-160 karakter
+- Sayfanın değerini özetler
+- Eylem çağrısı içerir (CTA)
+
+**Örnek:**
+- Title: `Kurumsal Web Sitesi Fiyatları 2026 | Aksipal Web Studio`
+- Description: `KOBİ ve esnaf için kurumsal web sitesi fiyatları. Hazır şablon 5.000 TL'den, özel tasarım 15.000 TL'den başlar. Ücretsiz teklif alın.`
+
+## Sayfa Yapısı ve Heading Düzeni
+
+Google, sayfanızın yapısını heading etiketleri (H1, H2, H3) ile anlar.
+
+Kurallar:
+
+- Her sayfada **tek bir H1** olsun
+- Alt başlıklar **H2** ile, detay başlıklar **H3** ile
+- Heading'lerde hedef anahtar kelimeler doğal şekilde yer alsın
+- Heading atlamayın (H1'den sonra direkt H4 kullanmayın)
+
+İç linkleme de aynı derecede önemlidir. Hizmet sayfalarından referanslara, blogdan hizmetlere doğal geçişler kurun.
+
+## LocalBusiness ve Organization Schema
+
+Yapısal veri (structured data), Google'a sitenizin ne hakkında olduğunu **makine tarafından okunabilir** formatta anlatır.
+
+Yerel işletmeler için en önemli şemalar:
+
+- **LocalBusiness:** İşletme adı, adres, telefon, çalışma saatleri
+- **Organization:** Şirket bilgileri, logo, sosyal medya linkleri
+- **Service:** Sunduğunuz hizmetler ve fiyatları
+- **FAQPage:** Sıkça sorulan sorular (zengin sonuçlarda çıkar)
+- **BreadcrumbList:** Sayfa hiyerarşisi
+
+Bu şemalar Google arama sonuçlarında **zengin snippet'ler** oluşturarak tıklama oranınızı artırır.
+
+## Google Business Profile Uyumu
+
+Web sitenizdeki bilgiler, Google Business Profile'daki bilgilerle **tutarlı** olmalıdır:
+
+- İşletme adı
+- Adres
+- Telefon numarası
+- Çalışma saatleri
+- Web sitesi URL'si
+
+Bu tutarlılık **NAP (Name, Address, Phone)** uyumu olarak bilinir ve yerel aramalarda sıralamanızı doğrudan etkiler.
+
+## İletişim Sayfası ve Harita Verileri
+
+İletişim sayfanızda bulunması gerekenler:
+
+- Çalışan iletişim formu (mail gönderimi test edilmiş)
+- Telefon numarası (tıklanabilir `tel:` linki)
+- WhatsApp butonu
+- Google Maps iframe veya embed
+- Fiziksel adres
+
+Bu bilgiler hem kullanıcı güvenini artırır hem Google'ın işletmenizi yerel sonuçlarda göstermesini kolaylaştırır.
+
+## Gereksiz Popup ve Ağır Animasyon Hataları
+
+Google'ın **intrusive interstitials** politikası, tam sayfa popup'ları cezalandırır.
+
+Kaçınılması gerekenler:
+
+- Sayfa yüklendiğinde açılan tam sayfa popup'lar
+- İçeriği kaplayan newsletter formları
+- Kapatılması zor olan bildirimler
+- Kontrolsüz, sayfa boyutunu değiştiren animasyonlar
+
+Bunların yerine:
+
+- Alt banner tarzı bildirimler
+- Sayfa sonunda CTA blokları
+- Performansı etkilemeyen hafif animasyonlar
+
+## Sonuç: 6 Maddelik Kontrol Listesi
+
+Google'da üst sıralara çıkmak için sitenizi bu listeyle kontrol edin:
+
+1. **Mobil uyumluluk:** Responsive tasarım ve mobil-öncelikli yaklaşım
+2. **Hız:** Core Web Vitals hedeflerini karşılama (LCP < 2.5s, CLS < 0.1, INP < 200ms)
+3. **Metadata:** Her sayfada benzersiz title ve meta description
+4. **Yapısal veri:** LocalBusiness, Organization, FAQ ve BreadcrumbList şemaları
+5. **İç linkleme:** Hizmet → referans → iletişim akışı
+6. **Google Business Profile:** NAP bilgilerinin web sitesiyle tutarlılığı
+
+---
+
+**SEO uyumlu, hızlı açılan ve mobil uyumlu kurumsal web sitesi yaptırmak ister misiniz?** Aksipal olarak Next.js App Router ile tüm bu altyapıyı standart olarak teslim ediyoruz. [Ücretsiz teklif alın](/tr/iletisim) veya [WhatsApp ile yazın](https://wa.me/905397087848).
+

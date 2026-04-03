@@ -2,6 +2,7 @@
 
 import { headers } from "next/headers";
 
+import { web3formsAccessKey } from "@/lib/constants";
 import { storeLead } from "@/lib/leads";
 import { consumeRateLimit } from "@/lib/rate-limit";
 import { contactFormSchema } from "@/lib/validations";
@@ -35,6 +36,9 @@ export async function submitContactAction(
     };
   }
 
+  const locale = String(formData.get("locale") ?? "tr");
+  const isEn = locale === "en";
+
   const payload = {
     name: String(formData.get("name") ?? ""),
     email: String(formData.get("email") ?? ""),
@@ -62,24 +66,70 @@ export async function submitContactAction(
     };
   }
 
+  const subject = isEn
+    ? "[Aksipal] Contact form"
+    : "[Aksipal] İletişim formu";
+  const bodyText = [
+    `${isEn ? "Phone" : "Telefon"}: ${parsed.data.phone}`,
+    `${isEn ? "Sector" : "Sektör"}: ${parsed.data.sector}`,
+    `${isEn ? "Budget" : "Bütçe"}: ${parsed.data.budget}`,
+    "",
+    parsed.data.message,
+  ].join("\n");
+
   try {
-    await storeLead({
-      name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone,
-      sector: parsed.data.sector,
-      budget: parsed.data.budget,
-      message: parsed.data.message,
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: web3formsAccessKey,
+        subject,
+        name: parsed.data.name,
+        email: parsed.data.email,
+        replyto: parsed.data.email,
+        message: bodyText,
+      }),
     });
+
+    const json = (await res.json()) as { success?: boolean; message?: string };
+
+    if (!res.ok || !json.success) {
+      return {
+        status: "error",
+        message: isEn
+          ? "Could not send the message. Please try WhatsApp or email."
+          : "Gönderim başarısız. Lütfen WhatsApp veya e-posta ile ulaşın.",
+      };
+    }
+
+    try {
+      await storeLead({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone,
+        sector: parsed.data.sector,
+        budget: parsed.data.budget,
+        message: parsed.data.message,
+      });
+    } catch {
+      // E-posta Web3Forms ile gitti; yerel yedek yazılamasa bile kullanıcıya başarı göster
+    }
 
     return {
       status: "success",
-      message: "Talebiniz alındı. 24 saat içinde size dönüş yapacağım.",
+      message: isEn
+        ? "Your request has been received. I will get back to you within 24 hours."
+        : "Talebiniz alındı. 24 saat içinde size dönüş yapacağım.",
     };
   } catch {
     return {
       status: "error",
-      message: "Bir hata oluştu. Lütfen WhatsApp üzerinden ulaşın.",
+      message: isEn
+        ? "Something went wrong. Please reach out via WhatsApp."
+        : "Bir hata oluştu. Lütfen WhatsApp üzerinden ulaşın.",
     };
   }
 }

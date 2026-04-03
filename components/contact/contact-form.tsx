@@ -48,6 +48,7 @@ export function ContactForm({ locale, action }: ContactFormProps) {
 
   return (
     <form action={formAction} className="glass-card space-y-5 p-6">
+      <input type="hidden" name="locale" value={locale} />
       <div className="hidden">
         <Label htmlFor="company">Company</Label>
         <Input id="company" name="company" tabIndex={-1} autoComplete="off" />
@@ -90,7 +91,7 @@ export function ContactForm({ locale, action }: ContactFormProps) {
               {copy.sector}
             </option>
             <option value="Emlak">Emlak</option>
-            <option value="Tasımacılık">Taşımacılık</option>
+            <option value="Taşımacılık">Taşımacılık</option>
             <option value="Restoran">Restoran</option>
             <option value="Klinik">Klinik</option>
             <option value="Oto Servis">Oto Servis</option>

@@ -5,6 +5,7 @@ import { Code2, Palette, Rocket, ShieldCheck } from "lucide-react";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { Badge } from "@/components/ui/badge";
 import { isLocale } from "@/lib/i18n";
+import { seoKeywordsTr } from "@/lib/constants";
 import { createPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -19,12 +20,13 @@ export async function generateMetadata({
 
   return createPageMetadata({
     locale,
-    pathname: "/ben-kimim",
-    title: locale === "tr" ? "Ben Kimim" : "About",
+    pathname: "/hakkimda",
+    title: locale === "tr" ? "Hakkımda | Web Geliştirici — Aksipal" : "About | Barış Akşipal",
     description:
       locale === "tr"
-        ? "6+ yıllık deneyimle modern web, backend ve entegrasyon çözümleri geliştiren Barış Akşipal'i tanıyın."
-        : "Meet Barış Akşipal: 6+ years of experience in modern web, backend and integration solutions.",
+        ? "Barış Akşipal: kurumsal web sitesi ve özel yazılım projelerinde 6+ yıl deneyim. Ankara, Türkiye — Next.js, backend ve entegrasyon."
+        : "Barış Akşipal: 6+ years building corporate websites, backends and integrations—based in Turkey.",
+    keywords: locale === "tr" ? [...seoKeywordsTr, "Barış Akşipal", "web geliştirici"] : undefined,
   });
 }
 

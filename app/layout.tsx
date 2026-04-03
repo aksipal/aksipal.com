@@ -3,7 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 
 import "./globals.css";
 
-import { siteConfig } from "@/lib/constants";
+import { seoKeywordsEn, seoKeywordsTr, siteConfig } from "@/lib/constants";
 import { absoluteUrl } from "@/lib/seo";
 
 const inter = Inter({
@@ -34,23 +34,39 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  authors: [{ name: "Barış Akşipal", url: siteConfig.url }],
+  creator: siteConfig.legalName,
+  publisher: siteConfig.legalName,
   alternates: {
     canonical: siteConfig.url,
+    languages: {
+      tr: `${siteConfig.url}/tr`,
+      en: `${siteConfig.url}/en`,
+    },
   },
-  keywords: [
-    "web tasarım",
-    "next.js",
-    "premium website",
-    "turkiye",
-    "kucuk isletme web sitesi",
-    "e-ticaret yazilim",
-  ],
+  keywords: [...seoKeywordsTr, ...seoKeywordsEn, "Next.js", "Aksipal"],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+  },
   openGraph: {
     type: "website",
     url: siteConfig.url,
     title: siteConfig.title,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    locale: "tr_TR",
+    alternateLocale: ["en_US"],
     images: [
       {
         url: absoluteUrl("/opengraph-image.png"),
@@ -66,6 +82,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [absoluteUrl("/opengraph-image.png")],
   },
+  category: "technology",
 };
 
 export const viewport: Viewport = {
@@ -80,6 +97,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className="dark" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://api.web3forms.com" />
+      </head>
       <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
         {children}
       </body>

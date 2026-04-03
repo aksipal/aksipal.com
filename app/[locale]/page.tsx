@@ -10,10 +10,14 @@ import { TemplatePreview } from "@/components/sections/template-preview";
 import { Testimonials } from "@/components/sections/testimonials";
 import { TrustBar } from "@/components/sections/trust-bar";
 import { isLocale, type Locale } from "@/lib/i18n";
+import { seoKeywordsEn, seoKeywordsTr, siteConfig } from "@/lib/constants";
+import { FaqSection } from "@/components/sections/faq";
 import {
   createPageMetadata,
   getLocalBusinessJsonLd,
+  getOrganizationJsonLd,
   getServiceJsonLd,
+  getWebSiteJsonLd,
 } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -28,14 +32,15 @@ export async function generateMetadata({
 
   const copy = {
     tr: {
-      title: "Premium Web Tasarım ve Yazılım",
-      description:
-        "Aksipal Web Studio ile 1 günde yayına alınan premium web siteleri, şablon paketler ve özel yazılım projeleri.",
+      title: "Web Sitesi Yaptırma | Kurumsal Web Tasarım",
+      description: siteConfig.description,
+      keywords: [...seoKeywordsTr],
     },
     en: {
-      title: "Premium Web Design and Software",
+      title: "Corporate Websites & Web Design Services",
       description:
-        "Launch premium websites in 5 days with Aksipal templates or request advanced custom software.",
+        "Corporate websites, business templates and custom software: SEO-ready, fast delivery. Built with Next.js for teams that need a strong online presence in Turkey and abroad.",
+      keywords: [...seoKeywordsEn],
     },
   }[locale];
 
@@ -44,6 +49,7 @@ export async function generateMetadata({
     pathname: "/",
     title: copy.title,
     description: copy.description,
+    keywords: copy.keywords,
   });
 }
 
@@ -59,18 +65,29 @@ export default async function LocaleHomePage({
 
   const localBusinessJsonLd = getLocalBusinessJsonLd();
   const serviceJsonLd = getServiceJsonLd();
+  const webSiteJsonLd = getWebSiteJsonLd();
+  const organizationJsonLd = getOrganizationJsonLd();
 
   return (
     <>
       <HeroSection locale={locale as Locale} />
       <TrustBar locale={locale as Locale} />
       <TemplatePreview locale={locale as Locale} />
-      <CaseGrid locale={locale as Locale} limit={6} />
+      <CaseGrid locale={locale as Locale} limit={8} />
       <AdvancedServicesTeaser locale={locale as Locale} />
       <Testimonials locale={locale as Locale} />
+      <FaqSection locale={locale as Locale} />
       <MiniInteractive locale={locale as Locale} />
       <ContactCta locale={locale as Locale} />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}

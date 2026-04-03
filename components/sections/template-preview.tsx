@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
 import { LeadDialog } from "@/components/contact/lead-dialog";
+import GlareHover from "@/components/ui/glare-hover";
+import GradientText from "@/components/ui/gradient-text";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
@@ -16,9 +20,9 @@ type TemplatePreviewProps = {
 export function TemplatePreview({ locale }: TemplatePreviewProps) {
   const copy = {
     tr: {
-      title: "Sektöre Özel Şablonlar",
+      title: "Hazır Web Sitesi Şablonları (Sektöre Özel)",
       subtitle:
-        "Hızlı teslim edilen ürünleşmiş paketler. İşinize göre uyarlanır, performans ve SEO standardı korunur.",
+        "Web sitesi satın almak isteyen işletmeler için paketler: berber, kuaför, lojistik, sağlık ve daha fazlası. Hızlı teslim, uyarlanabilir içerik, teknik SEO ve performans standartı.",
       all: "Tüm Şablonlar",
       select: "Bu Şablonu Seç",
       demo: "Canlı Demo",
@@ -39,7 +43,11 @@ export function TemplatePreview({ locale }: TemplatePreviewProps) {
     <section className="section-shell mt-20 space-y-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl space-y-2">
-          <h2 className="text-3xl font-semibold tracking-tight text-white">{copy.title}</h2>
+          <h2 className="text-3xl font-semibold tracking-tight text-[#E9DFFF]">
+            <GradientText colors={["#E9DFFF", "#7cff92", "#a78bfa", "#E9DFFF"]} animationSpeed={10}>
+              {copy.title}
+            </GradientText>
+          </h2>
           <p className="text-zinc-400">{copy.subtitle}</p>
         </div>
         <Link
@@ -51,11 +59,19 @@ export function TemplatePreview({ locale }: TemplatePreviewProps) {
       </div>
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {templates.slice(0, 10).map((template) => (
-          <article key={template.id} className="glass-card overflow-hidden">
+        {templates.map((template) => (
+          <GlareHover
+            key={template.id}
+            glareColor="#7cff92"
+            glareOpacity={0.15}
+            borderColor="rgba(124,255,146,0.12)"
+            borderRadius="16px"
+            className="glass-card overflow-hidden"
+          >
+            <article className="w-full">
             <Image
               src={template.image}
-              alt={template.title}
+              alt={`${template.title} web sitesi şablonu — ${templateSectorLabel[template.sector]} sektörü için hazır web sitesi`}
               width={960}
               height={640}
               className="h-44 w-full object-cover"
@@ -100,7 +116,8 @@ export function TemplatePreview({ locale }: TemplatePreviewProps) {
                 ) : null}
               </div>
             </div>
-          </article>
+            </article>
+          </GlareHover>
         ))}
       </div>
     </section>

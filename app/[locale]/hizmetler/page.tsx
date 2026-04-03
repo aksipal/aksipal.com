@@ -4,13 +4,14 @@ import { notFound } from "next/navigation";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { FaqSection } from "@/components/sections/faq";
 import { PricingSection } from "@/components/sections/pricing";
+import { seoKeywordsTr } from "@/lib/constants";
 import { isLocale } from "@/lib/i18n";
 import {
   getEnterpriseServices,
   getProcessSteps,
   getRevisionPolicy,
 } from "@/lib/pricing";
-import { createPageMetadata, getServiceJsonLd } from "@/lib/seo";
+import { absoluteUrl, createPageMetadata, getBreadcrumbJsonLd, getServiceJsonLd } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -25,11 +26,12 @@ export async function generateMetadata({
   return createPageMetadata({
     locale,
     pathname: "/hizmetler",
-    title: locale === "tr" ? "Hizmetler ve Paketler" : "Services and Packages",
+    title: locale === "tr" ? "Hizmetler | Web Sitesi Paketleri ve Özel Yazılım" : "Services | Website Packages & Custom Software",
     description:
       locale === "tr"
-        ? "Sektöre özel şablon paketleri, kurumsal uygulama geliştirme ve özel mühendislik çözümleri."
-        : "Sector-specific template packages, enterprise application development and custom engineering solutions.",
+        ? "Web sitesi satın al ve paket seç: sektöre özel hazır şablonlar, kurumsal web sitesi geliştirme ve özel yazılım. SEO uyumlu teslim."
+        : "Template packages, corporate web development and custom software—SEO-ready delivery for businesses.",
+    keywords: locale === "tr" ? [...seoKeywordsTr, "web sitesi paketi", "özel yazılım"] : undefined,
   });
 }
 
@@ -44,6 +46,10 @@ export default async function ServicesPage({
   }
 
   const jsonLd = getServiceJsonLd();
+  const breadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: locale === "tr" ? "Ana Sayfa" : "Home", url: absoluteUrl(`/${locale}`) },
+    { name: locale === "tr" ? "Hizmetler & Fiyatlar" : "Services & Pricing", url: absoluteUrl(`/${locale}/hizmetler`) },
+  ]);
   const enterprise = getEnterpriseServices(locale);
   const steps = getProcessSteps(locale);
   const policy = getRevisionPolicy(locale);
@@ -60,8 +66,8 @@ export default async function ServicesPage({
           </h2>
           <p className="max-w-2xl text-zinc-400">
             {locale === "tr"
-              ? "E-ticaret, kurumsal uygulama veya özel mühendislik projeleriniz için uçtan uca geliştirme ve anahtar teslim çözümler."
-              : "End-to-end development and turnkey solutions for e-commerce, enterprise applications or custom engineering projects."}
+              ? "Web sitesi yaptırma kapsamının ötesinde: e-ticaret, kurumsal uygulama ve özel mühendislik projelerinde uçtan uca geliştirme ve anahtar teslim."
+              : "Beyond standard websites: end-to-end e-commerce, enterprise applications and custom engineering—turnkey delivery."}
           </p>
         </div>
 
@@ -135,6 +141,10 @@ export default async function ServicesPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
     </>
   );

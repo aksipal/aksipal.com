@@ -1,5 +1,9 @@
+"use client";
+
 import { Braces, Database, ShoppingCart, Workflow } from "lucide-react";
 
+import GlareHover from "@/components/ui/glare-hover";
+import GradientText from "@/components/ui/gradient-text";
 import type { Locale } from "@/lib/i18n";
 
 const icons = [ShoppingCart, Database, Workflow, Braces] as const;
@@ -38,20 +42,30 @@ export function AdvancedServicesTeaser({ locale }: AdvancedServicesTeaserProps) 
     <section className="section-shell mt-20">
       <div className="glass-card space-y-8 p-6 sm:p-8">
         <div className="max-w-2xl space-y-2">
-          <h2 className="text-3xl font-semibold tracking-tight text-white">{copy.title}</h2>
-          <p className="text-zinc-400">{copy.subtitle}</p>
+          <h2 className="text-3xl font-semibold tracking-tight text-[#E9DFFF]">
+            <GradientText colors={["#E9DFFF", "#7cff92", "#a78bfa", "#E9DFFF"]} animationSpeed={10}>
+              {copy.title}
+            </GradientText>
+          </h2>
+          <p className="text-[#B8B3D1]">{copy.subtitle}</p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {copy.items.map((item, index) => {
             const Icon = icons[index] ?? Braces;
             return (
-              <article
+              <GlareHover
                 key={item}
-                className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-zinc-300"
+                glareColor="#7cff92"
+                glareOpacity={0.1}
+                borderColor="rgba(124,255,146,0.1)"
+                borderRadius="16px"
+                className="rounded-2xl border border-white/10 bg-black/20"
               >
-                <Icon className="mb-3 size-4 text-[var(--accent)]" />
-                {item}
-              </article>
+                <div className="w-full p-4 text-sm text-[#B8B3D1]">
+                  <Icon className="mb-3 size-4 text-[var(--accent)]" />
+                  {item}
+                </div>
+              </GlareHover>
             );
           })}
         </div>

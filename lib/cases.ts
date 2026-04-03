@@ -17,26 +17,112 @@ export const caseSchema = z.object({
   image: z.string(),
   /** Canlı demo URL; varsa kartta "Canlı Demo" butonu gösterilir */
   demoUrl: z.string().url().optional(),
+  /** Meta keywords; arama görünürlüğü için (özellikle marka + sektör sorguları) */
+  seoKeywords: z.array(z.string()).optional(),
 });
 
 const rawCases = [
   {
-    slug: "ankara-kamyonetciler-dernegi",
-    title: "Ankara Kamyonetçiler Derneği",
-    sector: "Taşımacılık",
-    summary: "Ankara Kamyonetçi Nakliyeciler Derneği kurumsal sitesi; hizmetler, üyelik ve iletişim odaklı modern arayüz.",
+    slug: "korsis-teknoloji",
+    title: "Korsis Teknoloji",
+    sector: "Teknoloji",
+    summary:
+      "Korsis Teknoloji A.Ş. kurumsal web sitesi: siber güvenlik, kurumsal ağ altyapısı ve uç nokta koruması odaklı çok sayfalı Next.js uygulaması; Obsolix ürün vitrini, sektör/hizmet modülleri, TR/EN dil, çerez ve KVKK uyumu, teknik SEO ve üst düzey görsel etkiler (3D, motion, glass UI).",
     problem:
-      "Derneğin dijital görünürlüğü ve üye yönlendirme süreçleri tek bir profesyonel platformda toplanmıyordu.",
+      "Kurumsal siber güvenlik ve ağ mühendisliği alanında faaliyet gösteren şirketin; teknik güvenilirlik, ürün (Obsolix) ve hizmet portföyünün aynı anda anlaşılır şekilde sunulması, Obsolix ve hizmet sayfalarında dönüşüm, referans ve çözüm ortakları görünürlüğü ile profesyonel bir ilk izlenim gerekiyordu. Çok dilli (TR/EN) yapı, yasal sayfalar (KVKK, gizlilik, çerez) ve cookie consent olmadan kurumsal uyum tamamlanamazdı. Rakip teknoloji siteleri arasında ayrışmak için yalnız statik sayfa değil; ileri seviye etkileşim, performans ve SEO sinyalleri bir arada taşınmalıydı.",
     solution:
-      "Next.js ile hızlı, SEO uyumlu site; hizmet kartları, blog, üyelik formu ve iletişim kanalları tek çatıda.",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "SEO"],
+      "Next.js 15 App Router ve TypeScript ile modüler sayfa mimarisi: ana sayfa (hero, hizmet alanları, Obsolix vitrin, sektör grid’i, süreç ve CTA), dinamik hizmet sayfaları, hakkımızda, referanslar, çözüm ortakları, iletişim ve şirket profili; gizlilik, KVKK, kullanım şartları ve çerez politikası. next-intl ile TR/EN; görsel tarafta React Three Fiber / Three.js tabanlı interaktif bileşenler, GSAP ve Motion ile animasyonlar, glassmorphism ve koyu kurumsal tema. Metadata ve JSON-LD ile arama uyumu; çerez banner ve Google Analytics entegrasyonuna uygun yapı. Canlı site: korsisteknoloji.com.",
+    stack: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "next-intl (TR/EN)",
+      "Tailwind CSS",
+      "React Three Fiber & drei",
+      "Three.js",
+      "GSAP",
+      "Motion",
+      "SEO / JSON-LD",
+      "Cookie consent",
+    ],
+    metrics: [
+      { label: "Sayfa / Rota", value: "15+" },
+      { label: "Dil", value: "TR / EN" },
+      { label: "3D / Motion", value: "Evet" },
+    ],
+    image: "/images/cases/korsis-teknoloji.png",
+    demoUrl: "https://korsisteknoloji.com/",
+    seoKeywords: [
+      "Korsis Teknoloji",
+      "Korsis Teknoloji web sitesi",
+      "korsisteknoloji.com",
+      "kurumsal siber güvenlik web sitesi",
+      "Obsolix",
+      "ağ altyapısı web tasarım",
+      "siber güvenlik şirketi sitesi",
+      "Aksipal referans",
+      "Next.js kurumsal site",
+    ],
+  },
+  {
+    slug: "dedpharma",
+    title: "DedPharma",
+    sector: "İlaç & Sağlık",
+    summary:
+      "DedPharma (DeD Farma İlaç Sağlık Tic. San. Ltd. Şti.) kurumsal web sitesi: medikal ürün distribütörü için çok sayfalı Next.js yapı, ürün ve bilim danışma kurulu içerikleri, CE/KFDA ile güven mesajları, KVKK ve gizlilik sayfaları, form ve CTA; teknik SEO, Open Graph ve performans odaklı teslim.",
+    problem:
+      "İlaç ve medikal alanda faaliyet gösteren markanın; kurumsal güven, regülasyonlara uygun içerik sunumu ve sağlık profesyonellerine yönelik net bilgi mimarisi tek bir sitede toplanmalıydı. Ürün bilgileri, bilim danışma kurulu, şirket kimliği ve iletişim kanallarının ayrı ayrı dağınık veya güncelliğini yitirmiş kaynaklarda olması, hem marka aramalarında hem de «DeD Farma», «DedPharma», «Ultracol» gibi niyetli sorgularda görünürlüğü zayıflatıyordu. Yasal gereklilikler (KVKK, gizlilik politikası) ve erişilebilir, hızlı, mobil uyumlu deneyim olmadan kurumsal itibar tam taşınmıyordu.",
+    solution:
+      "Next.js App Router ile çok sayfalı kurumsal yapı kurgulandı: ana sayfa, ürünler ve ürün detay, bilim danışma kurulu (uzman profilleri), hakkımızda, iletişim ve bilgi talep akışları; gizlilik politikası ve KVKK metinleri. Semantik HTML başlık hiyerarşisi, sayfa bazlı meta açıklamalar, Open Graph ve Twitter Card ile paylaşım önizlemeleri; Türkçe içerik ve tutarlı URL yapısı (ör. /urunler, /bilim-kurulu) ile arama motorlarına net sinyal. Tailwind CSS ile responsive arayüz, görsel optimizasyonu ve form/CTA ile dönüşüm; Core Web Vitals ve Lighthouse uyumlu performans hedefiyle yayına alındı. Canlı site: dedpharma.com.",
+    stack: [
+      "Next.js (App Router)",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "SEO",
+      "Open Graph",
+      "Semantic HTML",
+      "Performans / CWV",
+    ],
+    metrics: [
+      { label: "Sayfa", value: "~8+" },
+      { label: "Yasal / KVKK", value: "Dahil" },
+      { label: "Teknik SEO", value: "OG + Meta" },
+    ],
+    image: "/images/cases/dedpharma.png",
+    demoUrl: "https://dedpharma.com/",
+    seoKeywords: [
+      "DedPharma",
+      "DeD Farma",
+      "DedPharma web sitesi",
+      "DeD Farma İlaç Sağlık",
+      "ilaç distribütörü web sitesi",
+      "medikal kurumsal web tasarım",
+      "Ultracol",
+      "PDO dolgu",
+      "sağlık sektörü web sitesi",
+      "Aksipal referans",
+      "kurumsal web sitesi",
+    ],
+  },
+  {
+    slug: "renk-lojistik",
+    title: "RENK LOJİSTİK",
+    sector: "Taşımacılık",
+    summary:
+      "81 il parça, parsiyel ve komple taşımacılık; şehir içi, şehirler arası, ekspres ve kurumsal sözleşmeli hizmetler. Sigortalı taşıma, zamanında teslimat, teklif formu ve WhatsApp entegrasyonu; dark mode ve SEO ile kurumsal lojistik sitesi.",
+    problem:
+      "Lojistik hizmetlerinin (şehir içi, 81 il, parsiyel, komple, ekspres, kurumsal) tek sitede net sunulması, teklif ve iletişim (form + WhatsApp) ile dark mode deneyimi gerekiyordu.",
+    solution:
+      "Next.js App Router ile 10 sayfalık lojistik sitesi; hizmet kartları (şehir içi, şehirler arası, parsiyel, komple, ekspres, kurumsal), her hizmette «Teklif Al» ve WhatsApp CTA, teklif formu, dark mode ve SEO odaklı yapı kurgulandı.",
+    stack: ["Next.js App Router", "TypeScript", "React", "Dark Mode", "WhatsApp Entegrasyonu", "Teklif Formu", "SEO"],
     metrics: [
       { label: "Hizmet Sayısı", value: "6+" },
-      { label: "İletişim Kanalları", value: "7/24" },
-      { label: "Üyelik Akışı", value: "Entegre" },
+      { label: "Sayfa", value: "~10" },
+      { label: "Teklif / WhatsApp", value: "Entegre" },
     ],
-    image: "/images/cases/kamyonetciler.png",
-    demoUrl: "https://kamyonetciler.com/",
+    image: "/images/cases/renklojistik.png",
+    demoUrl: "https://renklojistik.com/",
   },
   {
     slug: "artel-energy",
@@ -96,37 +182,36 @@ const rawCases = [
     demoUrl: "https://musclefactorysportcenter.com/",
   },
   {
-    slug: "renk-lojistik",
-    title: "RENK LOJİSTİK",
+    slug: "ankara-kamyonetciler-dernegi",
+    title: "Ankara Kamyonetçiler Derneği",
     sector: "Taşımacılık",
-    summary:
-      "81 il parça, parsiyel ve komple taşımacılık; şehir içi, şehirler arası, ekspres ve kurumsal sözleşmeli hizmetler. Sigortalı taşıma, zamanında teslimat, teklif formu ve WhatsApp entegrasyonu; dark mode ve SEO ile kurumsal lojistik sitesi.",
+    summary: "Ankara Kamyonetçi Nakliyeciler Derneği kurumsal sitesi; hizmetler, üyelik ve iletişim odaklı modern arayüz.",
     problem:
-      "Lojistik hizmetlerinin (şehir içi, 81 il, parsiyel, komple, ekspres, kurumsal) tek sitede net sunulması, teklif ve iletişim (form + WhatsApp) ile dark mode deneyimi gerekiyordu.",
+      "Derneğin dijital görünürlüğü ve üye yönlendirme süreçleri tek bir profesyonel platformda toplanmıyordu.",
     solution:
-      "Next.js App Router ile 10 sayfalık lojistik sitesi; hizmet kartları (şehir içi, şehirler arası, parsiyel, komple, ekspres, kurumsal), her hizmette «Teklif Al» ve WhatsApp CTA, teklif formu, dark mode ve SEO odaklı yapı kurgulandı.",
-    stack: ["Next.js App Router", "TypeScript", "React", "Dark Mode", "WhatsApp Entegrasyonu", "Teklif Formu", "SEO"],
+      "Next.js ile hızlı, SEO uyumlu site; hizmet kartları, blog, üyelik formu ve iletişim kanalları tek çatıda.",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "SEO"],
     metrics: [
       { label: "Hizmet Sayısı", value: "6+" },
-      { label: "Sayfa", value: "~10" },
-      { label: "Teklif / WhatsApp", value: "Entegre" },
+      { label: "İletişim Kanalları", value: "7/24" },
+      { label: "Üyelik Akışı", value: "Entegre" },
     ],
-    image: "/images/cases/renklojistik.png",
-    demoUrl: "https://renklojistik.com/",
+    image: "/images/cases/kamyonetciler.png",
+    demoUrl: "https://kamyonetciler.com/",
   },
   {
     slug: "aksipal-web-systems-studio",
-    title: "Aksipal Web Systems Studio",
-    sector: "Web Studio",
+    title: "Aksipal Web Studio",
+    sector: "Blog",
     summary:
-      "Kişisel satış ve stüdyo tanıtım sitesi. Sektöre özel şablon galerisi (lojistik, spor salonu, enerji, inşaat, taşımacılık vb.), hizmetler, referans projeler, blog ve teklif akışı; premium koyu tema, TR/EN dil desteği, WhatsApp ve form ile dönüşüm odaklı.",
+      "Kişisel satış ve stüdyo tanıtım sitesi. Sektöre özel şablon galerisi (teknoloji, lojistik, spor salonu, enerji, inşaat, taşımacılık vb.), hizmetler, referans projeler, blog ve teklif akışı; premium koyu tema, TR/EN dil desteği, WhatsApp ve form ile dönüşüm odaklı.",
     problem:
       "Stüdyonun hizmetlerini, şablonları ve referansları tek bir premium sitede sunması; küçük işletmelere net mesaj, filtrelenebilir şablon seçimi ve «Teklif Al» akışı ile erişmesi gerekiyordu.",
     solution:
-      "Template Gallery (sektör filtresi, karttan şablon seçimi, canlı demo linkleri), hizmetler, Referans Projeler grid’i, referans/testimonials, blog, «Ben Kimim», iletişim ve Teklif Al CTA; koyu tema, i18n (TR/EN), SEO ve Lighthouse 90+ hedefi ile tek sayfa deneyimi kurgulandı.",
+      "Template Gallery (sektör filtresi, karttan şablon seçimi, canlı demo linkleri), hizmetler, Referans Projeler grid’i, referans/testimonials, blog, Hakkımda, iletişim ve Teklif Al CTA; koyu tema, i18n (TR/EN), SEO ve Lighthouse 90+ hedefi ile tek sayfa deneyimi kurgulandı.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "i18n (TR/EN)", "SEO", "Lead Form", "WhatsApp CTA"],
     metrics: [
-      { label: "Şablon Kategorisi", value: "9+" },
+      { label: "Şablon Kategorisi", value: "11+" },
       { label: "Referans Projeler", value: "Grid" },
       { label: "Dil", value: "TR / EN" },
     ],

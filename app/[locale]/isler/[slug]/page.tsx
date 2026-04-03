@@ -7,8 +7,9 @@ import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cases } from "@/lib/cases";
+import { siteConfig } from "@/lib/constants";
 import { isLocale, locales, withLocale } from "@/lib/i18n";
-import { createPageMetadata } from "@/lib/seo";
+import { absoluteUrl, createPageMetadata, getBreadcrumbJsonLd, getCaseStudyJsonLd } from "@/lib/seo";
 
 type PageParams = {
   locale: string;
@@ -42,9 +43,10 @@ export async function generateMetadata({
   return createPageMetadata({
     locale,
     pathname: `/isler/${slug}`,
-    title: found.title,
+    title: `${found.title} | Aksipal Referans`,
     description: found.summary,
     image: found.image,
+    keywords: found.seoKeywords,
   });
 }
 
@@ -63,19 +65,44 @@ export default async function CaseDetailPage({
     notFound();
   }
 
+  const caseStudyJsonLd = getCaseStudyJsonLd({
+    title: found.title,
+    description: found.summary,
+    pathname: `/isler/${slug}`,
+    locale,
+    image: found.image,
+  });
+
+  const breadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: locale === "tr" ? "Ana Sayfa" : "Home", url: absoluteUrl(`/${locale}`) },
+    { name: locale === "tr" ? "Referans Projeler" : "Case Studies", url: absoluteUrl(`/${locale}/isler`) },
+    { name: found.title, url: absoluteUrl(`/${locale}/isler/${slug}`) },
+  ]);
+
   return (
     <section className="section-shell pt-16">
-      <Link
-        href={withLocale(locale, "/isler")}
-        className="text-sm text-zinc-400 hover:text-zinc-200"
-      >
-        ← {locale === "tr" ? "Tüm işler" : "All work"}
-      </Link>
+      <nav aria-label="Breadcrumb" className="mb-2 text-sm text-zinc-500">
+        <ol className="flex items-center gap-1.5">
+          <li>
+            <Link href={withLocale(locale, "/")} className="hover:text-zinc-300">
+              {locale === "tr" ? "Ana Sayfa" : "Home"}
+            </Link>
+          </li>
+          <li aria-hidden>/</li>
+          <li>
+            <Link href={withLocale(locale, "/isler")} className="hover:text-zinc-300">
+              {locale === "tr" ? "Referans Projeler" : "Case Studies"}
+            </Link>
+          </li>
+          <li aria-hidden>/</li>
+          <li className="text-zinc-300">{found.title}</li>
+        </ol>
+      </nav>
 
       <article className="glass-card mt-6 overflow-hidden">
         <Image
           src={found.image}
-          alt={found.title}
+          alt={`${found.title} — ${found.sector} sektörü kurumsal web sitesi projesi | Aksipal referans`}
           width={1200}
           height={700}
           className="h-64 w-full object-cover sm:h-80"
@@ -149,6 +176,15 @@ export default async function CaseDetailPage({
           </div>
         </div>
       </article>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudyJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
     </section>
   );
 }

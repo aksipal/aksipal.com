@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
+import GlareHover from "@/components/ui/glare-hover";
+import GradientText from "@/components/ui/gradient-text";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
@@ -18,7 +22,7 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
     tr: {
       title: "Referans Projeler",
       subtitle:
-        "Sadece estetik değil; hız, SEO ve dönüşüm metrikleriyle ölçülen sonuçlar.",
+        "Web sitesi yaptırma örnekleri: kurumsal web siteleri, sektörel projeler. Hız, teknik SEO ve dönüşüm odaklı sonuçlar.",
       detail: "Proje Detayı",
       demo: "Canlı Demo",
       all: "Tüm İşleri Gör",
@@ -39,7 +43,11 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
     <section className="section-shell mt-20 space-y-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl space-y-2">
-          <h2 className="text-3xl font-semibold tracking-tight text-white">{copy.title}</h2>
+          <h2 className="text-3xl font-semibold tracking-tight text-[#E9DFFF]">
+            <GradientText colors={["#E9DFFF", "#a78bfa", "#7cff92", "#E9DFFF"]} animationSpeed={10}>
+              {copy.title}
+            </GradientText>
+          </h2>
           <p className="text-zinc-400">{copy.subtitle}</p>
         </div>
         {limit ? (
@@ -54,10 +62,18 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
 
       <div className="grid gap-5 lg:grid-cols-3">
         {items.map((item) => (
-          <article key={item.slug} className="glass-card overflow-hidden">
+          <GlareHover
+            key={item.slug}
+            glareColor="#a78bfa"
+            glareOpacity={0.15}
+            borderColor="rgba(167,139,250,0.12)"
+            borderRadius="16px"
+            className="glass-card overflow-hidden"
+          >
+            <article className="w-full">
             <Image
               src={item.image}
-              alt={item.title}
+              alt={`${item.title} — ${item.sector} sektörü kurumsal web sitesi referans projesi`}
               width={900}
               height={600}
               className="h-44 w-full object-cover"
@@ -100,7 +116,8 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
                 ) : null}
               </div>
             </div>
-          </article>
+            </article>
+          </GlareHover>
         ))}
       </div>
     </section>

@@ -1,24 +1,27 @@
+"use client";
+
+import GlareHover from "@/components/ui/glare-hover";
 import type { Locale } from "@/lib/i18n";
 
 const testimonialData = {
   tr: [
     {
       quote:
-        "Aksipal ile 2 günde yayına çıktık. Reklam trafiğimiz artık boşa gitmiyor, WhatsApp talepleri net arttı.",
+        "Aksipal ile 2 gunede yayina ciktik. Reklam trafigimiz artik bosa gitmiyor, WhatsApp talepleri net artti.",
       author: "M. Demir",
       role: "Emlak Ofisi Sahibi",
     },
     {
       quote:
-        "Sitemiz ilk kez premium hissettiriyor. Mobil hız ve tasarım kalitesi müşteride güven oluşturdu.",
+        "Sitemiz ilk kez premium hissettiriyor. Mobil hiz ve tasarim kalitesi musteride guven olusturdu.",
       author: "Z. Korkmaz",
-      role: "Klinik Yöneticisi",
+      role: "Klinik Yoneticisi",
     },
     {
       quote:
-        "Teklif akışımız sadeleşti, form tamamlanma oranı yükseldi. Teknik tarafta da çok profesyonel ilerledik.",
+        "Teklif akisimiz sadelesti, form tamamlanma orani yukseldi. Teknik tarafta da cok profesyonel ilerledik.",
       author: "A. Kara",
-      role: "Lojistik Operasyon Müdürü",
+      role: "Lojistik Operasyon Muduru",
     },
   ],
   en: [
@@ -51,24 +54,33 @@ export function Testimonials({ locale }: TestimonialsProps) {
   return (
     <section className="section-shell mt-20 space-y-8">
       <div className="max-w-xl space-y-2">
-        <h2 className="text-3xl font-semibold tracking-tight text-white">
+        <h2 className="text-3xl font-semibold tracking-tight text-[#E9DFFF]">
           {locale === "tr" ? "Referanslar" : "Testimonials"}
         </h2>
-        <p className="text-zinc-400">
+        <p className="text-[#B8B3D1]">
           {locale === "tr"
-            ? "Placeholder referans metinleri. Gerçek müşteri yorumları ile kolayca güncellenir."
+            ? "Placeholder referans metinleri. Gercek musteri yorumlari ile kolayca guncellenir."
             : "Placeholder testimonials. Easy to replace with real client references."}
         </p>
       </div>
       <div className="grid gap-5 lg:grid-cols-3">
         {testimonialData[locale].map((item) => (
-          <blockquote key={item.quote} className="glass-card space-y-4 p-6">
-            <p className="text-sm leading-7 text-zinc-300">“{item.quote}”</p>
-            <footer>
-              <p className="text-sm font-semibold text-zinc-100">{item.author}</p>
-              <p className="text-xs text-zinc-500">{item.role}</p>
-            </footer>
-          </blockquote>
+          <GlareHover
+            key={item.quote}
+            glareColor="#a78bfa"
+            glareOpacity={0.12}
+            borderColor="rgba(167,139,250,0.1)"
+            borderRadius="16px"
+            className="glass-card"
+          >
+            <blockquote className="w-full space-y-4 p-6">
+              <p className="text-sm leading-7 text-[#B8B3D1]">&ldquo;{item.quote}&rdquo;</p>
+              <footer>
+                <p className="text-sm font-semibold text-[#E9DFFF]">{item.author}</p>
+                <p className="text-xs text-zinc-500">{item.role}</p>
+              </footer>
+            </blockquote>
+          </GlareHover>
         ))}
       </div>
     </section>

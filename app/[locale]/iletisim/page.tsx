@@ -3,7 +3,7 @@ import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { ContactForm } from "@/components/contact/contact-form";
-import { siteConfig } from "@/lib/constants";
+import { siteConfig, seoKeywordsTr } from "@/lib/constants";
 import { submitContactAction } from "@/lib/actions/contact";
 import { isLocale } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/seo";
@@ -22,11 +22,12 @@ export async function generateMetadata({
   return createPageMetadata({
     locale,
     pathname: "/iletisim",
-    title: locale === "tr" ? "İletişim" : "Contact",
+    title: locale === "tr" ? "İletişim | Web Sitesi Teklifi" : "Contact | Project Inquiry",
     description:
       locale === "tr"
-        ? "WhatsApp, e-posta veya form üzerinden proje talebinizi iletin."
-        : "Reach out via WhatsApp, email, phone, or project contact form.",
+        ? "Web sitesi yaptırma ve kurumsal web tasarım teklifi için WhatsApp, e-posta veya form. Aksipal ile projenizi iletin."
+        : "Contact Aksipal for corporate website projects, quotes and custom software—WhatsApp, email, phone or form.",
+    keywords: locale === "tr" ? [...seoKeywordsTr, "iletişim", "teklif"] : undefined,
   });
 }
 
@@ -51,12 +52,14 @@ export default async function ContactPage({
     <section className="section-shell pt-16">
       <div className="mb-10 max-w-3xl space-y-3">
         <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          {locale === "tr" ? "İletişim" : "Contact"}
+          {locale === "tr"
+            ? "İletişim — Web Sitesi Teklifi Alın"
+            : "Contact — Get a Website Quote"}
         </h1>
         <p className="text-zinc-400">
           {locale === "tr"
-            ? "Projenizi kısaca anlatın, 24 saat içinde size net bir aksiyon planı ile dönüş yapayım."
-            : "Share a short brief and I will respond within 24 hours with a concrete plan."}
+            ? "Web sitesi yaptırma veya hazır web sitesi paketi için projenizi kısaca anlatın, 24 saat içinde size net bir aksiyon planı ile dönüş yapayım."
+            : "Share a short brief about your website project and I will respond within 24 hours with a concrete plan."}
         </p>
       </div>
 

@@ -38,12 +38,14 @@ type SiteFooterProps = {
 export function SiteFooter({ locale }: SiteFooterProps) {
   const copy = {
     tr: {
-      pitch: "Premium web deneyimi ve sürdürülebilir dijital altyapı.",
+      pitch:
+        "Web sitesi yaptırma ve kurumsal web tasarım: SEO uyumlu, hızlı ve sürdürülebilir altyapı.",
       quickLinks: "Hızlı Linkler",
       contact: "İletişim",
       legal: "Yasal",
-      privacy: "Gizlilik",
-      kvkk: "KVKK",
+      privacy: "Gizlilik Politikası",
+      kvkk: "KVKK Aydınlatma",
+      cookies: "Çerez Politikası",
       rights: "Tüm hakları saklıdır.",
     },
     en: {
@@ -51,8 +53,9 @@ export function SiteFooter({ locale }: SiteFooterProps) {
       quickLinks: "Quick Links",
       contact: "Contact",
       legal: "Legal",
-      privacy: "Privacy",
-      kvkk: "Data Policy",
+      privacy: "Privacy Policy",
+      kvkk: "KVKK Notice",
+      cookies: "Cookie Policy",
       rights: "All rights reserved.",
     },
   }[locale];
@@ -108,22 +111,32 @@ export function SiteFooter({ locale }: SiteFooterProps) {
           <ul className="space-y-2 text-sm text-zinc-400">
             <li>
               <Link href={withLocale(locale, "/templates")} className="hover:text-zinc-100">
-                Templates
+                {locale === "tr" ? "Hazır Web Sitesi Şablonları" : "Templates"}
               </Link>
             </li>
             <li>
               <Link href={withLocale(locale, "/hizmetler")} className="hover:text-zinc-100">
-                {locale === "tr" ? "Hizmetler" : "Services"}
+                {locale === "tr" ? "Hizmetler & Fiyatlar" : "Services & Pricing"}
               </Link>
             </li>
             <li>
               <Link href={withLocale(locale, "/isler")} className="hover:text-zinc-100">
-                {locale === "tr" ? "Referanslar" : "Work"}
+                {locale === "tr" ? "Referans Projeler" : "Case Studies"}
               </Link>
             </li>
             <li>
               <Link href={withLocale(locale, "/blog")} className="hover:text-zinc-100">
                 Blog
+              </Link>
+            </li>
+            <li>
+              <Link href={withLocale(locale, "/hakkimda")} className="hover:text-zinc-100">
+                {locale === "tr" ? "Hakkımda" : "About"}
+              </Link>
+            </li>
+            <li>
+              <Link href={withLocale(locale, "/iletisim")} className="hover:text-zinc-100">
+                {locale === "tr" ? "İletişim" : "Contact"}
               </Link>
             </li>
           </ul>
@@ -138,14 +151,23 @@ export function SiteFooter({ locale }: SiteFooterProps) {
           </ul>
           <div className="pt-4">
             <p className="mb-2 text-sm font-semibold text-zinc-200">{copy.legal}</p>
-            <div className="flex gap-4 text-sm text-zinc-400">
-              <Link href={withLocale(locale, "/iletisim")} className="hover:text-zinc-100">
-                {copy.privacy}
-              </Link>
-              <Link href={withLocale(locale, "/iletisim")} className="hover:text-zinc-100">
-                {copy.kvkk}
-              </Link>
-            </div>
+            <ul className="space-y-1.5 text-sm text-zinc-400">
+              <li>
+                <Link href={withLocale(locale, "/gizlilik-politikasi")} className="hover:text-zinc-100">
+                  {copy.privacy}
+                </Link>
+              </li>
+              <li>
+                <Link href={withLocale(locale, "/kvkk-aydinlatma")} className="hover:text-zinc-100">
+                  {copy.kvkk}
+                </Link>
+              </li>
+              <li>
+                <Link href={withLocale(locale, "/cerez-politikasi")} className="hover:text-zinc-100">
+                  {copy.cookies}
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

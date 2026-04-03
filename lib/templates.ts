@@ -1,6 +1,8 @@
 import { z } from "zod";
 
 export const templateSectorSchema = z.enum([
+  "teknoloji",
+  "farma",
   "lojistik",
   "gym",
   "enerji",
@@ -28,6 +30,41 @@ export const templateSchema = z.object({
 
 const rawTemplates = [
   {
+    id: "tpl-teknoloji",
+    slug: "teknoloji",
+    title: "Teknoloji",
+    sector: "teknoloji",
+    summary:
+      "Teknoloji veya yazılım firmaları için kurumsal site: koyu tema, hareketli ve etkileyici görünüm, birden fazla sayfa.",
+    features: [
+      "Modern tasarım; öne çıkan görsel efektler ve akıcı geçişler",
+      "Hizmetler, referanslar, iletişim ve gerekli yasal sayfalar dahil",
+      "İsteğe bağlı Türkçe / İngilizce",
+      "Hızlı yüklenir; Google ve telefon uyumlu",
+    ],
+    deliveryTime: "5 gün",
+    startingPrice: "₺20.000",
+    image: "/images/cases/korsis-teknoloji.png",
+    demoUrl: "https://adorable-torrone-84b065.netlify.app/",
+  },
+  {
+    id: "tpl-farma",
+    slug: "farma",
+    title: "İlaç & Sağlık",
+    sector: "farma",
+    summary: "İlaç ve sağlık sektörü için kurumsal çok sayfalı site şablonu.",
+    features: [
+      "~8 sayfa (ana, ürünler, detay, bilim kurulu, hakkımızda, iletişim, gizlilik/KVKK)",
+      "Ürün vitrini ve kurumsal içerik blokları",
+      "İletişim ve talep formları",
+      "Next.js, TypeScript, Tailwind, responsive, SEO",
+    ],
+    deliveryTime: "2 gün",
+    startingPrice: "₺15.000",
+    image: "/images/cases/dedpharma.png",
+    demoUrl: "https://charming-jelly-c2ba89.netlify.app",
+  },
+  {
     id: "tpl-lojistik",
     slug: "lojistik",
     title: "Lojistik",
@@ -40,7 +77,7 @@ const rawTemplates = [
       "Mobil uyumlu tasarım",
     ],
     deliveryTime: "2 gün",
-    startingPrice: "₺10.000",
+    startingPrice: "₺12.500",
     image: "/images/templates/lojistik.png",
     demoUrl: "https://classy-gecko-aceb0b.netlify.app",
   },
@@ -188,6 +225,8 @@ export type Template = z.infer<typeof templateSchema>;
 export type TemplateSector = z.infer<typeof templateSectorSchema>;
 
 export const templateSectorLabel: Record<TemplateSector, string> = {
+  teknoloji: "Teknoloji",
+  farma: "İlaç & Sağlık",
   lojistik: "Lojistik",
   gym: "Spor Salonu",
   enerji: "Enerji",

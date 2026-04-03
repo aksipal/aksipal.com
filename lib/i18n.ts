@@ -58,9 +58,9 @@ export const navItems = [
     },
   },
   {
-    href: "/ben-kimim",
+    href: "/hakkimda",
     label: {
-      tr: "Ben Kimim",
+      tr: "Hakkımda",
       en: "About",
     },
   },

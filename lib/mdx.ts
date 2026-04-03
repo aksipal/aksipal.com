@@ -7,6 +7,8 @@ import readingTime from "reading-time";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
+export type FaqItem = { q: string; a: string };
+
 export type BlogPostMeta = {
   slug: string;
   title: string;
@@ -15,18 +17,24 @@ export type BlogPostMeta = {
   tags: string[];
   coverImage: string;
   readingMinutes: number;
+  keywords: string[];
+  faq: FaqItem[];
 };
 
 export type BlogPost = BlogPostMeta & {
   content: string;
 };
 
-const parseTags = (value: unknown) => {
-  if (!Array.isArray(value)) {
-    return [];
-  }
-
+const parseStringArray = (value: unknown): string[] => {
+  if (!Array.isArray(value)) return [];
   return value.map((item) => String(item));
+};
+
+const parseFaq = (value: unknown): FaqItem[] => {
+  if (!Array.isArray(value)) return [];
+  return value
+    .filter((item) => item && typeof item === "object" && "q" in item && "a" in item)
+    .map((item) => ({ q: String((item as Record<string, unknown>).q), a: String((item as Record<string, unknown>).a) }));
 };
 
 const parsePost = async (slug: string): Promise<BlogPost> => {
@@ -40,9 +48,11 @@ const parsePost = async (slug: string): Promise<BlogPost> => {
     title: String(data.title ?? slug),
     description: String(data.description ?? ""),
     publishedAt: String(data.publishedAt ?? new Date().toISOString()),
-    tags: parseTags(data.tags),
+    tags: parseStringArray(data.tags),
     coverImage: String(data.coverImage ?? "/images/cases/emlak-case.svg"),
     readingMinutes: minutes,
+    keywords: parseStringArray(data.keywords),
+    faq: parseFaq(data.faq),
     content,
   };
 };
@@ -63,6 +73,8 @@ export const getBlogPosts = cache(async (): Promise<BlogPostMeta[]> => {
     tags: post.tags,
     coverImage: post.coverImage,
     readingMinutes: post.readingMinutes,
+    keywords: post.keywords,
+    faq: post.faq,
   }));
 
   return metadata.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));

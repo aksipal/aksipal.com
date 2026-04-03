@@ -1,9 +1,13 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+import { BackgroundGrid } from "@/components/backgrounds/background-grid";
+import { CookieConsent } from "@/components/layout/cookie-consent";
 import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import type { Locale } from "@/lib/i18n";
 import { isLocale, locales } from "@/lib/i18n";
 
 export const dynamicParams = false;
@@ -27,10 +31,17 @@ export default async function LocaleLayout({
 
   return (
     <div className="relative min-h-screen pb-20 md:pb-0">
-      <SiteHeader locale={locale} />
-      <main>{children}</main>
-      <SiteFooter locale={locale} />
+      <BackgroundGrid />
+
+      <div className="relative z-10">
+        <SiteHeader locale={locale} />
+        <main>{children}</main>
+        <SiteFooter locale={locale} />
+      </div>
+
       <MobileStickyCta locale={locale} />
+      <CookieConsent locale={locale as Locale} />
+      <GoogleAnalytics />
     </div>
   );
 }

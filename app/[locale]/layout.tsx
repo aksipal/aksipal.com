@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 
+import { GtagConsentSync } from "@/components/analytics/gtag-consent-sync";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { BackgroundGrid } from "@/components/backgrounds/background-grid";
 import { CookieConsent } from "@/components/layout/cookie-consent";
@@ -41,6 +42,7 @@ export default async function LocaleLayout({
 
       <MobileStickyCta locale={locale} />
       <CookieConsent locale={locale as Locale} />
+      <GtagConsentSync />
       <GoogleAnalytics />
     </div>
   );

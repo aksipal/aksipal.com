@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { useConsent } from "@/lib/consent";
+import { gtagApplyConsentState } from "@/lib/gtag-consent";
 import type { Locale } from "@/lib/i18n";
 import { withLocale } from "@/lib/i18n";
 
@@ -48,7 +49,18 @@ export function CookieConsent({ locale }: CookieConsentProps) {
 
   if (decided) return null;
 
+  const handleAcceptAll = () => {
+    gtagApplyConsentState({ analytics: true });
+    accept();
+  };
+
+  const handleRejectAll = () => {
+    gtagApplyConsentState({ analytics: false });
+    deny();
+  };
+
   const handleSavePrefs = () => {
+    gtagApplyConsentState({ analytics: analyticsChecked });
     update({ analytics: analyticsChecked });
   };
 
@@ -97,10 +109,10 @@ export function CookieConsent({ locale }: CookieConsentProps) {
         ) : null}
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          <Button type="button" size="sm" onClick={accept}>
+          <Button type="button" size="sm" onClick={handleAcceptAll}>
             {copy.accept}
           </Button>
-          <Button type="button" size="sm" variant="secondary" onClick={deny}>
+          <Button type="button" size="sm" variant="secondary" onClick={handleRejectAll}>
             {copy.deny}
           </Button>
           {!showPrefs ? (

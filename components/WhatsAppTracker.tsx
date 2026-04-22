@@ -4,9 +4,11 @@ import { useEffect } from "react";
 
 export default function WhatsAppTracker() {
   useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const link = target.closest("a[href*='wa.me']") as HTMLAnchorElement | null;
+    const handleClick = (e: Event) => {
+      if (!(e.target instanceof Element)) {
+        return;
+      }
+      const link = e.target.closest<HTMLAnchorElement>("a[href*='wa.me']");
 
       if (link && typeof window !== "undefined" && typeof window.gtag === "function") {
         window.gtag("event", "conversion", {
@@ -17,8 +19,9 @@ export default function WhatsAppTracker() {
       }
     };
 
-    document.addEventListener("click", handleClick, { passive: true });
-    return () => document.removeEventListener("click", handleClick, { passive: true });
+    const options: AddEventListenerOptions = { passive: true };
+    document.addEventListener("click", handleClick, options);
+    return () => document.removeEventListener("click", handleClick);
   }, []);
 
   return null;

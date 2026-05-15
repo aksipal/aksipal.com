@@ -11,11 +11,15 @@ import { absoluteUrl } from "@/lib/seo";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -35,10 +39,13 @@ export const metadata: Metadata = {
   creator: siteConfig.legalName,
   publisher: siteConfig.legalName,
   alternates: {
-    canonical: siteConfig.url,
+    canonical: `${siteConfig.url}/tr`,
     languages: {
       tr: `${siteConfig.url}/tr`,
+      "tr-TR": `${siteConfig.url}/tr`,
       en: `${siteConfig.url}/en`,
+      "en-US": `${siteConfig.url}/en`,
+      "x-default": `${siteConfig.url}/tr`,
     },
   },
   keywords: [...seoKeywordsTr, ...seoKeywordsEn, "Next.js", "Aksipal"],
@@ -85,6 +92,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#09090d",
   colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

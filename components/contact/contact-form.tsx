@@ -167,6 +167,15 @@ export function ContactForm({ locale }: ContactFormProps) {
           ? "Your request has been received. I will get back to you within 24 hours."
           : "Talebiniz alındı. 24 saat içinde size dönüş yapacağım.",
       );
+      // GA4 form submit conversion eventi (consent verildiyse gtag yüklü olur)
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("event", "generate_lead", {
+          form_name: "contact",
+          sector: parsed.data.sector,
+          budget: parsed.data.budget,
+          currency: "TRY",
+        });
+      }
       form.reset();
     } catch {
       setStatus("error");
@@ -217,13 +226,22 @@ export function ContactForm({ locale }: ContactFormProps) {
             className="w-full rounded-xl border border-white/15 bg-black/30 px-4 py-2.5 text-sm text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
           >
             <option value="" disabled>
-              {copy.sector}
+              {locale === "tr" ? "İlgilendiğiniz Hizmet" : "Service of Interest"}
             </option>
-            <option value="Emlak">Emlak</option>
-            <option value="Taşımacılık">Taşımacılık</option>
-            <option value="Restoran">Restoran</option>
-            <option value="Klinik">Klinik</option>
-            <option value="Oto Servis">Oto Servis</option>
+            <optgroup label={locale === "tr" ? "AI · Otomasyon · Yazılım" : "AI · Automation · Software"}>
+              <option value="AI Agent / Chatbot">{locale === "tr" ? "AI Agent / Chatbot" : "AI Agent / Chatbot"}</option>
+              <option value="WhatsApp Otomasyon">{locale === "tr" ? "WhatsApp Otomasyonu" : "WhatsApp Automation"}</option>
+              <option value="Süreç Otomasyonu (n8n)">{locale === "tr" ? "Süreç Otomasyonu (n8n)" : "Workflow Automation (n8n)"}</option>
+              <option value="Özel Yazılım">{locale === "tr" ? "Özel Yazılım" : "Custom Software"}</option>
+              <option value="E-Ticaret">{locale === "tr" ? "E-Ticaret" : "E-Commerce"}</option>
+            </optgroup>
+            <optgroup label={locale === "tr" ? "Web Sitesi (Sektör)" : "Website (Sector)"}>
+              <option value="Emlak">{locale === "tr" ? "Emlak" : "Real Estate"}</option>
+              <option value="Taşımacılık">{locale === "tr" ? "Taşımacılık / Lojistik" : "Logistics"}</option>
+              <option value="Restoran">{locale === "tr" ? "Restoran" : "Restaurant"}</option>
+              <option value="Klinik">{locale === "tr" ? "Klinik / Sağlık" : "Clinic / Health"}</option>
+              <option value="Oto Servis">{locale === "tr" ? "Oto Servis" : "Auto Service"}</option>
+            </optgroup>
             <option value={locale === "tr" ? "Diğer" : "Other"}>
               {locale === "tr" ? "Diğer" : "Other"}
             </option>
@@ -245,11 +263,12 @@ export function ContactForm({ locale }: ContactFormProps) {
           <option value="" disabled>
             {copy.budget}
           </option>
-          <option value="₺10k-₺20k">₺10k-₺20k</option>
-          <option value="₺20k-₺40k">₺20k-₺40k</option>
-          <option value="₺40k-₺80k">₺40k-₺80k</option>
+          <option value="₺10k-₺25k">₺10k-₺25k</option>
+          <option value="₺25k-₺50k">₺25k-₺50k</option>
+          <option value="₺50k-₺100k">₺50k-₺100k</option>
+          <option value="₺100k+">₺100k+</option>
           <option value={locale === "tr" ? "Özel teklif" : "Custom quote"}>
-            {locale === "tr" ? "Özel teklif" : "Custom quote"}
+            {locale === "tr" ? "Önce konuşalım" : "Let's discuss first"}
           </option>
         </select>
         {errors?.budget ? (
@@ -273,8 +292,31 @@ export function ContactForm({ locale }: ContactFormProps) {
         ) : null}
       </div>
 
+      <label
+        htmlFor="kvkk-consent"
+        className="flex items-start gap-2 text-xs leading-6 text-zinc-400"
+      >
+        <input
+          id="kvkk-consent"
+          name="kvkk"
+          type="checkbox"
+          required
+          className="mt-1 size-4 rounded border-white/20 bg-black/40 accent-[var(--accent)]"
+        />
+        <span>
+          {isEn
+            ? "I have read and consent to the use of my data per the KVKK / Privacy Policy for responding to this inquiry."
+            : "İletişim talebime yanıt verilmesi amacıyla bilgilerimin KVKK Aydınlatma Metni ve Gizlilik Politikası kapsamında işlenmesine onay veriyorum."}
+        </span>
+      </label>
+
       <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Button type="submit" className="w-full sm:w-auto" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          className="w-full sm:w-auto"
+          disabled={isSubmitting}
+          data-cta="contactform-submit"
+        >
           {isSubmitting ? copy.sending : copy.submit}
         </Button>
         {message ? (

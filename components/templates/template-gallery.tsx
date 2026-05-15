@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { ExternalLink } from "lucide-react";
 
 import { LeadDialog } from "@/components/contact/lead-dialog";
@@ -19,9 +20,26 @@ type TemplateGalleryProps = {
 };
 
 const sectors = Object.keys(templateSectorLabel) as TemplateSector[];
+const sectorSet = new Set<string>(sectors);
 
 export function TemplateGallery({ locale }: TemplateGalleryProps) {
-  const [activeSector, setActiveSector] = useState<TemplateSector | "all">("all");
+  const searchParams = useSearchParams();
+  const initial = searchParams?.get("s") ?? "";
+  const initialSector: TemplateSector | "all" = sectorSet.has(initial)
+    ? (initial as TemplateSector)
+    : "all";
+
+  const [activeSector, setActiveSector] = useState<TemplateSector | "all">(initialSector);
+
+  // URL paramı dış değişiklikle değişirse yansıt
+  useEffect(() => {
+    const s = searchParams?.get("s") ?? "";
+    if (sectorSet.has(s)) {
+      setActiveSector(s as TemplateSector);
+    } else if (s === "" || s === "all") {
+      setActiveSector("all");
+    }
+  }, [searchParams]);
 
   const filtered = useMemo(
     () =>
@@ -50,11 +68,12 @@ export function TemplateGallery({ locale }: TemplateGalleryProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2" role="tablist" aria-label={copy.all}>
         <Button
           variant={activeSector === "all" ? "default" : "secondary"}
           size="sm"
           onClick={() => setActiveSector("all")}
+          aria-pressed={activeSector === "all"}
         >
           {copy.all}
         </Button>
@@ -64,6 +83,7 @@ export function TemplateGallery({ locale }: TemplateGalleryProps) {
             variant={activeSector === sector ? "default" : "secondary"}
             size="sm"
             onClick={() => setActiveSector(sector)}
+            aria-pressed={activeSector === sector}
           >
             {templateSectorLabel[sector]}
           </Button>
@@ -74,14 +94,15 @@ export function TemplateGallery({ locale }: TemplateGalleryProps) {
         <p className="text-sm text-zinc-400">{copy.empty}</p>
       ) : (
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((template) => (
+          {filtered.map((template, index) => (
             <article key={template.id} className="glass-card overflow-hidden">
               <Image
                 src={template.image}
-                alt={template.title}
+                alt={`${template.title} web sitesi şablonu — ${templateSectorLabel[template.sector]} sektörü için hazır site`}
                 width={960}
                 height={640}
                 className="h-44 w-full object-cover"
+                loading={index < 3 ? "eager" : "lazy"}
               />
               <div className="space-y-4 p-5">
                 <div className="flex items-start justify-between gap-3">
@@ -115,8 +136,9 @@ export function TemplateGallery({ locale }: TemplateGalleryProps) {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5"
+                        aria-label={`${template.title} — ${copy.demo}`}
                       >
-                        <ExternalLink className="size-3.5" />
+                        <ExternalLink className="size-3.5" aria-hidden />
                         {copy.demo}
                       </a>
                     </Button>

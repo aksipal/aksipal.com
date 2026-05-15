@@ -1,11 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
 import { LeadDialog } from "@/components/contact/lead-dialog";
-import GlareHover from "@/components/ui/glare-hover";
 import GradientText from "@/components/ui/gradient-text";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,7 +19,7 @@ export function TemplatePreview({ locale }: TemplatePreviewProps) {
     tr: {
       title: "Hazır Web Sitesi Şablonları (Sektöre Özel)",
       subtitle:
-        "Web sitesi satın almak isteyen işletmeler için paketler: berber, kuaför, lojistik, sağlık ve daha fazlası. Hızlı teslim, uyarlanabilir içerik, teknik SEO ve performans standartı.",
+        "Web sitesi yaptırmak isteyen KOBİ'ler için sektör paketleri: berber, kuaför, klinik, lojistik, oto yıkama, danışmanlık ve daha fazlası. 2-5 günde yayın, sözleşmeli teslim, fiyat şeffaf — KDV bilgisi teklif anında netleşir.",
       all: "Tüm Şablonlar",
       select: "Bu Şablonu Seç",
       demo: "Canlı Demo",
@@ -31,7 +28,7 @@ export function TemplatePreview({ locale }: TemplatePreviewProps) {
     en: {
       title: "Sector-focused Templates",
       subtitle:
-        "Productized packages with fast delivery. Tailored to your business while preserving SEO and performance standards.",
+        "Productized packages for SMBs that want to launch fast. Tailored to your business while preserving SEO and performance standards. Live in 2-5 days, contracted delivery, transparent pricing.",
       all: "All Templates",
       select: "Choose This Template",
       demo: "View Demo",
@@ -40,10 +37,13 @@ export function TemplatePreview({ locale }: TemplatePreviewProps) {
   }[locale];
 
   return (
-    <section className="section-shell mt-20 space-y-8">
+    <section className="section-shell mt-20 space-y-8" aria-labelledby="templates-heading">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl space-y-2">
-          <h2 className="text-3xl font-semibold tracking-tight text-[#E9DFFF]">
+          <h2
+            id="templates-heading"
+            className="text-3xl font-semibold tracking-tight text-[#E9DFFF]"
+          >
             <GradientText colors={["#E9DFFF", "#7cff92", "#a78bfa", "#E9DFFF"]} animationSpeed={10}>
               {copy.title}
             </GradientText>
@@ -59,22 +59,18 @@ export function TemplatePreview({ locale }: TemplatePreviewProps) {
       </div>
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {templates.map((template) => (
-          <GlareHover
+        {templates.map((template, index) => (
+          <article
             key={template.id}
-            glareColor="#7cff92"
-            glareOpacity={0.15}
-            borderColor="rgba(124,255,146,0.12)"
-            borderRadius="16px"
-            className="glass-card overflow-hidden"
+            className="glass-card overflow-hidden transition-colors hover:border-white/20"
           >
-            <article className="w-full">
             <Image
               src={template.image}
               alt={`${template.title} web sitesi şablonu — ${templateSectorLabel[template.sector]} sektörü için hazır web sitesi`}
               width={960}
               height={640}
               className="h-44 w-full object-cover"
+              loading={index < 3 ? "eager" : "lazy"}
             />
             <div className="space-y-4 p-5">
               <div className="flex items-center justify-between gap-3">
@@ -108,16 +104,16 @@ export function TemplatePreview({ locale }: TemplatePreviewProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5"
+                      aria-label={`${template.title} — ${copy.demo}`}
                     >
-                      <ExternalLink className="size-3.5" />
+                      <ExternalLink className="size-3.5" aria-hidden />
                       {copy.demo}
                     </a>
                   </Button>
                 ) : null}
               </div>
             </div>
-            </article>
-          </GlareHover>
+          </article>
         ))}
       </div>
     </section>

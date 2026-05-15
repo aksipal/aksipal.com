@@ -26,12 +26,25 @@ export async function generateMetadata({
   return createPageMetadata({
     locale,
     pathname: "/hizmetler",
-    title: locale === "tr" ? "Hizmetler | Web Sitesi Paketleri ve Özel Yazılım" : "Services | Website Packages & Custom Software",
+    title:
+      locale === "tr"
+        ? "Hizmetler & Şeffaf Fiyatlar — AI, Otomasyon, Web | Aksipal"
+        : "Services & Transparent Pricing — AI, Automation, Web",
     description:
       locale === "tr"
-        ? "Web sitesi satın al ve paket seç: sektöre özel hazır şablonlar, kurumsal web sitesi geliştirme ve özel yazılım. SEO uyumlu teslim."
-        : "Template packages, corporate web development and custom software—SEO-ready delivery for businesses.",
-    keywords: locale === "tr" ? [...seoKeywordsTr, "web sitesi paketi", "özel yazılım"] : undefined,
+        ? "Web paketleri ₺17k'dan, AI agent ₺45k'dan, WhatsApp & süreç otomasyonu ₺25k'dan başlar. Sözleşmeli teslim, sabit fiyat, KDV hariç. 4-12 gün web teslimi."
+        : "Web packages from ₺17k, AI agent from ₺45k, WhatsApp & workflow automation from ₺25k. Contracted delivery, fixed price, VAT exclusive. 4-12 day web launch.",
+    keywords:
+      locale === "tr"
+        ? [
+            ...seoKeywordsTr,
+            "AI agent fiyat",
+            "WhatsApp bot fiyat",
+            "n8n otomasyon fiyat",
+            "web sitesi paketi fiyat",
+            "özel yazılım Ankara fiyat",
+          ]
+        : undefined,
   });
 }
 
@@ -62,12 +75,12 @@ export default async function ServicesPage({
       <section className="section-shell mt-20">
         <div className="space-y-3">
           <h2 className="text-3xl font-semibold tracking-tight text-white">
-            {locale === "tr" ? "Daha Büyük İşler" : "Enterprise Projects"}
+            {locale === "tr" ? "AI, Otomasyon ve Özel Yazılım" : "AI, Automation & Custom Software"}
           </h2>
           <p className="max-w-2xl text-zinc-400">
             {locale === "tr"
-              ? "Web sitesi yaptırma kapsamının ötesinde: e-ticaret, kurumsal uygulama ve özel mühendislik projelerinde uçtan uca geliştirme ve anahtar teslim."
-              : "Beyond standard websites: end-to-end e-commerce, enterprise applications and custom engineering—turnkey delivery."}
+              ? "Web sitesi yetmediği noktada: AI agent, WhatsApp / süreç otomasyonu, e-ticaret, kurumsal uygulama ve özel mühendislik. Sprint bazlı, ölçülebilir teslim."
+              : "Where a website isn't enough: AI agents, WhatsApp / workflow automation, e-commerce, enterprise apps and custom engineering. Sprint-based, measurable delivery."}
           </p>
         </div>
 

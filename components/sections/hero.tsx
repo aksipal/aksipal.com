@@ -1,13 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, MessageCircle, Sparkles } from "lucide-react";
 
 import { LeadDialog } from "@/components/contact/lead-dialog";
 import GradientText from "@/components/ui/gradient-text";
-import ShinyText from "@/components/ui/shiny-text";
-import TrueFocus from "@/components/ui/true-focus";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
 import { withLocale } from "@/lib/i18n";
@@ -20,24 +17,32 @@ type HeroSectionProps = {
 export function HeroSection({ locale }: HeroSectionProps) {
   const copy = {
     tr: {
-      badge: "Premium Web & Platform",
-      title: "İşletmeler için modern hızlı premium web siteleri",
+      badge: "AI · Otomasyon · Premium Web",
+      title: "AI çağında işletmeniz için yazılım, otomasyon ve premium web",
       description:
-        "Web sitesi yaptırma veya hazır web sitesi paketi arayan işletmeler için: SEO uyumlu kurumsal web siteleri, sektöre özel şablonlar ve özel yazılım. Google'da görünürlük ve hız odaklı teslim.",
-      quote: "Teklif Al",
+        "Manuel iş yükünüzü AI agent ve WhatsApp / süreç otomasyonu ile azaltın; kurumsal web sitenizi 4-12 günde yayına alın. 6+ yıl senior full-stack mühendislik, sözleşmeli teslim, şeffaf fiyat — Ankara merkezli, KVKK uyumlu.",
+      quote: "WhatsApp'tan Teklif Al",
       templates: "Şablonları Gör",
       quickForm: "Hızlı Form",
-      note: "Lighthouse 90+ hedefi, teknik SEO (meta, OG, performans) ve mobil uyum — berber, kuaför, lojistik gibi nişler için hazır şablonlar.",
+      bullets: [
+        "Sözleşmeli teslim · sabit fiyat · sürpriz yok",
+        "WhatsApp + e-posta · Türkçe destek · 24 saat içinde dönüş",
+        "Ankara merkezli · yüz yüze görüşmeye açık",
+      ],
     },
     en: {
-      badge: "Premium Web & Platform",
-      title: "Modern fast premium websites for businesses",
+      badge: "AI · Automation · Premium Web",
+      title: "Software, automation and premium web for the AI era",
       description:
-        "Corporate websites, template packages and custom software—built for conversions, search visibility and speed. Full delivery for teams that need a serious web presence.",
-      quote: "Get Quote",
+        "Cut manual workload with AI agents and WhatsApp / workflow automation; launch your corporate website in 4-12 days. 6+ years senior full-stack engineering, contracted delivery, transparent pricing — Ankara, KVKK/GDPR-aware.",
+      quote: "Get Quote on WhatsApp",
       templates: "View Templates",
       quickForm: "Quick Form",
-      note: "Lighthouse 90+ target, technical SEO (metadata, OG, performance) and mobile-first layouts—sector templates included.",
+      bullets: [
+        "Contracted delivery · fixed price · no surprises",
+        "WhatsApp + email · 24-hour response",
+        "Ankara-based · in-person meetings on request",
+      ],
     },
   }[locale];
 
@@ -49,7 +54,7 @@ export function HeroSection({ locale }: HeroSectionProps) {
   });
 
   return (
-    <section className="section-shell pt-16 sm:pt-24">
+    <section className="section-shell pt-16 sm:pt-24" aria-labelledby="hero-heading">
       <div className="glass-card relative overflow-hidden p-8 sm:p-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(124,255,146,0.18),transparent_40%),radial-gradient(circle_at_90%_20%,rgba(132,100,255,0.14),transparent_45%)]" />
         <div className="relative max-w-3xl space-y-6">
@@ -60,57 +65,52 @@ export function HeroSection({ locale }: HeroSectionProps) {
             className="w-fit"
           >
             <span className="inline-flex items-center gap-1 text-sm font-medium">
-              <Sparkles className="size-3" />
+              <Sparkles className="size-3" aria-hidden />
               {copy.badge}
             </span>
           </GradientText>
 
-          <h1 className="text-balance text-4xl font-semibold tracking-tight text-[#E9DFFF] sm:text-6xl">
-            <TrueFocus
-              sentence={copy.title}
-              manualMode={false}
-              blurAmount={3}
-              borderColor="#7cff92"
-              glowColor="rgba(124, 255, 146, 0.5)"
-              animationDuration={0.5}
-              pauseBetweenAnimations={1.5}
-            />
+          <h1
+            id="hero-heading"
+            className="text-balance text-4xl font-semibold tracking-tight text-[#E9DFFF] sm:text-6xl"
+          >
+            {copy.title}
           </h1>
 
-          <p className="max-w-2xl text-pretty text-base leading-7 sm:text-lg">
-            <ShinyText
-              text={copy.description}
-              color="#B8B3D1"
-              shineColor="#E9DFFF"
-              speed={4}
-              className="leading-7"
-            />
+          <p className="max-w-2xl text-pretty text-base leading-7 text-[#B8B3D1] sm:text-lg">
+            {copy.description}
           </p>
 
           <div className="flex flex-wrap gap-3">
             <Button asChild size="lg">
-              <a href={whatsappHref} target="_blank" rel="noreferrer">
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noreferrer"
+                data-cta="hero-whatsapp"
+                aria-label={copy.quote}
+              >
+                <MessageCircle className="size-4" aria-hidden />
                 {copy.quote}
               </a>
             </Button>
             <Button asChild size="lg" variant="secondary">
-              <Link href={withLocale(locale, "/templates")}>
+              <Link href={withLocale(locale, "/templates")} data-cta="hero-templates">
                 {copy.templates}
-                <ArrowRight className="size-4" />
+                <ArrowRight className="size-4" aria-hidden />
               </Link>
             </Button>
             <LeadDialog locale={locale} buttonText={copy.quickForm} buttonVariant="outline" />
           </div>
 
-          <p className="text-sm text-[#B8B3D1]">
-            <ShinyText
-              text={copy.note}
-              color="#8a8599"
-              shineColor="#B8B3D1"
-              speed={5}
-              className="text-sm"
-            />
-          </p>
+          <ul className="grid gap-1.5 text-sm text-[#B8B3D1] sm:text-[15px]">
+            {copy.bullets.map((b) => (
+              <li key={b} className="flex items-start gap-2">
+                <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

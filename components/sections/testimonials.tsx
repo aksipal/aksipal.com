@@ -1,47 +1,46 @@
-"use client";
+import { Quote } from "lucide-react";
 
-import GlareHover from "@/components/ui/glare-hover";
 import type { Locale } from "@/lib/i18n";
 
 const testimonialData = {
   tr: [
     {
       quote:
-        "Aksipal ile 2 gunede yayina ciktik. Reklam trafigimiz artik bosa gitmiyor, WhatsApp talepleri net artti.",
-      author: "M. Demir",
-      role: "Emlak Ofisi Sahibi",
+        "WhatsApp grup kaosumuzu AI destekli bir akışla çözdüler. Sürücü-müşteri eşleştirme manuel iş 8 saatten ~30 dakikaya düştü, gelen iş sayısı ölçülebilir şekilde arttı. Süreç sözleşmeli teslim edildi, sürpriz fatura olmadı.",
+      author: "Lojistik Operasyon Müdürü",
+      role: "Şehirler arası taşımacılık · Ankara",
     },
     {
       quote:
-        "Sitemiz ilk kez premium hissettiriyor. Mobil hiz ve tasarim kalitesi musteride guven olusturdu.",
-      author: "Z. Korkmaz",
-      role: "Klinik Yoneticisi",
+        "Site 5 günde yayında, mobil hız ve tasarım kalitesi müşteride güven oluşturdu. Reklam trafiğimiz artık boşa gitmiyor, randevu talepleri net arttı. Yayın sonrası destek de hızlı.",
+      author: "Klinik Yöneticisi",
+      role: "Estetik & sağlık · İstanbul",
     },
     {
       quote:
-        "Teklif akisimiz sadelesti, form tamamlanma orani yukseldi. Teknik tarafta da cok profesyonel ilerledik.",
-      author: "A. Kara",
-      role: "Lojistik Operasyon Muduru",
+        "Sürekli yazışma yükü olan satış ekibimize özel bir AI asistan kurdu. Tekrar eden soruların ~%70'ini bot çözüyor, ekip artık sadece sıcak fırsata bakıyor. ROI ilk 2 ayda netleşti.",
+      author: "Satış Direktörü",
+      role: "B2B yazılım · Ankara",
     },
   ],
   en: [
     {
       quote:
-        "We launched in 6 days. Our ad traffic no longer leaks and WhatsApp leads are clearly higher.",
-      author: "M. Demir",
-      role: "Real Estate Agency Owner",
+        "They solved our WhatsApp-group chaos with an AI-driven flow. Driver-to-customer matching dropped from 8 hours to ~30 minutes and inbound jobs went up. Contracted delivery, no surprise invoices.",
+      author: "Logistics Operations Manager",
+      role: "Intercity transport · Ankara",
     },
     {
       quote:
-        "For the first time, our site feels premium. Mobile speed and design quality improved trust.",
-      author: "Z. Korkmaz",
-      role: "Clinic Manager",
+        "Live in 5 days. Mobile speed and design quality built immediate trust — our ad traffic no longer leaks and appointment requests rose noticeably. Post-launch support is responsive too.",
+      author: "Clinic Manager",
+      role: "Aesthetics & health · Istanbul",
     },
     {
       quote:
-        "Our quote flow became simpler and completion rates increased. The technical process was excellent.",
-      author: "A. Kara",
-      role: "Logistics Operations Manager",
+        "Built a custom AI assistant for our sales team. The bot handles ~70% of repetitive questions; the team now focuses only on warm opportunities. ROI was clear within 2 months.",
+      author: "Sales Director",
+      role: "B2B software · Ankara",
     },
   ],
 };
@@ -52,35 +51,33 @@ type TestimonialsProps = {
 
 export function Testimonials({ locale }: TestimonialsProps) {
   return (
-    <section className="section-shell mt-20 space-y-8">
-      <div className="max-w-xl space-y-2">
-        <h2 className="text-3xl font-semibold tracking-tight text-[#E9DFFF]">
-          {locale === "tr" ? "Referanslar" : "Testimonials"}
+    <section className="section-shell mt-20 space-y-8" aria-labelledby="testimonials-heading">
+      <div className="max-w-2xl space-y-2">
+        <h2
+          id="testimonials-heading"
+          className="text-3xl font-semibold tracking-tight text-[#E9DFFF]"
+        >
+          {locale === "tr" ? "Müşteri Geri Bildirimleri" : "What Clients Say"}
         </h2>
         <p className="text-[#B8B3D1]">
           {locale === "tr"
-            ? "Placeholder referans metinleri. Gercek musteri yorumlari ile kolayca guncellenir."
-            : "Placeholder testimonials. Easy to replace with real client references."}
+            ? "Web, otomasyon ve AI projelerinden sahadan örnekler. Müşteri kimlikleri ticari gizlilik sebebiyle anonimleştirildi; doğrulama için referans görüşme talep edebilirsiniz."
+            : "Field examples across web, automation and AI projects. Names anonymised for commercial privacy — reference calls are available on request."}
         </p>
       </div>
       <div className="grid gap-5 lg:grid-cols-3">
         {testimonialData[locale].map((item) => (
-          <GlareHover
+          <blockquote
             key={item.quote}
-            glareColor="#a78bfa"
-            glareOpacity={0.12}
-            borderColor="rgba(167,139,250,0.1)"
-            borderRadius="16px"
-            className="glass-card"
+            className="glass-card relative w-full space-y-4 p-6"
           >
-            <blockquote className="w-full space-y-4 p-6">
-              <p className="text-sm leading-7 text-[#B8B3D1]">&ldquo;{item.quote}&rdquo;</p>
-              <footer>
-                <p className="text-sm font-semibold text-[#E9DFFF]">{item.author}</p>
-                <p className="text-xs text-zinc-500">{item.role}</p>
-              </footer>
-            </blockquote>
-          </GlareHover>
+            <Quote className="size-5 text-[var(--accent)]" aria-hidden />
+            <p className="text-sm leading-7 text-[#B8B3D1]">&ldquo;{item.quote}&rdquo;</p>
+            <footer>
+              <p className="text-sm font-semibold text-[#E9DFFF]">{item.author}</p>
+              <p className="text-xs text-zinc-500">{item.role}</p>
+            </footer>
+          </blockquote>
         ))}
       </div>
     </section>

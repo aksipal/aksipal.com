@@ -1,10 +1,7 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
-import GlareHover from "@/components/ui/glare-hover";
 import GradientText from "@/components/ui/gradient-text";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,7 +19,7 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
     tr: {
       title: "Referans Projeler",
       subtitle:
-        "Web sitesi yaptırma örnekleri: kurumsal web siteleri, sektörel projeler. Hız, teknik SEO ve dönüşüm odaklı sonuçlar.",
+        "Web sitesi yaptırma örnekleri ve sektörel kurumsal projeler. Tasarım kalitesi, teknik SEO ve dönüşüm metriklerine göre seçildi — anonim müşteri verileri içermez, tamamı yayında olan canlı projelerdir.",
       detail: "Proje Detayı",
       demo: "Canlı Demo",
       all: "Tüm İşleri Gör",
@@ -30,7 +27,7 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
     en: {
       title: "Selected Work",
       subtitle:
-        "Not only visual quality; measurable outcomes across speed, SEO and conversion.",
+        "Real client websites and sector projects. Picked for design quality, technical SEO and measurable conversion — every link points to a live project.",
       detail: "View Case Study",
       demo: "View Demo",
       all: "See All Work",
@@ -40,10 +37,13 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
   const items = typeof limit === "number" ? cases.slice(0, limit) : cases;
 
   return (
-    <section className="section-shell mt-20 space-y-8">
+    <section className="section-shell mt-20 space-y-8" aria-labelledby="cases-heading">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl space-y-2">
-          <h2 className="text-3xl font-semibold tracking-tight text-[#E9DFFF]">
+          <h2
+            id="cases-heading"
+            className="text-3xl font-semibold tracking-tight text-[#E9DFFF]"
+          >
             <GradientText colors={["#E9DFFF", "#a78bfa", "#7cff92", "#E9DFFF"]} animationSpeed={10}>
               {copy.title}
             </GradientText>
@@ -61,23 +61,24 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-3">
-        {items.map((item) => (
-          <GlareHover
+        {items.map((item, index) => (
+          <article
             key={item.slug}
-            glareColor="#a78bfa"
-            glareOpacity={0.15}
-            borderColor="rgba(167,139,250,0.12)"
-            borderRadius="16px"
-            className="glass-card overflow-hidden"
+            className="glass-card overflow-hidden transition-colors hover:border-white/20"
           >
-            <article className="w-full">
-            <Image
-              src={item.image}
-              alt={`${item.title} — ${item.sector} sektörü kurumsal web sitesi referans projesi`}
-              width={900}
-              height={600}
-              className="h-44 w-full object-cover"
-            />
+            <Link
+              href={withLocale(locale, `/isler/${item.slug}`)}
+              aria-label={`${item.title} — ${copy.detail}`}
+            >
+              <Image
+                src={item.image}
+                alt={`${item.title} — ${item.sector} sektörü kurumsal web sitesi referans projesi`}
+                width={900}
+                height={600}
+                className="h-44 w-full object-cover"
+                loading={index < 3 ? "eager" : "lazy"}
+              />
+            </Link>
             <div className="space-y-4 p-5">
               <div className="flex items-start justify-between gap-3">
                 <h3 className="text-lg font-semibold text-zinc-100">{item.title}</h3>
@@ -108,16 +109,16 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5"
+                      aria-label={`${item.title} — ${copy.demo}`}
                     >
-                      <ExternalLink className="size-3.5" />
+                      <ExternalLink className="size-3.5" aria-hidden />
                       {copy.demo}
                     </a>
                   </Button>
                 ) : null}
               </div>
             </div>
-            </article>
-          </GlareHover>
+          </article>
         ))}
       </div>
     </section>

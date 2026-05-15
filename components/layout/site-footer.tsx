@@ -1,11 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Instagram, Linkedin, Youtube } from "lucide-react";
+import { Instagram, Linkedin, Mail, Phone, Youtube } from "lucide-react";
 
 import { siteConfig } from "@/lib/constants";
 import type { Locale } from "@/lib/i18n";
 import { withLocale } from "@/lib/i18n";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+
+const sectorLinks: { slug: string; tr: string; en: string }[] = [
+  { slug: "lojistik", tr: "Lojistik web sitesi", en: "Logistics website" },
+  { slug: "gym", tr: "Spor salonu web sitesi", en: "Gym website" },
+  { slug: "enerji", tr: "Enerji firması web sitesi", en: "Energy company website" },
+  { slug: "danismanlik", tr: "Danışmanlık web sitesi", en: "Consultancy website" },
+  { slug: "oto-yikama", tr: "Oto yıkama web sitesi", en: "Car wash website" },
+  { slug: "insaat", tr: "İnşaat firması web sitesi", en: "Construction website" },
+];
 
 const socialConfig = [
   { href: siteConfig.sameAs[0], label: "LinkedIn", Icon: Linkedin },
@@ -145,10 +154,45 @@ export function SiteFooter({ locale }: SiteFooterProps) {
         <div className="space-y-3">
           <p className="text-sm font-semibold text-zinc-200">{copy.contact}</p>
           <ul className="space-y-2 text-sm text-zinc-400">
-            <li>{siteConfig.email}</li>
-            <li>{siteConfig.phone}</li>
+            <li>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="inline-flex items-center gap-1.5 hover:text-zinc-100"
+                data-cta="footer-mail"
+              >
+                <Mail className="size-3.5" aria-hidden />
+                {siteConfig.email}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`tel:${siteConfig.phone.replace(/\s+/g, "")}`}
+                className="inline-flex items-center gap-1.5 hover:text-zinc-100"
+                data-cta="footer-tel"
+              >
+                <Phone className="size-3.5" aria-hidden />
+                {siteConfig.phone}
+              </a>
+            </li>
             <li>{siteConfig.address.addressLocality}, Turkey</li>
           </ul>
+          <div className="pt-4">
+            <p className="mb-2 text-sm font-semibold text-zinc-200">
+              {locale === "tr" ? "Sektörler" : "Sectors"}
+            </p>
+            <ul className="space-y-1.5 text-sm text-zinc-400">
+              {sectorLinks.map((s) => (
+                <li key={s.slug}>
+                  <Link
+                    href={`${withLocale(locale, "/templates")}?s=${s.slug}`}
+                    className="hover:text-zinc-100"
+                  >
+                    {locale === "tr" ? s.tr : s.en}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className="pt-4">
             <p className="mb-2 text-sm font-semibold text-zinc-200">{copy.legal}</p>
             <ul className="space-y-1.5 text-sm text-zinc-400">

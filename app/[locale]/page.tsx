@@ -16,6 +16,7 @@ import {
   createPageMetadata,
   getLocalBusinessJsonLd,
   getOrganizationJsonLd,
+  getPersonJsonLd,
   getServiceJsonLd,
   getWebSiteJsonLd,
 } from "@/lib/seo";
@@ -32,14 +33,15 @@ export async function generateMetadata({
 
   const copy = {
     tr: {
-      title: "Web Sitesi Yaptırma | Kurumsal Web Tasarım",
-      description: siteConfig.description,
+      title: "Aksipal | AI Agent, Otomasyon & Premium Web",
+      description:
+        "AI agent, WhatsApp & süreç otomasyonu ve premium kurumsal web siteleri. 4-12 günde teslim, sözleşmeli, KVKK uyumlu — Ankara merkezli senior mühendislik.",
       keywords: [...seoKeywordsTr],
     },
     en: {
-      title: "Corporate Websites & Web Design Services",
+      title: "Aksipal | AI Agents, Automation & Premium Web",
       description:
-        "Corporate websites, business templates and custom software: SEO-ready, fast delivery. Built with Next.js for teams that need a strong online presence in Turkey and abroad.",
+        "AI agents, WhatsApp & workflow automation and premium corporate websites. Live in 4-12 days, contracted, KVKK aware — senior engineering from Ankara.",
       keywords: [...seoKeywordsEn],
     },
   }[locale];
@@ -67,14 +69,15 @@ export default async function LocaleHomePage({
   const serviceJsonLd = getServiceJsonLd();
   const webSiteJsonLd = getWebSiteJsonLd();
   const organizationJsonLd = getOrganizationJsonLd();
+  const personJsonLd = getPersonJsonLd();
 
   return (
     <>
       <HeroSection locale={locale as Locale} />
       <TrustBar locale={locale as Locale} />
-      <TemplatePreview locale={locale as Locale} />
-      <CaseGrid locale={locale as Locale} limit={8} />
       <AdvancedServicesTeaser locale={locale as Locale} />
+      <CaseGrid locale={locale as Locale} limit={8} />
+      <TemplatePreview locale={locale as Locale} />
       <Testimonials locale={locale as Locale} />
       <FaqSection locale={locale as Locale} />
       <MiniInteractive locale={locale as Locale} />
@@ -95,6 +98,10 @@ export default async function LocaleHomePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
     </>
   );

@@ -153,6 +153,34 @@ const tiersByLocale: Record<Locale, readonly RawTier[]> = {
 const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
   tr: [
     {
+      id: "ai-agent",
+      title: "AI Agent / Chatbot Geliştirme",
+      description:
+        "Claude veya OpenAI tabanlı, şirket verinizi (PDF, web, CRM, Notion) bilen müşteri destek, satış veya iç verim ajanı. RAG, function calling ve WhatsApp / web entegrasyonu dahil.",
+      price: "₺45.000'den başlayan",
+      priceNote: "Kapsam, veri kaynağı ve entegrasyon sayısına göre netleştirilir",
+      highlights: [
+        "Claude / OpenAI · RAG (vektör DB)",
+        "WhatsApp, web widget veya Slack/Discord entegrasyonu",
+        "Şirket verisi (PDF, site, Notion, CRM) ile eğitim",
+        "Loglama, panel ve maliyet kontrolü",
+      ],
+    },
+    {
+      id: "automation",
+      title: "WhatsApp & Süreç Otomasyonu",
+      description:
+        "n8n + AI ile uçtan uca otomasyon: form → CRM → e-posta → WhatsApp → fatura akışları. Tekrarlayan manuel işi azaltır, cevap süresini düşürür.",
+      price: "₺25.000'den başlayan",
+      priceNote: "Akış sayısına ve entegre edilen sistemlere göre değişir",
+      highlights: [
+        "WhatsApp Cloud API (resmi) entegrasyonu",
+        "Otomatik teklif, randevu ve sipariş akışları",
+        "CRM / e-posta / Sheets / fatura entegrasyonları",
+        "n8n self-host veya bulut kurulumu",
+      ],
+    },
+    {
       id: "ecommerce",
       title: "Minimal E-Ticaret",
       description:
@@ -195,6 +223,34 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
     },
   ],
   en: [
+    {
+      id: "ai-agent",
+      title: "AI Agent / Chatbot Development",
+      description:
+        "Claude or OpenAI based agent that knows your company data (PDFs, web, CRM, Notion) for support, sales or internal productivity. RAG, function calling and WhatsApp / web integration included.",
+      price: "from ₺45,000",
+      priceNote: "Final scope set by data sources and integration count",
+      highlights: [
+        "Claude / OpenAI · RAG (vector DB)",
+        "WhatsApp, web widget, Slack or Discord integration",
+        "Trained on your data (PDF, site, Notion, CRM)",
+        "Logging, dashboard and cost control",
+      ],
+    },
+    {
+      id: "automation",
+      title: "WhatsApp & Workflow Automation",
+      description:
+        "End-to-end automation with n8n + AI: form → CRM → email → WhatsApp → invoice. Cuts manual work and slashes response times.",
+      price: "from ₺25,000",
+      priceNote: "Varies with number of flows and integrated systems",
+      highlights: [
+        "Official WhatsApp Cloud API integration",
+        "Automated quote, appointment and order flows",
+        "CRM / email / Sheets / invoice integrations",
+        "Self-hosted or cloud n8n setup",
+      ],
+    },
     {
       id: "ecommerce",
       title: "Minimal E-Commerce",

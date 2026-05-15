@@ -1,99 +1,103 @@
-"use client";
-
-import { useMemo, useRef, useState } from "react";
+import { CheckCircle2, MessagesSquare, Rocket } from "lucide-react";
 
 import type { Locale } from "@/lib/i18n";
-
-type Dot = {
-  id: number;
-  x: number;
-  y: number;
-};
 
 type MiniInteractiveProps = {
   locale: Locale;
 };
 
+/**
+ * 3 Adımda Süreç bloğu — Türk müşterisi için "nasıl çalışıyoruz" sorusuna
+ * somut, güven veren cevap. Önceki dekoratif "energy dots" mikro etkileşimi
+ * yerine geçer; CRO ve Google Ads landing kalitesi için daha değerli.
+ */
 export function MiniInteractive({ locale }: MiniInteractiveProps) {
-  const [dots, setDots] = useState<Dot[]>([]);
-  const [score, setScore] = useState(0);
-  const areaRef = useRef<HTMLDivElement>(null);
-
-  const heading = useMemo(
-    () =>
-      locale === "tr"
-        ? "Mini Etkileşim: Enerji Noktaları"
-        : "Mini Interaction: Energy Dots",
-    [locale],
-  );
-
-  const description = useMemo(
-    () =>
-      locale === "tr"
-        ? "Alana tıklayarak enerji noktaları biriktirin. Hafif, hızlı ve tamamen yerel bir mikro etkileşim."
-        : "Click inside the area to collect energy dots. Lightweight, fast and fully local.",
-    [locale],
-  );
-
-  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    event.currentTarget.style.setProperty("--x", `${x}px`);
-    event.currentTarget.style.setProperty("--y", `${y}px`);
-  };
-
-  const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const dot: Dot = {
-      id: Date.now(),
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top,
-    };
-
-    setDots((prev) => [...prev, dot]);
-    setScore((prev) => prev + 1);
-
-    window.setTimeout(() => {
-      setDots((prev) => prev.filter((item) => item.id !== dot.id));
-    }, reduceMotion ? 250 : 900);
-  };
+  const copy =
+    locale === "tr"
+      ? {
+          eyebrow: "Süreç",
+          title: "3 adımda nasıl çalışıyoruz",
+          subtitle:
+            "İlk mesajdan teslime kadar net bir akış. Sözleşmeli, şeffaf ve sürpriz fatura yok. WhatsApp veya formdan ulaşmanız yeterli — geri kalanını birlikte planlayalım.",
+          steps: [
+            {
+              icon: MessagesSquare,
+              num: "01",
+              title: "Konuşalım (15 dakika)",
+              text: "WhatsApp veya formdan ulaşın. Mevcut durumu, hedefi ve bütçeyi netleştiriyoruz; size en uygun kulvarı (web sitesi mi, AI / otomasyon mu) öneriyoruz.",
+            },
+            {
+              icon: CheckCircle2,
+              num: "02",
+              title: "Plan ve sözleşme",
+              text: "Kapsam, teslim tarihi, fiyat ve revizyon politikası tek dokümanda. Onay alındığında işe başlıyoruz; ek talepler için şeffaf değişiklik yönetimi.",
+            },
+            {
+              icon: Rocket,
+              num: "03",
+              title: "Teslim ve destek",
+              text: "Web paketlerinde 4-12 günde yayın; AI / özel yazılım projelerinde sprint bazlı çalışan teslim. Yayın sonrası bakım ve iyileştirme aylık plan ile.",
+            },
+          ],
+        }
+      : {
+          eyebrow: "Process",
+          title: "How we work — in 3 steps",
+          subtitle:
+            "A clear flow from first message to delivery. Contracted, transparent, no surprise invoices. Reach out on WhatsApp or via the form — we'll plan the rest together.",
+          steps: [
+            {
+              icon: MessagesSquare,
+              num: "01",
+              title: "Talk (15 minutes)",
+              text: "Reach out on WhatsApp or via the form. We clarify current state, goals and budget — and recommend the right track (website vs. AI / automation).",
+            },
+            {
+              icon: CheckCircle2,
+              num: "02",
+              title: "Plan and contract",
+              text: "Scope, delivery date, price and revision policy in a single document. Once approved we start; extra asks go through transparent change management.",
+            },
+            {
+              icon: Rocket,
+              num: "03",
+              title: "Delivery and support",
+              text: "Web packages live in 4-12 days; AI / custom software in sprint-based working delivery. Post-launch maintenance and improvements via monthly plan.",
+            },
+          ],
+        };
 
   return (
-    <section className="section-shell mt-20">
-      <div className="glass-card space-y-5 p-6 sm:p-8">
-        <div className="space-y-2">
-          <h2 className="text-3xl font-semibold tracking-tight text-white">{heading}</h2>
-          <p className="max-w-2xl text-zinc-400">{description}</p>
+    <section className="section-shell mt-20" aria-labelledby="process-heading">
+      <div className="glass-card space-y-6 p-6 sm:p-10">
+        <div className="max-w-2xl space-y-2">
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--accent)]">
+            {copy.eyebrow}
+          </p>
+          <h2
+            id="process-heading"
+            className="text-3xl font-semibold tracking-tight text-white"
+          >
+            {copy.title}
+          </h2>
+          <p className="text-zinc-400">{copy.subtitle}</p>
         </div>
 
-        <div
-          ref={areaRef}
-          onPointerMove={onPointerMove}
-          onClick={onClick}
-          className="interactive-surface relative h-52 cursor-crosshair overflow-hidden rounded-2xl border border-white/10 bg-black/40"
-          aria-label={heading}
-        >
-          <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(120px_circle_at_var(--x)_var(--y),rgba(124,255,146,0.22),transparent_70%)]" />
-
-          {dots.map((dot) => (
-            <span
-              key={dot.id}
-              className="dot-burst absolute"
-              style={{
-                left: dot.x,
-                top: dot.y,
-                animationDuration: "900ms",
-              }}
-            />
+        <ol className="grid gap-4 md:grid-cols-3">
+          {copy.steps.map((step) => (
+            <li
+              key={step.num}
+              className="rounded-2xl border border-white/10 bg-black/30 p-5 transition-colors hover:border-white/20"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <step.icon className="size-5 text-[var(--accent)]" aria-hidden />
+                <span className="text-xs font-mono text-zinc-500">{step.num}</span>
+              </div>
+              <h3 className="text-base font-semibold text-zinc-100">{step.title}</h3>
+              <p className="mt-1.5 text-sm leading-6 text-zinc-400">{step.text}</p>
+            </li>
           ))}
-
-          <div className="absolute left-4 top-4 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-zinc-300">
-            {locale === "tr" ? "Toplanan nokta" : "Dots collected"}:{" "}
-            <span className="font-semibold text-[var(--accent)]">{score}</span>
-          </div>
-        </div>
+        </ol>
       </div>
     </section>
   );

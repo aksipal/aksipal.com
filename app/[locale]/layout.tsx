@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 
 import { GtagConsentSync } from "@/components/analytics/gtag-consent-sync";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
@@ -30,13 +31,17 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  // Root <html> tek; ancak SEO için locale'e göre lang güncellenir
   return (
-    <div className="relative min-h-screen pb-20 md:pb-0">
+    <div className="relative min-h-screen pb-20 md:pb-0" lang={locale}>
+      <Script id="set-html-lang" strategy="beforeInteractive">
+        {`document.documentElement.lang = "${locale}";`}
+      </Script>
       <BackgroundGrid />
 
       <div className="relative z-10">
         <SiteHeader locale={locale} />
-        <main>{children}</main>
+        <main lang={locale}>{children}</main>
         <SiteFooter locale={locale} />
       </div>
 

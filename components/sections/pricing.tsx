@@ -13,12 +13,17 @@ export function PricingSection({ locale }: PricingSectionProps) {
     <section className="section-shell pt-16">
       <div className="max-w-3xl space-y-3">
         <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          {locale === "tr" ? "Hizmetler" : "Services"}
+          {locale === "tr" ? "Hizmetler & Şeffaf Fiyatlar" : "Services & Transparent Pricing"}
         </h1>
         <p className="text-zinc-400">
           {locale === "tr"
-            ? "Hazır web sitesi şablonlarından kurumsal yazılıma: web sitesi satın al veya özel proje—her ölçekte SEO uyumlu teslim."
-            : "From template packages to enterprise software—SEO-ready delivery at every scale."}
+            ? "İki kulvarda çalışıyoruz: Hızlı yayın için sektörel web siteleri (aşağıda) ve stratejik AI / otomasyon / özel yazılım projeleri (altta). Her paket sözleşmeli teslim, sabit fiyat ve net revizyon politikası ile gelir."
+            : "Two tracks: fast-launch sector websites (below) and strategic AI / automation / custom software projects (further down). Every package includes contracted delivery, fixed pricing and a clear revision policy."}
+        </p>
+        <p className="text-sm font-medium text-[var(--accent)]">
+          {locale === "tr"
+            ? "Web Paketleri — 4-12 günde teslim · Fiyatlara KDV dahil değildir"
+            : "Web Packages — Live in 4-12 days · Prices exclusive of VAT (KDV)"}
         </p>
       </div>
 

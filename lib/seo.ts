@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { enterpriseServices, packageTiers } from "@/lib/pricing";
 import { siteConfig } from "@/lib/constants";
 import type { Locale } from "@/lib/i18n";
+import { defaultLocale } from "@/lib/i18n";
 
 export function absoluteUrl(pathname = "") {
   return new URL(pathname, siteConfig.url).toString();
@@ -18,6 +19,18 @@ type PageMetadataInput = {
   keywords?: string[];
 };
 
+const TITLE_MAX = 60;
+const DESC_MAX = 160;
+
+function clamp(text: string, max: number) {
+  if (!text) return text;
+  if (text.length <= max) return text;
+  // Kelime sınırına yakın kes ve "…" ekle (Türkçe karakter güvenli)
+  const cut = text.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut).trimEnd() + "…";
+}
+
 export function createPageMetadata({
   title,
   description,
@@ -27,21 +40,30 @@ export function createPageMetadata({
   keywords,
 }: PageMetadataInput): Metadata {
   const canonical = absoluteUrl(`/${locale}${pathname === "/" ? "" : pathname}`);
+  const safeTitle = clamp(title, TITLE_MAX);
+  const safeDescription = clamp(description, DESC_MAX);
+
+  // x-default Türkiye odaklı olduğu için TR'ye işaret ediyor
+  const trUrl = absoluteUrl(`/tr${pathname === "/" ? "" : pathname}`);
+  const enUrl = absoluteUrl(`/en${pathname === "/" ? "" : pathname}`);
 
   return {
-    title,
-    description,
+    title: safeTitle,
+    description: safeDescription,
     ...(keywords?.length ? { keywords } : {}),
     alternates: {
       canonical,
       languages: {
-        tr: absoluteUrl(`/tr${pathname === "/" ? "" : pathname}`),
-        en: absoluteUrl(`/en${pathname === "/" ? "" : pathname}`),
+        tr: trUrl,
+        "tr-TR": trUrl,
+        en: enUrl,
+        "en-US": enUrl,
+        "x-default": defaultLocale === "tr" ? trUrl : enUrl,
       },
     },
     openGraph: {
-      title,
-      description,
+      title: safeTitle,
+      description: safeDescription,
       url: canonical,
       siteName: siteConfig.name,
       locale: locale === "tr" ? "tr_TR" : "en_US",
@@ -51,14 +73,14 @@ export function createPageMetadata({
           url: absoluteUrl(image),
           width: 1200,
           height: 630,
-          alt: title,
+          alt: safeTitle,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: safeTitle,
+      description: safeDescription,
       images: [absoluteUrl(image)],
     },
   };
@@ -88,14 +110,18 @@ export function getCaseStudyJsonLd(input: {
     image: imageUrl,
     inLanguage: input.locale === "tr" ? "tr-TR" : "en-US",
     author: {
-      "@type": "Organization",
-      name: siteConfig.name,
-      url: siteConfig.url,
+      "@type": "Person",
+      name: "Barış Akşipal",
+      url: absoluteUrl("/tr/hakkimda"),
     },
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
       url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/favicon.png"),
+      },
     },
   };
 }
@@ -104,17 +130,32 @@ export function getLocalBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": `${siteConfig.url}#localbusiness`,
     name: siteConfig.legalName,
     description: siteConfig.description,
     url: siteConfig.url,
     telephone: siteConfig.phone,
     email: siteConfig.email,
     image: absoluteUrl("/favicon.png"),
+    priceRange: "₺₺",
     address: {
       "@type": "PostalAddress",
       ...siteConfig.address,
     },
-    areaServed: "TR",
+    areaServed: [
+      { "@type": "Country", name: "TR" },
+      { "@type": "City", name: "Ankara" },
+      { "@type": "City", name: "İstanbul" },
+      { "@type": "City", name: "İzmir" },
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "19:00",
+      },
+    ],
     sameAs: siteConfig.sameAs,
   };
 }
@@ -125,31 +166,43 @@ export function getServiceJsonLd() {
     name: tier.name,
     price: tier.price.replace(/[^\d]/g, ""),
     priceCurrency: "TRY",
+    availability: "https://schema.org/InStock",
     description: tier.description,
+    url: absoluteUrl("/tr/hizmetler"),
+    seller: {
+      "@type": "Organization",
+      name: siteConfig.legalName,
+      url: siteConfig.url,
+    },
   }));
 
-  const customServices = enterpriseServices.map((service) => ({
-    "@type": "Service",
-    name: service.title,
-    description: service.description,
+  const enterpriseOffers = enterpriseServices.map((svc) => ({
+    "@type": "Offer",
+    name: svc.title,
+    description: svc.description,
+    priceCurrency: "TRY",
+    price: svc.price.replace(/[^\d]/g, "") || undefined,
+    availability: "https://schema.org/InStock",
+    url: absoluteUrl("/tr/hizmetler"),
   }));
 
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType:
-      "Kurumsal web sitesi geliştirme, hazır web sitesi şablonları ve özel yazılım (web sitesi yaptırma, SEO uyumlu teslim)",
+      "AI agent geliştirme, WhatsApp ve süreç otomasyonu (n8n), özel yazılım, kurumsal web sitesi geliştirme ve hazır web sitesi şablonları",
+    areaServed: { "@type": "Country", name: "TR" },
     provider: {
       "@type": "Organization",
-      name: siteConfig.name,
+      name: siteConfig.legalName,
       url: siteConfig.url,
+      logo: absoluteUrl("/favicon.png"),
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Aksipal Paketleri",
-      itemListElement: offers,
+      name: "Aksipal Hizmet Paketleri",
+      itemListElement: [...offers, ...enterpriseOffers],
     },
-    additionalType: customServices,
   };
 }
 
@@ -157,6 +210,7 @@ export function getWebSiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${siteConfig.url}#website`,
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
@@ -169,7 +223,6 @@ export function getWebSiteJsonLd() {
         "@type": "ImageObject",
         url: absoluteUrl("/favicon.png"),
       },
-      sameAs: [...siteConfig.sameAs],
     },
     potentialAction: {
       "@type": "SearchAction",
@@ -186,13 +239,22 @@ export function getOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": `${siteConfig.url}#organization`,
     name: siteConfig.legalName,
+    alternateName: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
     telephone: siteConfig.phone,
     email: siteConfig.email,
     image: absoluteUrl("/favicon.png"),
     logo: absoluteUrl("/favicon.png"),
+    founder: {
+      "@type": "Person",
+      name: "Barış Akşipal",
+      jobTitle: "Senior Full-Stack & AI Engineer",
+      url: absoluteUrl("/tr/hakkimda"),
+      sameAs: [...siteConfig.sameAs],
+    },
     address: {
       "@type": "PostalAddress",
       ...siteConfig.address,
@@ -209,20 +271,39 @@ export function getOrganizationJsonLd() {
     priceRange: "₺₺",
     sameAs: [...siteConfig.sameAs],
     knowsAbout: [
+      "AI Agent Geliştirme",
+      "Yapay Zeka Entegrasyonu",
+      "Claude API",
+      "OpenAI API",
+      "RAG (Retrieval-Augmented Generation)",
+      "WhatsApp Otomasyonu",
+      "WhatsApp Cloud API",
+      "Süreç Otomasyonu (n8n)",
+      "Özel Yazılım Geliştirme",
       "Web Sitesi Geliştirme",
       "Kurumsal Web Tasarım",
-      "SEO",
+      "Teknik SEO",
       "Next.js",
       "React",
       "TypeScript",
+      "Java",
+      "Python",
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Web Sitesi Paketleri",
+      name: "Aksipal Hizmet Kataloğu",
       itemListElement: [
         {
           "@type": "OfferCatalog",
-          name: "Hazır Web Sitesi Şablonları",
+          name: "AI Agent ve Chatbot Geliştirme",
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "WhatsApp ve Süreç Otomasyonu",
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "Özel Yazılım Projeleri",
         },
         {
           "@type": "OfferCatalog",
@@ -230,10 +311,52 @@ export function getOrganizationJsonLd() {
         },
         {
           "@type": "OfferCatalog",
-          name: "Özel Yazılım Projeleri",
+          name: "Hazır Web Sitesi Şablonları",
         },
       ],
     },
+  };
+}
+
+/** Founder Person şeması — E-E-A-T için ayrı entity */
+export function getPersonJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${siteConfig.url}#barisaksipal`,
+    name: "Barış Akşipal",
+    givenName: "Barış",
+    familyName: "Akşipal",
+    jobTitle: "Senior Full-Stack & AI Engineer",
+    description:
+      "6+ yıl senior full-stack mühendislik. AI agent geliştirme, WhatsApp/süreç otomasyonu, özel yazılım ve premium kurumsal web — Ankara.",
+    url: absoluteUrl("/tr/hakkimda"),
+    image: absoluteUrl("/favicon.png"),
+    email: `mailto:${siteConfig.email}`,
+    telephone: siteConfig.phone,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Ankara",
+      addressCountry: "TR",
+    },
+    worksFor: {
+      "@type": "Organization",
+      name: siteConfig.legalName,
+      url: siteConfig.url,
+    },
+    knowsAbout: [
+      "AI Agent",
+      "Claude",
+      "OpenAI",
+      "RAG",
+      "n8n",
+      "WhatsApp Cloud API",
+      "Next.js",
+      "Java",
+      "Python",
+    ],
+    knowsLanguage: ["tr", "en"],
+    sameAs: [...siteConfig.sameAs],
   };
 }
 
@@ -283,9 +406,11 @@ export function getBlogPostingJsonLd(input: {
     description: input.description,
     datePublished: input.publishedAt,
     dateModified: input.publishedAt,
+    inLanguage: "tr-TR",
     author: {
       "@type": "Person",
-      name: "Aksipal",
+      name: "Barış Akşipal",
+      url: absoluteUrl("/tr/hakkimda"),
     },
     publisher: {
       "@type": "Organization",

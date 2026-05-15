@@ -9,11 +9,16 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: siteConfig.name,
     description: siteConfig.description,
     start_url: "/tr",
+    scope: "/",
     display: "standalone",
     background_color: "#09090d",
     theme_color: "#09090d",
-    icons: [{ src: "/favicon.png", sizes: "32x32", type: "image/png", purpose: "any" }],
+    icons: [
+      { src: "/favicon.png", sizes: "32x32", type: "image/png", purpose: "any" },
+    ],
     lang: "tr",
-    categories: ["business", "web", "design"],
+    dir: "ltr",
+    orientation: "portrait-primary",
+    categories: ["business", "web", "design", "productivity"],
   };
 }

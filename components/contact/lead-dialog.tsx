@@ -44,7 +44,8 @@ export function LeadDialog({
       description:
         "Kısa bilgileri doldurun, WhatsApp mesajı otomatik hazırlansın.",
       sector: "Sektör",
-      template: "Şablon",
+      template: "İlgilendiğiniz Hizmet",
+      templatePlaceholder: "AI agent, WhatsApp otomasyon, web sitesi vb.",
       city: "Şehir",
       budget: "Bütçe",
       whatsapp: "WhatsApp'ta Gönder",
@@ -55,7 +56,8 @@ export function LeadDialog({
       description:
         "Fill in brief details and we will prepare an automatic WhatsApp message.",
       sector: "Sector",
-      template: "Template",
+      template: "Service of Interest",
+      templatePlaceholder: "AI agent, WhatsApp automation, website, etc.",
       city: "City",
       budget: "Budget",
       whatsapp: "Send via WhatsApp",
@@ -101,7 +103,7 @@ export function LeadDialog({
               id="lead-template"
               value={template}
               onChange={(event) => setTemplate(event.target.value)}
-              placeholder={copy.template}
+              placeholder={copy.templatePlaceholder}
             />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">

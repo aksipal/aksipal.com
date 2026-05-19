@@ -23,12 +23,12 @@ export async function generateMetadata({
     pathname: "/isler",
     title:
       locale === "tr"
-        ? "Referans Projeler — Kurumsal Web Sitesi Örnekleri | Aksipal"
-        : "Case Studies & Client Websites | Aksipal",
+        ? "Referans Projeler | Aksipal Web Studio"
+        : "Case Studies | Aksipal Web Studio",
     description:
       locale === "tr"
-        ? "Aksipal referansları: lojistik, enerji, sağlık, teknoloji ve daha fazlası. Yayında olan kurumsal web siteleri, problem-çözüm-stack ve ölçülebilir metriklerle."
-        : "Aksipal case studies: logistics, energy, health, tech and more. Live corporate websites with problem, solution, stack and measurable metrics.",
+        ? "Aksipal Web Studio referans projeleri: yapay zeka ajanları, WhatsApp ve süreç otomasyonu, kurumsal web siteleri. Problem, çözüm, kullanılan teknoloji ve ölçülebilir metriklerle."
+        : "Aksipal Web Studio case studies: AI agents, WhatsApp & workflow automation and corporate websites. Problem, solution, stack and measurable outcomes.",
     keywords:
       locale === "tr"
         ? [
@@ -75,13 +75,13 @@ export default async function WorkPage({
         <div className="max-w-2xl space-y-3">
           <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
             {locale === "tr"
-              ? "Referans Projeler — Kurumsal Web Sitesi Örnekleri"
-              : "Case Studies — Corporate Website Examples"}
+              ? "Referans Projeler — Yapay Zeka, Otomasyon ve Web"
+              : "Case Studies — AI, Automation and Web"}
           </h1>
           <p className="text-zinc-400">
             {locale === "tr"
-              ? "Web sitesi yaptırma örnekleri: lojistik, enerji, sağlık, teknoloji, mekanik tesisat ve dernek projelerimiz. Her vakada problem, çözüm, kullanılan teknoloji stack'i ve ölçülebilir sonuçlar — tüm linkler yayında olan canlı projelere gider."
-              : "Real client websites — logistics, energy, health, tech, mechanical and association projects. Every case includes problem, solution, tech stack and measurable outcomes — every link points to a live project."}
+              ? "Sahadan gerçek referanslar: yapay zeka ajanları, WhatsApp ve süreç otomasyonu kurulumları ve sektörel kurumsal web siteleri. Her vakada problem, çözüm, kullanılan teknoloji ve ölçülebilir sonuçlar yer alır. Müşteri kimliği gizli olan vakalar yazılı izinli olarak yayınlanmıştır; ek doğrulama için referans görüşmesi talep edebilirsiniz."
+              : "Real-world references: AI agents, WhatsApp & workflow automation deployments, and sector-specific corporate websites. Every case lists problem, solution, stack and measurable outcomes. Confidential clients are published with written consent — reference calls available on request."}
           </p>
         </div>
       </section>

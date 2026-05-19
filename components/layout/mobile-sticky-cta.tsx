@@ -26,10 +26,10 @@ export function MobileStickyCta({ locale }: MobileStickyCtaProps) {
         rel="noreferrer"
         className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[var(--accent)] px-4 py-3 text-sm font-semibold text-black"
         data-cta="mobile-sticky-whatsapp"
-        aria-label={locale === "tr" ? "WhatsApp ile teklif al" : "Get quote on WhatsApp"}
+        aria-label={locale === "tr" ? "WhatsApp'tan yazın" : "Message on WhatsApp"}
       >
         <MessageCircle className="size-4" aria-hidden />
-        {locale === "tr" ? "WhatsApp'tan Teklif Al" : "Get Quote via WhatsApp"}
+        {locale === "tr" ? "WhatsApp'tan Yazın" : "Message on WhatsApp"}
       </a>
       <a
         href={telHref}

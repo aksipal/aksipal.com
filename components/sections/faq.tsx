@@ -8,71 +8,83 @@ type FaqSectionProps = {
 
 const faqTr = [
   {
-    q: "WhatsApp bot kurmak yasal mı, ne ile çalışıyorsunuz?",
-    a: "Evet, yasal — kurulum Meta'nın resmi WhatsApp Cloud API'si üzerinden yapılır (toplu mesaj / spam aracı değil). Müşteri sizin numaranıza mesaj attığında bot içinde tanımlı akışlar (teklif, randevu, sipariş, destek) tetiklenir. KVKK uyumlu loglama, opt-out ve kullanıcı bilgilendirme süreçleriyle birlikte teslim edilir.",
+    q: "Yapay zeka ajanı (AI agent) ile sıradan chatbot arasında ne fark var?",
+    a: "Sıradan chatbot önceden yazılmış cevapları seçer; yapay zeka ajanı sizin verinizi (PDF, web, CRM, Notion) okur, anlar ve gerektiğinde sisteminize gerçek işlem yapar (randevu yazar, CRM günceller, sipariş açar, fatura kesilmesini tetikler). Claude veya OpenAI üzerine RAG (vektör veritabanı) ile kuruyoruz. Müşteriniz robotla konuştuğunu fark etmez; arka planda kontrol size kalır.",
   },
   {
-    q: "AI agent için ChatGPT mi kuruyorsunuz, Claude mu?",
-    a: "İhtiyacınıza göre seçiyoruz. Claude (Anthropic) uzun bağlam ve doküman analizi gerektiren işlerde, OpenAI (GPT-4 / GPT-4.1) çok dilli ve geniş ekosistem entegrasyonu olan akışlarda öne çıkıyor. Çoğu projede ikisi de gerektiğinde kullanılabilir; karar maliyet, gecikme (latency) ve kullanım senaryosuna göre verilir. Veriniz RAG (vektör veritabanı) ile modele güvenli şekilde sunulur.",
+    q: "WhatsApp otomasyonu yasal mı, hangi altyapıyla kuruyorsunuz?",
+    a: "Evet, yasaldır. Kurulum Meta'nın resmi WhatsApp Cloud API'si üzerinden yapılır — toplu mesaj veya spam aracı değildir. Müşteri sizin numaranıza yazdığında akıllı akışlar (teklif, randevu, sipariş, destek) tetiklenir. KVKK uyumlu loglama, vazgeçme (opt-out) ve kullanıcı aydınlatma süreçleri standart olarak teslim edilir.",
   },
   {
-    q: "AI / otomasyon ne kadar sürede para kazandırır?",
-    a: "Yaklaşık ölçek: WhatsApp ve süreç otomasyonu yatırımları genelde 1-3 ay içinde geri döner (haftada 5-10 saatlik manuel iş ortadan kalktığında). AI agent projelerinde geri dönüş 2-6 ay arasında değişir; soğuk satış desteği veya 7/24 müşteri destek senaryolarında daha hızlıdır. Görüşmede sizin operasyonunuz için somut bir tahmin çıkarıyoruz.",
+    q: "Yapay zeka için ChatGPT mi, Claude mu kullanıyorsunuz?",
+    a: "İhtiyacınıza göre seçiyoruz. Claude (Anthropic) uzun bağlam ve döküman analizinde, OpenAI ailesi ise çok dilli ve geniş ekosistem entegrasyonu olan akışlarda öne çıkıyor. Çoğu projede ikisi birlikte kullanılır; karar maliyet, gecikme (latency) ve senaryoya göre verilir. Veriniz RAG ile modele kontrollü şekilde sunulur — şirket verisi modelin eğitimine girmez.",
   },
   {
-    q: "Web sitesi yaptırma süreci nasıl işliyor, ne kadar sürer?",
-    a: "Hazır şablon paketlerinde içerikler hazırsa 4-12 günde yayına alıyoruz. Süreç: kısa keşif (1 gün) → içerik & marka uyarlama (2-5 gün) → teknik SEO ve mobil uyum testi (1-2 gün) → yayın. Özel projelerde sprint bazlı çalışıyor, her sprintte çalışan teslim veriyoruz; toplam süre kapsama göre değişir.",
+    q: "Otomasyon yatırımı ne kadar sürede kendini amorti eder?",
+    a: "Ölçek olarak: WhatsApp ve süreç otomasyonu yatırımları çoğunlukla 1–3 ay içinde geri döner (haftada 5–10 saatlik manuel iş ortadan kalktığında). Yapay zeka ajanı projelerinde geri dönüş 2–6 ay arasında değişir; 7/24 müşteri desteği veya satış öncesi soru yükü senaryolarında daha hızlıdır. Keşif görüşmesinde sizin operasyonunuz için somut bir tahmin çıkarıyoruz.",
   },
   {
-    q: "Web sitesi fiyatları ne kadar, KDV dahil mi?",
-    a: "Hazır şablon paketleri ₺17.000'den başlıyor; sektörel paketler bazında ₺17k-₺35k aralığında. Kurumsal özel projeler kapsama göre fiyatlandırılır. Belirtilen fiyatlara KDV dahil değildir; teklif sırasında fatura tipi (KDV'li / hariç) net olarak yazılı paylaşılır.",
+    q: "Web sitesi süreci nasıl işliyor, ne kadar sürede yayında olur?",
+    a: "Hazır şablon paketlerinde içerikleriniz hazırsa 4–12 iş gününde yayına alıyoruz. Akış: kısa keşif (1 gün) → içerik ve marka uyarlama (2–5 gün) → teknik SEO ve mobil testi (1–2 gün) → canlıya alım. Özel projelerde sprint bazlı çalışıyoruz; her sprintte çalışan teslim alıyorsunuz, toplam süre kapsama göre netleşir.",
   },
   {
-    q: "Berber, kuaför, restoran, klinik gibi sektörler için web sitesi yapıyor musunuz?",
-    a: "Evet — sektöre özel hazır şablonlarımız var (berber/kuaför, klinik & estetik, lojistik & taşımacılık, oto yıkama, restoran, butik, danışmanlık, enerji, inşaat, spor salonu, startup ve daha fazlası). Metin ve görselleri işletmenize göre uyarlayıp kısa sürede yayına alıyoruz.",
+    q: "Fiyatlar nedir, KDV nasıl uygulanıyor?",
+    a: "Sektörel hazır web paketleri 17.000 TL'den başlar; web paketleri 17.000 – 35.000 TL aralığında. Yapay zeka ajanı kurulumları 45.000 TL'den, WhatsApp ve süreç otomasyonu 25.000 TL'den başlar; e-ticaret ve özel yazılım kapsama göre fiyatlandırılır. Tüm fiyatlara KDV hariçtir (+KDV). Yazılı teklifte kapsam, fatura tipi ve ödeme koşulu açıkça belirtilir.",
   },
   {
-    q: "SEO (arama motoru optimizasyonu) dahil mi?",
-    a: "Evet, tüm projelerde teknik SEO standart: başlık ve açıklama meta etiketleri, Open Graph, JSON-LD yapılandırılmış veri, sitemap.xml, robots.txt, mobil uyum, Core Web Vitals (yükleme hızı), hreflang, görsel alt metinleri. Ek SEO içerik üretimi (blog, kategori sayfaları) ayrı talep olarak konuşulur.",
+    q: "Berber, kuaför, restoran, klinik gibi sektörlere özel şablonunuz var mı?",
+    a: "Evet. Sektöre özel hazır şablonlarımız mevcut: berber & kuaför, klinik ve estetik, lojistik ve taşımacılık, oto yıkama, restoran, butik, danışmanlık, enerji, inşaat, spor salonu, startup ve daha fazlası. İçerik ve görsellerinizi işletmenize göre uyarlıyor, kısa sürede yayına alıyoruz.",
   },
   {
-    q: "Sözleşmeli teslim ve şeffaf fiyat ne demek? Bütçe aşımı yaşar mıyım?",
-    a: "Her proje için yazılı sözleşme imzalanır; kapsam, teslim tarihi, ödeme koşulu ve revizyon politikası tek dokümanda. Anlaşılan kapsam içinde sürpriz fiyat çıkmaz. Ek talep gelirse önce fiyat ve süre bildirilir, onayınız olmadan iş başlamaz — bu sayede bütçe aşımı yaşanmaz.",
+    q: "SEO (arama motoru optimizasyonu) pakete dahil mi?",
+    a: "Evet, tüm projelerde teknik SEO standarttır: meta başlık ve açıklama, Open Graph, JSON-LD yapılandırılmış veri, sitemap.xml, robots.txt, mobil uyum, Core Web Vitals, hreflang, görsel alternatif metinleri. Sürekli içerik SEO'su (blog yazıları, kategori sayfaları, anahtar kelime stratejisi) ayrı bir hizmet olarak ele alınır.",
   },
   {
-    q: "Yayın sonrası destek veriyor musunuz, kullanamayacağım bir şey teslim alır mıyım?",
-    a: "Hayır, teslim sonrası başınıza bırakılmaz. Aylık bakım planları (güvenlik yamaları, içerik güncellemeleri, performans takibi) sunuyoruz. WhatsApp ve e-posta üzerinden Türkçe destek; içerik güncellemeleri için size kısa video eğitimleri hazırlanır. Sözleşmede destek kapsamı net belirtilir.",
+    q: "Şeffaf fiyat ve sözleşmeli teslim ne demek? Bütçem aşılır mı?",
+    a: "Her proje için yazılı sözleşme imzalanır; kapsam, teslim tarihi, ödeme koşulu ve revizyon politikası tek dökümanda yer alır. Anlaşılan kapsam içinde sürpriz fatura çıkmaz. Ek talep gelirse önce fiyat ve süre yazılı bildirilir, onayınız olmadan başlamayız — bu sayede bütçe aşımı yaşanmaz.",
   },
   {
-    q: "Veriler nerede tutuluyor, KVKK uyumlu musunuz?",
-    a: "Tercihen Avrupa veya Türkiye lokasyonlu sunucular (Vercel EU, Supabase EU, Hetzner Almanya) kullanıyoruz. Form verileri için onay (consent) kutusu, gizlilik politikası ve KVKK aydınlatma metni standart kuruluyor. Çerez yönetimi için banner ve Google Consent Mode v2 ile çalışıyoruz; analytics ancak kullanıcı onayından sonra başlar.",
+    q: "Tek mühendisle çalışmak risk değil mi? Yarın iş bırakırsanız ne olur?",
+    a: "Doğru bir soru. Bu yüzden tüm projeler standart araçlarla (Next.js, Java, Python, n8n, Supabase, Vercel) kuruluyor — başka bir mühendis devralabilir. Kaynak kod ve hesap erişimleri en başından sizde, sözleşmede yazılı. Aylık bakım planı opsiyonel; bağımlılık yaratmıyoruz. Üstelik: tek muhatap olduğum için takım koordinasyonunda kaybolan saatler size yansımıyor.",
   },
   {
-    q: "Ankara dışındaki müşterilerle de çalışıyor musunuz, yüz yüze görüşme mümkün mü?",
-    a: "Türkiye genelinde uzaktan çalışıyoruz; toplantılar Google Meet / Zoom üzerinden. Ankara içindeyseniz yüz yüze görüşme mümkün. İstanbul ve diğer şehirler için yoğun kapsamlı projelerde planlı saha ziyareti opsiyonel olarak konuşulur.",
+    q: "Yayın sonrası destek veriyor musunuz?",
+    a: "Evet, teslim ettikten sonra başınıza bırakmıyoruz. Aylık bakım paketleri (güvenlik yamaları, içerik güncellemeleri, performans takibi) mevcut. WhatsApp ve e-posta üzerinden Türkçe destek; içerik güncellemeleri için size kısa video eğitimleri hazırlıyoruz. Destek kapsamı sözleşmede net şekilde yer alıyor.",
+  },
+  {
+    q: "Verilerim nerede tutuluyor, KVKK uyumlu mu?",
+    a: "Tercihen Türkiye veya Avrupa lokasyonlu sunucular kullanıyoruz (Vercel EU, Supabase EU, Hetzner Almanya). Form verileri için onay (consent) kutusu, gizlilik politikası ve KVKK aydınlatma metni standart kuruluyor. Çerez yönetimi için banner ve Google Consent Mode v2 ile çalışıyoruz; ölçümleme yalnızca kullanıcı onayı sonrası başlıyor.",
+  },
+  {
+    q: "Ankara dışındayım, çalışabilir miyiz?",
+    a: "Evet. Türkiye genelinde uzaktan çalışıyoruz; görüşmeler Google Meet veya Zoom üzerinden. Ankara'daysanız yüz yüze görüşme mümkündür. İstanbul ve diğer şehirlerdeki yoğun kapsamlı projeler için planlı saha ziyareti opsiyoneldir.",
   },
 ];
 
 const faqEn = [
   {
+    q: "What's the difference between an AI agent and a regular chatbot?",
+    a: "A regular chatbot picks pre-written responses; an AI agent reads and understands your data (PDFs, web, CRM, Notion) and can take real actions inside your systems (book appointments, update the CRM, open orders, trigger invoices). Built on Claude or OpenAI with RAG (vector DB). Customers don't realize they're talking to a bot — you stay in control.",
+  },
+  {
     q: "Is WhatsApp automation legal, what stack do you use?",
-    a: "Yes — built on Meta's official WhatsApp Cloud API (not bulk-message / spam tooling). When a customer messages your number, defined flows (quote, appointment, order, support) are triggered. Delivered with KVKK/GDPR-compliant logging, opt-out and user notification.",
+    a: "Yes, fully legal. Built on Meta's official WhatsApp Cloud API — not bulk-message / spam tooling. When a customer messages your number, smart flows (quote, appointment, order, support) are triggered. KVKK/GDPR-compliant logging, opt-out and user notification are standard.",
   },
   {
-    q: "For AI agents, do you use ChatGPT or Claude?",
-    a: "We pick per use case. Claude (Anthropic) shines on long-context document tasks; OpenAI GPT-4 family on multilingual, broad-ecosystem flows. We can use both. Decision is based on cost, latency and scenario. Your data is exposed safely via RAG (vector DB).",
+    q: "For AI, do you use ChatGPT or Claude?",
+    a: "We pick per use case. Claude (Anthropic) shines on long-context document tasks; OpenAI on multilingual, broad-ecosystem flows. Most projects use both. The decision is based on cost, latency and scenario. Your data is exposed via RAG — company data is never used to train the model.",
   },
   {
-    q: "How fast does AI / automation pay back?",
-    a: "Rough scale: WhatsApp + workflow automation usually pays back in 1-3 months (when 5-10 hours/week of manual work disappear). AI agent projects 2-6 months — faster in cold-sales support or 24/7 customer support scenarios. We give a concrete estimate during the discovery call.",
+    q: "How fast does automation pay back?",
+    a: "Rough scale: WhatsApp + workflow automation usually pays back in 1–3 months (when 5–10 hours/week of manual work disappear). AI agent projects 2–6 months — faster on 24/7 support or pre-sales question load. We give a concrete estimate during the discovery call.",
   },
   {
-    q: "How does a website project start, how long does it take?",
-    a: "Template packages: live in 4-12 days when content is ready. Flow: brief discovery (1 day) → content & brand customization (2-5 days) → technical SEO + mobile QA (1-2 days) → launch. Custom projects run sprint-based with working delivery each cycle.",
+    q: "How does the website process work and how long does it take?",
+    a: "Template packages: live in 4–12 business days when content is ready. Flow: brief discovery (1 day) → content & brand customization (2–5 days) → technical SEO + mobile QA (1–2 days) → launch. Custom projects run sprint-based with working delivery each cycle.",
   },
   {
-    q: "How much does a website cost, is VAT included?",
-    a: "Template packages start at ₺17,000; sector packages range ₺17k-₺35k. Corporate custom projects are scoped. Listed prices are exclusive of VAT (KDV); the invoice type is stated in writing during the quote.",
+    q: "How are prices structured, is VAT included?",
+    a: "Sector-specific web packages start at ₺17,000; web tiers range ₺17,000–35,000. AI agent setups from ₺45,000; WhatsApp & workflow automation from ₺25,000; e-commerce and custom software are scoped per project. All prices exclude VAT (+KDV). The written quote states scope, invoice type and payment terms clearly.",
   },
   {
     q: "Do you build sites for barbershops, salons, restaurants or clinics?",
@@ -80,18 +92,22 @@ const faqEn = [
   },
   {
     q: "Is SEO included?",
-    a: "Yes — technical SEO is standard on every project: meta tags, Open Graph, JSON-LD structured data, sitemap.xml, robots.txt, mobile UX, Core Web Vitals, hreflang, image alt texts. Ongoing content SEO (blog, category pages) is scoped separately.",
+    a: "Yes — technical SEO is standard on every project: meta tags, Open Graph, JSON-LD structured data, sitemap.xml, robots.txt, mobile UX, Core Web Vitals, hreflang, image alt texts. Ongoing content SEO (blog posts, category pages, keyword strategy) is scoped separately.",
   },
   {
     q: "What is contracted delivery and transparent pricing? Will my budget overflow?",
-    a: "Every project is signed with a written contract: scope, delivery date, payment terms and revision policy in one document. No surprise charges within agreed scope. Any extra ask is quoted before work starts — so no budget overflow.",
+    a: "Every project is signed with a written contract: scope, delivery date, payment terms and revision policy in one document. No surprise charges within agreed scope. Any extra ask is quoted in writing before work starts — no budget overflow.",
+  },
+  {
+    q: "Isn't working with a single engineer risky? What if you stop?",
+    a: "Fair question. That's why all projects use standard tooling (Next.js, Java, Python, n8n, Supabase, Vercel) — another engineer can take over. Source code and account access are yours from day one, written into the contract. The monthly maintenance plan is optional; no lock-in. Plus: as the sole point of contact I don't lose hours in team coordination.",
   },
   {
     q: "Do you provide post-launch support?",
     a: "Yes. Monthly maintenance plans cover security patches, content updates and performance monitoring. Support over WhatsApp and email; short video walkthroughs for content updates. Support scope is stated in the contract.",
   },
   {
-    q: "Where is data stored, are you KVKK / GDPR aware?",
+    q: "Where is data stored, are you KVKK/GDPR aware?",
     a: "We prefer EU or Turkey hosting (Vercel EU, Supabase EU, Hetzner Germany). Forms ship with consent checkbox, privacy policy and KVKK notice. Cookie banner with Google Consent Mode v2; analytics only fires after user consent.",
   },
   {
@@ -115,7 +131,7 @@ export function FaqSection({ locale }: FaqSectionProps) {
       >
         <GradientText colors={["#E9DFFF", "#a78bfa", "#7cff92", "#E9DFFF"]} animationSpeed={10}>
           {locale === "tr"
-            ? "Sık Sorulan Sorular — AI, Otomasyon ve Web"
+            ? "Sık Sorulan Sorular — Yapay Zeka, Otomasyon ve Web"
             : "Frequently Asked Questions"}
         </GradientText>
       </h2>

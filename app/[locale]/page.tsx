@@ -33,15 +33,15 @@ export async function generateMetadata({
 
   const copy = {
     tr: {
-      title: "Aksipal | AI Agent, Otomasyon & Premium Web",
+      title: "Aksipal Web Studio | Yapay Zeka, Otomasyon, Premium Web",
       description:
-        "AI agent, WhatsApp & süreç otomasyonu ve premium kurumsal web siteleri. 4-12 günde teslim, sözleşmeli, KVKK uyumlu — Ankara merkezli senior mühendislik.",
+        "Yapay zeka ajanı, WhatsApp ve süreç otomasyonu ve premium kurumsal web siteleri. 4–12 iş gününde canlıda, yazılı sözleşme, KVKK uyumlu — Ankara'dan senior mühendislik.",
       keywords: [...seoKeywordsTr],
     },
     en: {
-      title: "Aksipal | AI Agents, Automation & Premium Web",
+      title: "Aksipal Web Studio | AI Agents, Automation & Premium Web",
       description:
-        "AI agents, WhatsApp & workflow automation and premium corporate websites. Live in 4-12 days, contracted, KVKK aware — senior engineering from Ankara.",
+        "AI agents, WhatsApp & workflow automation and premium corporate websites. Live in 4–12 business days, contracted, KVKK aware — senior engineering from Ankara.",
       keywords: [...seoKeywordsEn],
     },
   }[locale];

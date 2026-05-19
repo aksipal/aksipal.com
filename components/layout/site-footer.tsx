@@ -48,17 +48,18 @@ export function SiteFooter({ locale }: SiteFooterProps) {
   const copy = {
     tr: {
       pitch:
-        "Web sitesi yaptırma ve kurumsal web tasarım: SEO uyumlu, hızlı ve sürdürülebilir altyapı.",
-      quickLinks: "Hızlı Linkler",
+        "Yapay zeka ajanları, WhatsApp & süreç otomasyonu ve kurumsal web — Ankara'dan Türkiye geneline. Yazılı sözleşme, sabit fiyat, tek muhatap.",
+      quickLinks: "Hızlı Bağlantılar",
       contact: "İletişim",
-      legal: "Yasal",
+      legal: "Yasal Metinler",
       privacy: "Gizlilik Politikası",
-      kvkk: "KVKK Aydınlatma",
+      kvkk: "KVKK Aydınlatma Metni",
       cookies: "Çerez Politikası",
       rights: "Tüm hakları saklıdır.",
     },
     en: {
-      pitch: "Premium web experiences and scalable digital infrastructure.",
+      pitch:
+        "AI agents, WhatsApp & workflow automation and premium corporate web — from Ankara across Turkey. Written contract, fixed price, one point of contact.",
       quickLinks: "Quick Links",
       contact: "Contact",
       legal: "Legal",
@@ -125,7 +126,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
             </li>
             <li>
               <Link href={withLocale(locale, "/hizmetler")} className="hover:text-zinc-100">
-                {locale === "tr" ? "Hizmetler & Fiyatlar" : "Services & Pricing"}
+                {locale === "tr" ? "Hizmetler ve Fiyatlar" : "Services & Pricing"}
               </Link>
             </li>
             <li>
@@ -217,7 +218,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
       </div>
 
       <div className="border-t border-white/10 py-4 text-center text-xs text-zinc-500">
-        © {new Date().getFullYear()} Aksipal. {copy.rights}
+        © {new Date().getFullYear()} Aksipal Web Studio. {copy.rights}
       </div>
     </footer>
   );

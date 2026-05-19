@@ -1,27 +1,30 @@
-/** Türkiye arama niyeti: AI/otomasyon + web sitesi + özel yazılım — meta ve sayfa içi tutarlılık için */
+/** Türkiye arama niyeti: yapay zeka + otomasyon + web sitesi + özel yazılım — meta ve sayfa içi tutarlılık için */
 export const seoKeywordsTr = [
-  // AI / Otomasyon (yüksek değer, düşük rekabet)
+  // Yapay zeka / otomasyon (yüksek değer, hızlı yükselen)
+  "yapay zeka ajanı geliştirme",
   "AI agent geliştirme",
-  "yapay zeka çözümleri",
-  "yapay zeka entegrasyonu",
+  "yapay zeka chatbot kurulumu",
+  "WhatsApp chatbot kurulumu",
   "WhatsApp otomasyon",
   "WhatsApp bot geliştirme",
   "süreç otomasyonu",
+  "iş süreçleri otomasyonu",
   "n8n otomasyon",
-  "AI chatbot geliştirme",
+  "n8n türkçe rehber",
   "yapay zeka danışmanlık",
   "Claude API entegrasyonu",
-  "OpenAI entegrasyonu",
+  "OpenAI API entegrasyonu",
   "RAG sistemi geliştirme",
+  "AI çağrı merkezi otomasyonu",
   "özel yazılım Ankara",
   "özel yazılım geliştirme",
   // Web (cash flow tarafı)
   "web sitesi yaptırma",
-  "web sitesi fiyatları",
+  "web sitesi fiyatları 2026",
   "kurumsal web sitesi",
   "hazır web sitesi",
   "kurumsal web tasarım",
-  "seo uyumlu web sitesi",
+  "SEO uyumlu web sitesi",
   "web tasarım Ankara",
   "berber web sitesi",
   "kuaför web sitesi",
@@ -53,12 +56,12 @@ export const seoKeywordsEn = [
 ] as const;
 
 export const siteConfig = {
-  name: "Aksipal",
+  name: "Aksipal Web Studio",
   legalName: "Aksipal Web Studio",
   url: "https://aksipal.com",
-  title: "Aksipal | AI Agent, Otomasyon & Premium Web Çözümleri",
+  title: "Aksipal Web Studio | Yapay Zeka · Otomasyon · Premium Web Projeleri",
   description:
-    "AI çağında işletmeler için: AI agent geliştirme, WhatsApp otomasyonu, süreç otomasyonu ve özel yazılım — yanı sıra hızlı teslim premium kurumsal web siteleri. Ankara merkezli, 6+ yıl senior full-stack mühendislik.",
+    "Yapay zeka ajanları (AI agent), resmi WhatsApp Cloud API otomasyonu, n8n süreç otomasyonu ve özel yazılım — yanı sıra hızlı yayın premium kurumsal web siteleri. Ankara merkezli, 6+ yıl senior mühendislik; yazılı sözleşme, sabit fiyat, tek muhatap.",
   email: "b.aksipal@gmail.com",
   phone: "+90 507 590 23 02",
   whatsappPhone: "905075902302",

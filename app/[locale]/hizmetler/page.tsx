@@ -28,17 +28,17 @@ export async function generateMetadata({
     pathname: "/hizmetler",
     title:
       locale === "tr"
-        ? "Hizmetler & Şeffaf Fiyatlar — AI, Otomasyon, Web | Aksipal"
-        : "Services & Transparent Pricing — AI, Automation, Web",
+        ? "Hizmetler ve Fiyatlar | Aksipal Web Studio"
+        : "Services & Pricing | Aksipal Web Studio",
     description:
       locale === "tr"
-        ? "Web paketleri ₺17k'dan, AI agent ₺45k'dan, WhatsApp & süreç otomasyonu ₺25k'dan başlar. Sözleşmeli teslim, sabit fiyat, KDV hariç. 4-12 gün web teslimi."
-        : "Web packages from ₺17k, AI agent from ₺45k, WhatsApp & workflow automation from ₺25k. Contracted delivery, fixed price, VAT exclusive. 4-12 day web launch.",
+        ? "Web paketleri 17.000 TL'den, yapay zeka ajanı 45.000 TL'den, WhatsApp ve süreç otomasyonu 25.000 TL'den başlar (+KDV). Yazılı sözleşme, sabit fiyat. Web teslimi 4–12 iş günü."
+        : "Web packages from ₺17,000; AI agent from ₺45,000; WhatsApp & workflow automation from ₺25,000 (+VAT). Written contract, fixed price. Web delivery in 4–12 business days.",
     keywords:
       locale === "tr"
         ? [
             ...seoKeywordsTr,
-            "AI agent fiyat",
+            "yapay zeka ajanı fiyat",
             "WhatsApp bot fiyat",
             "n8n otomasyon fiyat",
             "web sitesi paketi fiyat",
@@ -75,12 +75,12 @@ export default async function ServicesPage({
       <section className="section-shell mt-20">
         <div className="space-y-3">
           <h2 className="text-3xl font-semibold tracking-tight text-white">
-            {locale === "tr" ? "AI, Otomasyon ve Özel Yazılım" : "AI, Automation & Custom Software"}
+            {locale === "tr" ? "Yapay Zeka, Otomasyon ve Özel Yazılım" : "AI, Automation & Custom Software"}
           </h2>
           <p className="max-w-2xl text-zinc-400">
             {locale === "tr"
-              ? "Web sitesi yetmediği noktada: AI agent, WhatsApp / süreç otomasyonu, e-ticaret, kurumsal uygulama ve özel mühendislik. Sprint bazlı, ölçülebilir teslim."
-              : "Where a website isn't enough: AI agents, WhatsApp / workflow automation, e-commerce, enterprise apps and custom engineering. Sprint-based, measurable delivery."}
+              ? "Web sitesinin yetmediği noktada devreye giren projeler: yapay zeka ajanı, WhatsApp ve süreç otomasyonu, e-ticaret, kurumsal uygulama ve özel mühendislik. Sprint bazlı, ölçülebilir teslim."
+              : "Projects where a website isn't enough: AI agents, WhatsApp & workflow automation, e-commerce, enterprise apps and custom engineering. Sprint-based, measurable delivery."}
           </p>
         </div>
 

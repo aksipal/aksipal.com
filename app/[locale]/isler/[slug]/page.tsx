@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ExternalLink } from "lucide-react";
+import { Bot, ExternalLink, Lock } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -43,7 +43,7 @@ export async function generateMetadata({
   return createPageMetadata({
     locale,
     pathname: `/isler/${slug}`,
-    title: `${found.title} | Aksipal Referans`,
+    title: `${found.title} | Aksipal Web Studio`,
     description: found.summary,
     image: found.image,
     keywords: found.seoKeywords,
@@ -100,13 +100,33 @@ export default async function CaseDetailPage({
       </nav>
 
       <article className="glass-card mt-6 overflow-hidden">
-        <Image
-          src={found.image}
-          alt={`${found.title} — ${found.sector} sektörü kurumsal web sitesi projesi | Aksipal referans`}
-          width={1200}
-          height={700}
-          className="h-64 w-full object-cover sm:h-80"
-        />
+        {found.image ? (
+          <Image
+            src={found.image}
+            alt={`${found.title} — ${found.sector} referans projesi | Aksipal Web Studio`}
+            width={1200}
+            height={700}
+            className="h-64 w-full object-cover sm:h-80"
+          />
+        ) : (
+          <div className="relative flex h-64 w-full items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_25%_25%,rgba(124,255,146,0.18),transparent_55%),radial-gradient(circle_at_75%_75%,rgba(132,100,255,0.22),transparent_55%),linear-gradient(180deg,#0a0a14_0%,#101019_100%)] sm:h-80">
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:28px_28px]" aria-hidden />
+            <div className="relative flex flex-col items-center gap-3 text-center">
+              <Bot className="size-12 text-[var(--accent)]" aria-hidden />
+              <p className="text-xl font-semibold tracking-tight text-[#E9DFFF]">
+                {found.visualTag ?? found.sector}
+              </p>
+              {found.confidential ? (
+                <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] text-zinc-400">
+                  <Lock className="size-3.5" aria-hidden />
+                  {locale === "tr"
+                    ? "Müşteri gizli — yazılı izin gerekiyor"
+                    : "Confidential client — written consent required"}
+                </span>
+              ) : null}
+            </div>
+          </div>
+        )}
         <div className="space-y-8 p-6 sm:p-8">
           <header className="space-y-3">
             <div className="flex flex-wrap items-center gap-3">

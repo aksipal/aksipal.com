@@ -14,10 +14,10 @@ type SiteHeaderProps = {
 export function SiteHeader({ locale }: SiteHeaderProps) {
   const copy = {
     tr: {
-      cta: "Teklif Al",
+      cta: "Ücretsiz Görüşme",
     },
     en: {
-      cta: "Get Quote",
+      cta: "Free Consultation",
     },
   }[locale];
 

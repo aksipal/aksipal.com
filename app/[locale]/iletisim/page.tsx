@@ -29,15 +29,15 @@ export async function generateMetadata({
     pathname: "/iletisim",
     title:
       locale === "tr"
-        ? "İletişim — AI, Otomasyon & Web Teklifi | Aksipal"
-        : "Contact — AI, Automation & Web Inquiry | Aksipal",
+        ? "İletişim | Aksipal Web Studio"
+        : "Contact | Aksipal Web Studio",
     description:
       locale === "tr"
-        ? "AI agent, WhatsApp / süreç otomasyonu, özel yazılım veya web sitesi teklifi için WhatsApp, telefon, e-posta veya formdan ulaşın. 24 saat içinde yazılı geri dönüş."
+        ? "Yapay zeka ajanı, WhatsApp ve süreç otomasyonu, özel yazılım veya web sitesi için WhatsApp, telefon, e-posta veya formdan ulaşın. 24 saat içinde yazılı yanıt."
         : "Reach out for AI agent, WhatsApp / workflow automation, custom software or website quotes — WhatsApp, phone, email or form. Written reply within 24 hours.",
     keywords:
       locale === "tr"
-        ? [...seoKeywordsTr, "iletişim", "AI teklif", "otomasyon teklif", "web sitesi teklif"]
+        ? [...seoKeywordsTr, "iletişim", "yapay zeka teklif", "otomasyon teklif", "web sitesi teklif"]
         : undefined,
   });
 }
@@ -73,13 +73,13 @@ export default async function ContactPage({
       <div className="mb-10 max-w-3xl space-y-3">
         <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           {locale === "tr"
-            ? "İletişim — Projenizi 15 Dakikada Konuşalım"
-            : "Contact — Let's Talk Your Project in 15 Minutes"}
+            ? "İletişim — Ücretsiz Keşif Görüşmesi"
+            : "Contact — Free Discovery Call"}
         </h1>
         <p className="text-zinc-400">
           {locale === "tr"
-            ? "AI agent, WhatsApp / süreç otomasyonu, özel yazılım veya web sitesi — projenizi kısaca anlatın, 24 saat içinde net bir aksiyon planı, sözleşmeli fiyat ve teslim tarihi ile dönüş yapayım. Acil ihtiyaçlar için WhatsApp en hızlısı."
-            : "AI agent, WhatsApp / workflow automation, custom software or website — share a short brief and I'll respond within 24 hours with a clear plan, contracted price and delivery date. WhatsApp is fastest for urgent needs."}
+            ? "Yapay zeka ajanı, WhatsApp ve süreç otomasyonu, özel yazılım veya web sitesi — projenizi kısaca anlatın, 24 saat içinde net aksiyon planı, yazılı sözleşmeli fiyat ve teslim tarihi ile yanıtlayayım. Acil ihtiyaçlar için WhatsApp en hızlısı."
+            : "AI agent, WhatsApp & workflow automation, custom software or website — share a short brief and I'll respond within 24 hours with a clear plan, contracted price and delivery date. WhatsApp is fastest for urgent needs."}
         </p>
       </div>
 
@@ -123,13 +123,13 @@ export default async function ContactPage({
           <div className="rounded-xl border border-[var(--accent)]/30 bg-[var(--accent)]/5 p-4 text-xs leading-6 text-zinc-300">
             {locale === "tr" ? (
               <>
-                <strong className="text-zinc-100">Yanıt süresi:</strong> Hafta içi 09:00-19:00 arasında
-                ortalama 1-2 saat; mesai dışında ertesi iş günü içinde dönüş yapılır.
+                <strong className="text-zinc-100">Yanıt süresi:</strong> Hafta içi 09:00–19:00 arasında
+                ortalama 1–2 saat; mesai dışında ertesi iş günü içinde yanıtlanır.
               </>
             ) : (
               <>
-                <strong className="text-zinc-100">Response time:</strong> 1-2 hours on weekdays
-                between 09:00-19:00 (Turkey); next business day outside office hours.
+                <strong className="text-zinc-100">Response time:</strong> 1–2 hours on weekdays
+                between 09:00–19:00 (Turkey); next business day outside office hours.
               </>
             )}
           </div>

@@ -18,55 +18,55 @@ type AdvancedServicesTeaserProps = {
 export function AdvancedServicesTeaser({ locale }: AdvancedServicesTeaserProps) {
   const copy = {
     tr: {
-      badge: "Yüksek Bilet · Stratejik İş Ortaklığı",
-      title: "AI, Otomasyon ve Özel Yazılım",
+      badge: "Yüksek Etkili · Stratejik İş Ortaklığı",
+      title: "Yapay Zeka, Otomasyon ve Özel Yazılım",
       subtitle:
-        "Web sitesi tek başına yetmediği noktada devreye giriyoruz: AI agent, WhatsApp / e-posta / CRM otomasyonu ve özel yazılım ile günde harcadığınız manuel saatleri operasyonel kazanca çeviriyoruz. Aşağıdaki senaryolar gerçek müşteri kurulumlarımızdan örneklerdir.",
+        "Tek başına web sitesinin yetmediği noktada devreye giriyoruz. Bot değil — sizin diliniz konuşan, sizin verinizi bilen yapay zeka ajanları (AI agent), resmi WhatsApp Cloud API otomasyonu ve özel yazılım ile ekibinizin haftada saatlerce harcadığı tekrar eden işi sırtınızdan alıyoruz. Aşağıdaki rakamlar gerçek kurulumlarımızdan ölçülen metriklerdir.",
       items: [
         {
-          title: "AI Agent & Chatbot",
-          desc: "Claude / OpenAI tabanlı, şirket verinizi (PDF, web, CRM, Notion) bilen agent. Örnek: B2B yazılım firmasında satış öncesi sorularda %70 yük azalması, ekip sadece sıcak fırsata bakıyor.",
+          title: "Yapay Zeka Ajanı (AI Agent)",
+          desc: "Claude / OpenAI tabanlı, şirket verinizi (PDF, web, CRM, Notion) RAG ile bilen ajan. Örnek: B2B yazılım firmasında satış öncesi tekrar eden sorularda %70 yük azalması; ekip yalnızca sıcak fırsata bakıyor.",
         },
         {
           title: "WhatsApp Otomasyonu",
-          desc: "Resmi WhatsApp Cloud API ile teklif, randevu ve sipariş akışları. Örnek: Estetik klinikte randevu cevap süresi 4 saatten 90 saniyeye, randevu kaçırma oranı yarıya düştü.",
+          desc: "Resmi WhatsApp Cloud API üzerinden teklif, randevu ve sipariş akışları — toplu mesaj/spam aracı değil. Örnek: Estetik klinikte yanıt süresi 4 saatten 90 saniyeye, randevu kaçırma oranı yarı yarıya.",
         },
         {
           title: "Süreç Otomasyonu (n8n)",
-          desc: "Form → CRM → e-posta → fatura → WhatsApp gibi tekrar eden zincirleri AI destekli pipeline'a çeviriyoruz. Örnek: Lojistikte sürücü-müşteri eşleştirme 8 saatten 30 dakikaya indi.",
+          desc: "Form → CRM → e-posta → fatura → WhatsApp gibi tekrar eden zincirleri yapay zeka destekli pipeline'a dönüştürüyoruz. Örnek: Lojistikte sürücü–müşteri eşleştirme 8 saatten 30 dakikaya indi.",
         },
         {
           title: "Özel Yazılım",
-          desc: "İç panel, B2B portal, e-ticaret, entegrasyon, SaaS MVP — Java/Python backend + Next.js ile uçtan uca. Sprint bazlı, her sprintte çalışan teslim, sürpriz fatura yok.",
+          desc: "İç panel, B2B portal, e-ticaret, entegrasyon, SaaS MVP — Java / Python backend + Next.js ile uçtan uca. Sprint bazlı, her sprintte çalışan teslim, ek kalem yok.",
         },
       ],
-      cta: "AI / Otomasyon İçin Konuşalım",
-      explore: "Hizmetler & Şeffaf Fiyatlar",
+      cta: "Ücretsiz Keşif Görüşmesi Ayırın",
+      explore: "Hizmetler ve Şeffaf Fiyatlar",
     },
     en: {
-      badge: "High-ticket · Strategic Partnership",
+      badge: "High-impact · Strategic Partnership",
       title: "AI, Automation and Custom Software",
       subtitle:
-        "Where a website alone isn't enough: AI agents, WhatsApp / email / CRM automations and custom software that turn daily manual hours into operational gains. The examples below come from real client deployments.",
+        "Where a website alone isn't enough. Not a bot — AI agents that speak your team's language and know your data, plus official WhatsApp Cloud API automations and custom software. We take hours of repetitive work off your team every week. The numbers below are measured from real deployments.",
       items: [
         {
-          title: "AI Agents & Chatbots",
-          desc: "Claude / OpenAI agents that know your data (PDFs, web, CRM, Notion). Example: B2B SaaS — 70% drop in repetitive pre-sales questions; team focuses only on warm leads.",
+          title: "AI Agent",
+          desc: "Claude / OpenAI agents that know your data (PDFs, web, CRM, Notion) via RAG. Example: B2B SaaS — 70% drop in repetitive pre-sales questions; team focuses only on warm leads.",
         },
         {
           title: "WhatsApp Automation",
-          desc: "Official WhatsApp Cloud API for quotes, appointments and order flows. Example: aesthetic clinic — response time from 4 hours to 90 seconds, no-shows cut in half.",
+          desc: "Official WhatsApp Cloud API quote, appointment and order flows — not bulk-messaging/spam tooling. Example: aesthetic clinic — response time 4h → 90s, no-shows halved.",
         },
         {
           title: "Workflow Automation (n8n)",
-          desc: "Repetitive Form → CRM → email → invoice → WhatsApp loops turned into AI-augmented pipelines. Example: logistics — driver-to-customer match dropped from 8 hours to 30 minutes.",
+          desc: "Repetitive Form → CRM → email → invoice → WhatsApp loops turned into AI-augmented pipelines. Example: logistics — driver-to-customer match 8h → 30min.",
         },
         {
           title: "Custom Software",
-          desc: "Internal tools, B2B portals, e-commerce, integrations, SaaS MVPs — Java/Python backend + Next.js. Sprint-based, working delivery each cycle, no surprise invoices.",
+          desc: "Internal tools, B2B portals, e-commerce, integrations, SaaS MVPs — Java/Python backend + Next.js. Sprint-based, working delivery each cycle, no extra line items.",
         },
       ],
-      cta: "Let's Talk AI / Automation",
+      cta: "Book a Free Discovery Call",
       explore: "Services & Transparent Pricing",
     },
   }[locale];

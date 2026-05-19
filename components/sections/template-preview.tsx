@@ -17,18 +17,18 @@ type TemplatePreviewProps = {
 export function TemplatePreview({ locale }: TemplatePreviewProps) {
   const copy = {
     tr: {
-      title: "Hazır Web Sitesi Şablonları (Sektöre Özel)",
+      title: "Sektöre Özel Hazır Web Sitesi Şablonları",
       subtitle:
-        "Web sitesi yaptırmak isteyen KOBİ'ler için sektör paketleri: berber, kuaför, klinik, lojistik, oto yıkama, danışmanlık ve daha fazlası. 2-5 günde yayın, sözleşmeli teslim, fiyat şeffaf — KDV bilgisi teklif anında netleşir.",
+        "Hızlı yayına çıkmak isteyen KOBİ'ler için sektör paketleri: berber & kuaför, klinik, lojistik, oto yıkama, danışmanlık ve daha fazlası. 4–7 iş gününde canlıya alım, yazılı sözleşme, sabit fiyat — fiyatlara KDV hariçtir (+KDV).",
       all: "Tüm Şablonlar",
-      select: "Bu Şablonu Seç",
+      select: "Bu Şablonu Seçin",
       demo: "Canlı Demo",
       from: "Başlangıç",
     },
     en: {
       title: "Sector-focused Templates",
       subtitle:
-        "Productized packages for SMBs that want to launch fast. Tailored to your business while preserving SEO and performance standards. Live in 2-5 days, contracted delivery, transparent pricing.",
+        "Productized packages for SMBs that want to launch fast. Tailored to your business while preserving SEO and performance standards. Live in 4–7 business days, written contract, transparent pricing (+VAT).",
       all: "All Templates",
       select: "Choose This Template",
       demo: "View Demo",

@@ -14,14 +14,117 @@ export const caseSchema = z.object({
   solution: z.string(),
   stack: z.array(z.string()).min(2),
   metrics: z.array(caseMetricSchema).min(2),
-  image: z.string(),
+  /** Görsel yoksa kart, gradient bir özet bloğu render eder (gizliliği korunan müşteriler için). */
+  image: z.string().optional(),
+  /** Görsel yokken kartta gösterilecek 1-2 kelimelik etiket (örn. "AI Agent"). */
+  visualTag: z.string().optional(),
   /** Canlı demo URL; varsa kartta "Canlı Demo" butonu gösterilir */
   demoUrl: z.string().url().optional(),
+  /** Müşterinin adı gizli mi? (anonim müşteri için yazılı izin durumu) */
+  confidential: z.boolean().optional(),
   /** Meta keywords; arama görünürlüğü için (özellikle marka + sektör sorguları) */
   seoKeywords: z.array(z.string()).optional(),
 });
 
 const rawCases = [
+  {
+    slug: "b2b-saas-ai-agent",
+    title: "B2B SaaS — Satış Öncesi AI Ajanı",
+    sector: "Yapay Zeka Ajanı",
+    summary:
+      "Bir B2B yazılım firması için Claude tabanlı, şirket içi dökümanlara ve ürün dokümantasyonuna RAG ile eğitilmiş satış öncesi yapay zeka ajanı. Web widget ve WhatsApp Cloud API üzerinden çalışıyor; tekrar eden satış öncesi soruların büyük bölümünü saniyeler içinde yanıtlıyor, sıcak fırsatı insan ekibe aktarıyor.",
+    problem:
+      "Satış ekibi, ürün dökümantasyonunda tekrar eden aynı sorulara günde 2–3 saat ayırıyordu; yanıt süreleri uzun, takipte düşüş yüksek, lead skorlama tutarsızdı. Mesai dışı sorular ertesi güne sarkıyor, anlık karar veren KOBİ alıcıları rakip ürüne yöneliyordu.",
+    solution:
+      "Claude (Anthropic) üzerine RAG (vektör veritabanı) ile şirketin tüm satış öncesi dökümanları (ürün PDF, fiyat tablosu, SSS, çözüm sayfaları) indekslendi. Ajan web widget ve WhatsApp Cloud API üzerinden 7/24 yanıtlıyor; nitelikli ipucu (qualified lead) tespit edince ekibe Slack ve CRM bildirimi geçiyor. Loglama, kullanım paneli ve aylık maliyet kontrolü standart kuruldu.",
+    stack: [
+      "Claude (Anthropic) · RAG",
+      "OpenAI embeddings · vektör DB",
+      "WhatsApp Cloud API",
+      "Web widget (Next.js)",
+      "n8n + CRM webhook",
+      "Loglama ve kullanım paneli",
+    ],
+    metrics: [
+      { label: "Tekrar Eden Soru", value: "%70 azalma" },
+      { label: "Yanıt Süresi", value: "Saniyeler" },
+      { label: "Yatırım Geri Dönüşü", value: "~2 ay" },
+    ],
+    visualTag: "AI Agent",
+    confidential: true,
+    seoKeywords: [
+      "yapay zeka ajanı geliştirme",
+      "AI agent B2B SaaS",
+      "Claude RAG entegrasyonu",
+      "satış öncesi chatbot",
+      "WhatsApp AI ajan",
+      "Aksipal AI referans",
+    ],
+  },
+  {
+    slug: "estetik-klinik-whatsapp-otomasyon",
+    title: "Estetik Klinik — WhatsApp Randevu Otomasyonu",
+    sector: "WhatsApp Otomasyonu",
+    summary:
+      "İstanbul'da bir estetik & sağlık kliniği için resmi WhatsApp Cloud API üzerinden uçtan uca randevu, hatırlatma ve sonrası iletişim otomasyonu. Ortalama yanıt süresi 4 saatten 90 saniyeye, randevu kaçırma oranı yarı yarıya indi.",
+    problem:
+      "Klinik reklam bütçesi yüksekti; ancak gelen WhatsApp mesajlarının önemli kısmı resepsiyon yoğunluğunda gecikiyor, reklamlardan gelen sıcak ilgi soğuyordu. Randevu hatırlatması manuel yapılıyor, no-show oranı bütçeyi yiyordu.",
+    solution:
+      "Resmi WhatsApp Cloud API üzerinden hızlı yanıt akışları kuruldu: hizmet bilgisi, fiyat aralığı, randevu rezervasyonu (takvim entegrasyonu) ve KVKK aydınlatma onayı. Otomatik hatırlatma 24 saat ve 1 saat öncesi; randevu sonrası bakım iletişimi. n8n üzerinden CRM, takvim ve faturalama sistemleri bağlandı.",
+    stack: [
+      "Resmi WhatsApp Cloud API",
+      "n8n otomasyon",
+      "Takvim entegrasyonu",
+      "CRM webhook",
+      "KVKK aydınlatma akışı",
+    ],
+    metrics: [
+      { label: "Yanıt Süresi", value: "4 sa → 90 sn" },
+      { label: "Randevu Kaçırma", value: "%50 azalma" },
+      { label: "Yayın", value: "5 iş günü" },
+    ],
+    visualTag: "WhatsApp",
+    confidential: true,
+    seoKeywords: [
+      "WhatsApp randevu otomasyonu",
+      "WhatsApp Cloud API klinik",
+      "estetik klinik otomasyonu",
+      "n8n WhatsApp bot",
+      "Aksipal otomasyon referans",
+    ],
+  },
+  {
+    slug: "lojistik-surec-otomasyonu",
+    title: "Lojistik — Sürücü/Müşteri Eşleştirme Otomasyonu",
+    sector: "Süreç Otomasyonu",
+    summary:
+      "Ankara merkezli şehirler arası taşımacılık firması için n8n + Claude tabanlı sürücü–müşteri eşleştirme ve teklif akışı. WhatsApp gruplarındaki manuel koordinasyonun yerini alan AI destekli pipeline; ortalama eşleştirme süresi 8 saatten 30 dakikaya indi.",
+    problem:
+      "Sürücü atama, müşteri bilgilendirme, teklif paylaşımı ve onay süreçleri farklı WhatsApp grupları üzerinden manuel yürütülüyordu. Operasyon yoğunluğunda yanıt veren kişiye göre değişen kalite ve ortalama 8 saatlik gecikme, gelen iş sayısını sınırlıyordu.",
+    solution:
+      "Form ve WhatsApp'tan gelen talepler n8n üzerinden tek pipeline'a alındı; Claude ile rota, tip ve aciliyet analizi yapılıyor, uygun sürücü(ler) eşleştirilip otomatik teklif ve onay akışı tetikleniyor. KVKK aydınlatma süreci ve loglama eksiksiz; süreç yazılı sözleşmeyle teslim edildi.",
+    stack: [
+      "n8n pipeline",
+      "Claude (Anthropic)",
+      "Resmi WhatsApp Cloud API",
+      "Google Sheets / CRM entegrasyonu",
+      "KVKK aydınlatma akışı",
+    ],
+    metrics: [
+      { label: "Eşleştirme Süresi", value: "8 sa → 30 dk" },
+      { label: "Manuel İş Yükü", value: "Belirgin azalma" },
+      { label: "Yatırım Geri Dönüşü", value: "1–3 ay" },
+    ],
+    visualTag: "n8n + AI",
+    confidential: true,
+    seoKeywords: [
+      "lojistik süreç otomasyonu",
+      "n8n türkçe rehber",
+      "Claude n8n entegrasyonu",
+      "WhatsApp sürücü atama",
+      "Aksipal otomasyon referans",
+    ],
+  },
   {
     slug: "korsis-teknoloji",
     title: "Korsis Teknoloji",

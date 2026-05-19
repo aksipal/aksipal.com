@@ -28,12 +28,12 @@ export async function generateMetadata({
     pathname: "/hakkimda",
     title:
       locale === "tr"
-        ? "Hakkımda — Barış Akşipal | Senior AI & Full-Stack"
-        : "About — Barış Akşipal | Senior AI & Full-Stack",
+        ? "Hakkımda — Barış Akşipal | Aksipal Web Studio"
+        : "About — Barış Akşipal | Aksipal Web Studio",
     description:
       locale === "tr"
-        ? "Barış Akşipal: 6+ yıl senior full-stack. Java/Python backend, Next.js, AI agent (Claude/OpenAI/RAG) ve n8n otomasyon — Ankara, sözleşmeli teslim."
-        : "Barış Akşipal: 6+ years senior full-stack. Java/Python, Next.js, AI agents (Claude/OpenAI/RAG) and n8n automation — Ankara, contracted delivery.",
+        ? "Barış Akşipal: 6+ yıl senior full-stack mühendisi. Yapay zeka ajanı (Claude / OpenAI / RAG), WhatsApp ve n8n otomasyonu, Java/Python backend ve Next.js — Ankara'dan, yazılı sözleşmeyle, tek muhatap."
+        : "Barış Akşipal: 6+ years senior full-stack engineer. AI agents (Claude/OpenAI/RAG), WhatsApp & n8n automation, Java/Python backend and Next.js — Ankara, written contract, single point of contact.",
     keywords:
       locale === "tr"
         ? [
@@ -62,23 +62,23 @@ export default async function AboutPage({
       ? [
           {
             icon: Bot,
-            title: "AI & Otomasyon",
-            text: "Claude / OpenAI tabanlı AI agent geliştirme, RAG, function calling, n8n ile süreç ve WhatsApp otomasyonu — gerçek operasyon problemlerine ölçülebilir çözümler.",
+            title: "Yapay Zeka ve Otomasyon",
+            text: "Claude / OpenAI tabanlı yapay zeka ajanı geliştirme, RAG (vektör veritabanı), function calling ve n8n + resmi WhatsApp Cloud API ile süreç otomasyonu — sahadan ölçülebilir sonuçlar.",
           },
           {
             icon: Code2,
             title: "Backend (Java / Python / Node)",
-            text: "Java, Python ve Node ile API, iş kuralları ve entegrasyon katmanları. Auth, rol yönetimi, veri modelleme ve performans.",
+            text: "Java, Python ve Node ile API, iş kuralları ve entegrasyon katmanları. Kimlik doğrulama, rol yönetimi, veri modelleme ve performans iyileştirmesi.",
           },
           {
             icon: Rocket,
             title: "Frontend (Next.js / React / TS)",
-            text: "Next.js, React ve TypeScript ile hızlı, modern ve dönüşüm odaklı arayüzler. App Router, server components ve Core Web Vitals odaklı.",
+            text: "Next.js, React ve TypeScript ile hızlı, modern ve dönüşüm odaklı arayüzler. App Router, server components ve Core Web Vitals odaklı geliştirme.",
           },
           {
             icon: ShieldCheck,
             title: "DevOps, Performans ve Güvenlik",
-            text: "Docker / CI/CD ile sürdürülebilir dağıtım, SEO ve Core Web Vitals optimizasyonu, KVKK uyumlu altyapı standartları.",
+            text: "Docker ve CI/CD ile sürdürülebilir dağıtım, SEO ve Core Web Vitals iyileştirmesi, KVKK uyumlu altyapı standartları.",
           },
         ]
       : [
@@ -116,8 +116,8 @@ export default async function AboutPage({
         <div className="glass-card p-8 sm:p-12">
           <Badge variant="accent" className="w-fit">
             {locale === "tr"
-              ? "6+ Yıl Senior Full-Stack • AI & Otomasyon"
-              : "6+ Years Senior Full-Stack • AI & Automation"}
+              ? "6+ Yıl Senior Mühendislik • Yapay Zeka ve Otomasyon"
+              : "6+ Years Senior Engineering • AI & Automation"}
           </Badge>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
             {locale === "tr"
@@ -126,13 +126,13 @@ export default async function AboutPage({
           </h1>
           <p className="mt-4 max-w-3xl text-zinc-400">
             {locale === "tr"
-              ? "Ankara merkezli, 6+ yıllık senior full-stack mühendisim. Kurumsal web, özel yazılım ve son 2 yıldır yoğun şekilde AI agent / otomasyon projeleri geliştiriyorum. Backend tarafında Java, Python ve Node ile API ve entegrasyonlar; frontend tarafında Next.js / React / TypeScript ile dönüşüm odaklı arayüzler. AI tarafında Claude ve OpenAI tabanlı agent'lar, RAG (vektör veritabanı) sistemleri ve resmi WhatsApp Cloud API + n8n ile uçtan uca süreç otomasyonu kuruyorum. Çalışma prensibim sade: yazılı sözleşme, sabit fiyat, sözünde durulan teslim tarihi ve yayın sonrası Türkçe destek."
-              : "Ankara-based, 6+ years senior full-stack engineer. I build corporate web, custom software and (for the past 2 years intensively) AI agent / automation projects. Backend: Java, Python, Node — APIs and integrations. Frontend: Next.js / React / TypeScript focused on conversion. AI: Claude and OpenAI agents, RAG (vector DB) systems, and official WhatsApp Cloud API + n8n end-to-end workflow automation. My principle is simple: written contract, fixed price, delivery dates kept, and post-launch support in Turkish or English."}
+              ? "Ankara merkezli, 6+ yıllık senior full-stack mühendisim. Kurumsal web ve özel yazılımın yanı sıra son 2 yıldır ağırlıklı olarak yapay zeka ajanı (AI agent) ve süreç otomasyonu projeleri geliştiriyorum. Backend tarafında Java, Python ve Node ile API ve entegrasyonlar; frontend tarafında Next.js, React ve TypeScript ile dönüşüm odaklı arayüzler. Yapay zeka tarafında Claude ve OpenAI tabanlı ajanlar, RAG (vektör veritabanı) sistemleri ve resmi WhatsApp Cloud API + n8n ile uçtan uca süreç otomasyonu kuruyorum. Çalışma prensibim sade: yazılı sözleşme, sabit fiyat, sözünde durulan teslim tarihi ve yayın sonrası Türkçe destek — tek muhatap."
+              : "Ankara-based, 6+ years senior full-stack engineer. Corporate web and custom software, plus (for the past 2 years intensively) AI agent and workflow automation projects. Backend: Java, Python, Node — APIs and integrations. Frontend: Next.js / React / TypeScript focused on conversion. AI: Claude / OpenAI agents, RAG (vector DB) systems, and official WhatsApp Cloud API + n8n end-to-end automation. My principle is simple: written contract, fixed price, delivery dates kept, post-launch support in Turkish or English — one point of contact."}
           </p>
           <p className="mt-3 text-sm text-zinc-500">
             {locale === "tr"
-              ? "6+ yıl deneyim · 40+ ürün ve servis yayını · Ankara · KVKK uyumlu çalışma"
-              : "6+ years of experience · 40+ product/service launches · Ankara · KVKK aware delivery"}
+              ? "6+ yıl deneyim · 40+ ürün ve servis yayını · Ankara merkezli · KVKK uyumlu çalışma"
+              : "6+ years experience · 40+ product/service launches · Ankara · KVKK aware delivery"}
           </p>
         </div>
 

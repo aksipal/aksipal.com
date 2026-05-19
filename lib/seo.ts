@@ -92,10 +92,10 @@ export function getCaseStudyJsonLd(input: {
   description: string;
   pathname: string;
   locale: Locale;
-  image: string;
+  image?: string;
 }) {
   const pageUrl = absoluteUrl(`/${input.locale}${input.pathname}`);
-  const imageUrl = absoluteUrl(input.image);
+  const imageUrl = absoluteUrl(input.image ?? "/favicon.png");
 
   return {
     "@context": "https://schema.org",
@@ -190,7 +190,7 @@ export function getServiceJsonLd() {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType:
-      "AI agent geliştirme, WhatsApp ve süreç otomasyonu (n8n), özel yazılım, kurumsal web sitesi geliştirme ve hazır web sitesi şablonları",
+      "Yapay zeka ajanı (AI agent) geliştirme, resmi WhatsApp Cloud API ve n8n süreç otomasyonu, özel yazılım geliştirme, kurumsal web sitesi geliştirme ve sektöre özel hazır web sitesi şablonları",
     areaServed: { "@type": "Country", name: "TR" },
     provider: {
       "@type": "Organization",
@@ -200,7 +200,7 @@ export function getServiceJsonLd() {
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Aksipal Hizmet Paketleri",
+      name: "Aksipal Web Studio Hizmet Paketleri",
       itemListElement: [...offers, ...enterpriseOffers],
     },
   };
@@ -271,7 +271,8 @@ export function getOrganizationJsonLd() {
     priceRange: "₺₺",
     sameAs: [...siteConfig.sameAs],
     knowsAbout: [
-      "AI Agent Geliştirme",
+      "Yapay Zeka Ajanı Geliştirme",
+      "AI Agent Development",
       "Yapay Zeka Entegrasyonu",
       "Claude API",
       "OpenAI API",
@@ -279,6 +280,7 @@ export function getOrganizationJsonLd() {
       "WhatsApp Otomasyonu",
       "WhatsApp Cloud API",
       "Süreç Otomasyonu (n8n)",
+      "İş Süreçleri Otomasyonu",
       "Özel Yazılım Geliştirme",
       "Web Sitesi Geliştirme",
       "Kurumsal Web Tasarım",
@@ -291,11 +293,11 @@ export function getOrganizationJsonLd() {
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Aksipal Hizmet Kataloğu",
+      name: "Aksipal Web Studio Hizmet Kataloğu",
       itemListElement: [
         {
           "@type": "OfferCatalog",
-          name: "AI Agent ve Chatbot Geliştirme",
+          name: "Yapay Zeka Ajanı (AI Agent) Geliştirme",
         },
         {
           "@type": "OfferCatalog",
@@ -311,7 +313,7 @@ export function getOrganizationJsonLd() {
         },
         {
           "@type": "OfferCatalog",
-          name: "Hazır Web Sitesi Şablonları",
+          name: "Sektöre Özel Hazır Web Sitesi Şablonları",
         },
       ],
     },
@@ -329,7 +331,7 @@ export function getPersonJsonLd() {
     familyName: "Akşipal",
     jobTitle: "Senior Full-Stack & AI Engineer",
     description:
-      "6+ yıl senior full-stack mühendislik. AI agent geliştirme, WhatsApp/süreç otomasyonu, özel yazılım ve premium kurumsal web — Ankara.",
+      "6+ yıl senior full-stack mühendislik. Yapay zeka ajanı (AI agent) geliştirme, WhatsApp ve süreç otomasyonu, özel yazılım ve premium kurumsal web — Ankara.",
     url: absoluteUrl("/tr/hakkimda"),
     image: absoluteUrl("/favicon.png"),
     email: `mailto:${siteConfig.email}`,
@@ -345,6 +347,7 @@ export function getPersonJsonLd() {
       url: siteConfig.url,
     },
     knowsAbout: [
+      "Yapay Zeka Ajanı",
       "AI Agent",
       "Claude",
       "OpenAI",

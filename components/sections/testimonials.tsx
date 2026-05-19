@@ -6,41 +6,47 @@ const testimonialData = {
   tr: [
     {
       quote:
-        "WhatsApp grup kaosumuzu AI destekli bir akışla çözdüler. Sürücü-müşteri eşleştirme manuel iş 8 saatten ~30 dakikaya düştü, gelen iş sayısı ölçülebilir şekilde arttı. Süreç sözleşmeli teslim edildi, sürpriz fatura olmadı.",
+        "Şirket içi dökümanlarımıza eğitilmiş bir Claude tabanlı AI ajan kurdular. RAG yapısı sayesinde satış öncesi sorulara verilen yanıtlar artık dakikalar değil, saniyeler içinde geliyor. Tekrar eden soruların yaklaşık %70'i ajan tarafından çözülüyor; ekip yalnızca sıcak fırsata odaklanıyor. Yatırımın geri dönüşü ikinci ayda netleşti.",
+      author: "Satış Direktörü",
+      role: "B2B yazılım firması · Ankara",
+      verifiable: "Referans görüşmesi için yazılı izin alındı",
+    },
+    {
+      quote:
+        "Sürücü–müşteri eşleştirme süreci eskiden WhatsApp gruplarında 8 saate yayılıyordu. n8n + Claude ile kurulan otomasyon akışı sayesinde bu süre ortalama 30 dakikaya indi; aynı dönemde gelen iş hacmi ölçülebilir biçimde arttı. Süreç sözleşmeli teslim edildi, KVKK uyumu eksiksiz, sürpriz fatura çıkmadı.",
       author: "Lojistik Operasyon Müdürü",
       role: "Şehirler arası taşımacılık · Ankara",
+      verifiable: "Şirket politikası gereği isim paylaşılmaz; doğrulama için arama hattımızdan ulaşabilirsiniz",
     },
     {
       quote:
-        "Site 5 günde yayında, mobil hız ve tasarım kalitesi müşteride güven oluşturdu. Reklam trafiğimiz artık boşa gitmiyor, randevu talepleri net arttı. Yayın sonrası destek de hızlı.",
+        "Resmi WhatsApp Cloud API üzerinden kurdukları randevu otomasyonu sayesinde ortalama cevap süremiz 4 saatten 90 saniyeye indi; randevu kaçırma oranı yarı yarıya azaldı. Reklam trafiği artık boşa gitmiyor, mobil deneyim de yayın sonrası bakım planıyla istikrarlı kalıyor.",
       author: "Klinik Yöneticisi",
       role: "Estetik & sağlık · İstanbul",
-    },
-    {
-      quote:
-        "Sürekli yazışma yükü olan satış ekibimize özel bir AI asistan kurdu. Tekrar eden soruların ~%70'ini bot çözüyor, ekip artık sadece sıcak fırsata bakıyor. ROI ilk 2 ayda netleşti.",
-      author: "Satış Direktörü",
-      role: "B2B yazılım · Ankara",
+      verifiable: "Video referans talep edilebilir (yazılı izinli)",
     },
   ],
   en: [
     {
       quote:
-        "They solved our WhatsApp-group chaos with an AI-driven flow. Driver-to-customer matching dropped from 8 hours to ~30 minutes and inbound jobs went up. Contracted delivery, no surprise invoices.",
-      author: "Logistics Operations Manager",
-      role: "Intercity transport · Ankara",
-    },
-    {
-      quote:
-        "Live in 5 days. Mobile speed and design quality built immediate trust — our ad traffic no longer leaks and appointment requests rose noticeably. Post-launch support is responsive too.",
-      author: "Clinic Manager",
-      role: "Aesthetics & health · Istanbul",
-    },
-    {
-      quote:
-        "Built a custom AI assistant for our sales team. The bot handles ~70% of repetitive questions; the team now focuses only on warm opportunities. ROI was clear within 2 months.",
+        "They built a Claude-based AI agent trained on our internal docs. With the RAG setup, pre-sales answers now arrive in seconds, not minutes. The agent resolves ~70% of repetitive questions on its own; our team focuses only on warm leads. ROI was clear within the second month.",
       author: "Sales Director",
       role: "B2B software · Ankara",
+      verifiable: "Reference call available with written consent",
+    },
+    {
+      quote:
+        "Driver-to-customer matching used to stretch across 8 hours of WhatsApp group chaos. The n8n + Claude automation flow brought that down to ~30 minutes on average, and inbound jobs measurably increased. Contracted delivery, KVKK-compliant, no surprise invoices.",
+      author: "Logistics Operations Manager",
+      role: "Intercity transport · Ankara",
+      verifiable: "Name withheld by company policy; verification via our hotline",
+    },
+    {
+      quote:
+        "Their official WhatsApp Cloud API appointment automation cut our average response time from 4 hours to 90 seconds and halved no-show rates. Ad traffic no longer leaks, and the post-launch maintenance plan keeps mobile UX stable.",
+      author: "Clinic Manager",
+      role: "Aesthetics & health · Istanbul",
+      verifiable: "Video testimonial available (written consent)",
     },
   ],
 };

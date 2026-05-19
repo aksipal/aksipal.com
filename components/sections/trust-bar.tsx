@@ -1,4 +1,4 @@
-import { Bot, MessageSquare, ShieldCheck, TimerReset } from "lucide-react";
+import { Bot, Code2, Globe, ShoppingCart, Smartphone, Workflow } from "lucide-react";
 
 import type { Locale } from "@/lib/i18n";
 
@@ -8,23 +8,27 @@ type TrustBarProps = {
 
 const trustItems = {
   tr: [
-    { icon: Bot, label: "AI agent · Claude / OpenAI · RAG" },
-    { icon: MessageSquare, label: "WhatsApp Cloud API · n8n otomasyon" },
-    { icon: ShieldCheck, label: "Sözleşmeli teslim · KVKK uyumlu" },
-    { icon: TimerReset, label: "Premium web · 4-12 günde yayın" },
+    { icon: Globe, label: "Premium Web Sitesi" },
+    { icon: ShoppingCart, label: "E-Ticaret Altyapısı" },
+    { icon: Smartphone, label: "Mobil Uygulama" },
+    { icon: Workflow, label: "Süreç Otomasyonu" },
+    { icon: Bot, label: "Yapay Zeka Entegrasyonu" },
+    { icon: Code2, label: "Kişiye Özel Yazılım" },
   ],
   en: [
-    { icon: Bot, label: "AI agents · Claude / OpenAI · RAG" },
-    { icon: MessageSquare, label: "WhatsApp Cloud API · n8n automation" },
-    { icon: ShieldCheck, label: "Contracted delivery · KVKK compliant" },
-    { icon: TimerReset, label: "Premium web · live in 4-12 days" },
+    { icon: Globe, label: "Premium Website" },
+    { icon: ShoppingCart, label: "E-Commerce" },
+    { icon: Smartphone, label: "Mobile Application" },
+    { icon: Workflow, label: "Workflow Automation" },
+    { icon: Bot, label: "AI Integration" },
+    { icon: Code2, label: "Custom Software" },
   ],
 };
 
 export function TrustBar({ locale }: TrustBarProps) {
   return (
-    <section className="section-shell mt-8" aria-label={locale === "tr" ? "Güven Çizgisi" : "Trust bar"}>
-      <div className="glass-card grid gap-4 p-4 sm:grid-cols-2 sm:p-5 lg:grid-cols-4">
+    <section className="section-shell mt-8" aria-label={locale === "tr" ? "Güven Bandı" : "Trust bar"}>
+      <div className="glass-card grid gap-4 p-4 sm:grid-cols-2 sm:p-5 lg:grid-cols-3">
         {trustItems[locale].map((item) => (
           <div
             key={item.label}

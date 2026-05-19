@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Bot, Lock } from "lucide-react";
 
 import GradientText from "@/components/ui/gradient-text";
 import { Badge } from "@/components/ui/badge";
@@ -19,15 +19,15 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
     tr: {
       title: "Referans Projeler",
       subtitle:
-        "Web sitesi yaptırma örnekleri ve sektörel kurumsal projeler. Tasarım kalitesi, teknik SEO ve dönüşüm metriklerine göre seçildi — anonim müşteri verileri içermez, tamamı yayında olan canlı projelerdir.",
+        "Yayında olan gerçek müşteri projeleri ve sektörel kurumsal işler. Tasarım kalitesi, teknik SEO ve ölçülebilir dönüşüm metriklerine göre seçildi — tüm bağlantılar canlı projelere açılır.",
       detail: "Proje Detayı",
       demo: "Canlı Demo",
-      all: "Tüm İşleri Gör",
+      all: "Tüm İşleri Görün",
     },
     en: {
       title: "Selected Work",
       subtitle:
-        "Real client websites and sector projects. Picked for design quality, technical SEO and measurable conversion — every link points to a live project.",
+        "Real, live client websites and sector projects. Picked for design quality, technical SEO and measurable conversion — every link opens a live project.",
       detail: "View Case Study",
       demo: "View Demo",
       all: "See All Work",
@@ -70,14 +70,32 @@ export function CaseGrid({ locale, limit }: CaseGridProps) {
               href={withLocale(locale, `/isler/${item.slug}`)}
               aria-label={`${item.title} — ${copy.detail}`}
             >
-              <Image
-                src={item.image}
-                alt={`${item.title} — ${item.sector} sektörü kurumsal web sitesi referans projesi`}
-                width={900}
-                height={600}
-                className="h-44 w-full object-cover"
-                loading={index < 3 ? "eager" : "lazy"}
-              />
+              {item.image ? (
+                <Image
+                  src={item.image}
+                  alt={`${item.title} — ${item.sector} referans projesi`}
+                  width={900}
+                  height={600}
+                  className="h-44 w-full object-cover"
+                  loading={index < 3 ? "eager" : "lazy"}
+                />
+              ) : (
+                <div className="relative flex h-44 w-full items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_25%_25%,rgba(124,255,146,0.18),transparent_55%),radial-gradient(circle_at_75%_75%,rgba(132,100,255,0.22),transparent_55%),linear-gradient(180deg,#0a0a14_0%,#101019_100%)]">
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px]" aria-hidden />
+                  <div className="relative flex flex-col items-center gap-2 text-center">
+                    <Bot className="size-9 text-[var(--accent)]" aria-hidden />
+                    <p className="text-base font-semibold tracking-tight text-[#E9DFFF]">
+                      {item.visualTag ?? item.sector}
+                    </p>
+                    {item.confidential ? (
+                      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+                        <Lock className="size-3" aria-hidden />
+                        {locale === "tr" ? "Müşteri Gizli" : "Confidential Client"}
+                      </span>
+                    ) : null}
+                  </div>
+                </div>
+              )}
             </Link>
             <div className="space-y-4 p-5">
               <div className="flex items-start justify-between gap-3">

@@ -24,8 +24,8 @@ export async function generateMetadata({
     pathname: "/blog",
     title:
       locale === "tr"
-        ? "Blog — Web Sitesi Yaptırma, Fiyatları ve SEO Rehberleri | Aksipal"
-        : "Blog — Web Design, Pricing & SEO Guides | Aksipal",
+        ? "Blog | Aksipal Web Studio"
+        : "Blog | Aksipal Web Studio",
     description:
       locale === "tr"
         ? "Kurumsal web sitesi fiyatları, web sitesi yaptırma rehberi, SEO ipuçları ve küçük işletmeler için dijital çözümler. Aksipal blog yazıları."
@@ -57,7 +57,7 @@ export default async function BlogPage({
   const blogListJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: locale === "tr" ? "Aksipal Blog" : "Aksipal Blog",
+    name: locale === "tr" ? "Aksipal Web Studio Blog" : "Aksipal Web Studio Blog",
     description:
       locale === "tr"
         ? "Web sitesi yaptırma, fiyatlar, SEO ve kurumsal dijital çözümler hakkında rehber yazılar."

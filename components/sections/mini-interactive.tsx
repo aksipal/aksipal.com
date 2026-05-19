@@ -18,25 +18,25 @@ export function MiniInteractive({ locale }: MiniInteractiveProps) {
           eyebrow: "Süreç",
           title: "3 adımda nasıl çalışıyoruz",
           subtitle:
-            "İlk mesajdan teslime kadar net bir akış. Sözleşmeli, şeffaf ve sürpriz fatura yok. WhatsApp veya formdan ulaşmanız yeterli — geri kalanını birlikte planlayalım.",
+            "İlk mesajdan teslime kadar net bir akış. Yazılı sözleşme, sabit fiyat, ek kalem yok. WhatsApp veya formdan ulaşmanız yeterli — geri kalanını birlikte planlıyoruz.",
           steps: [
             {
               icon: MessagesSquare,
               num: "01",
-              title: "Konuşalım (15 dakika)",
-              text: "WhatsApp veya formdan ulaşın. Mevcut durumu, hedefi ve bütçeyi netleştiriyoruz; size en uygun kulvarı (web sitesi mi, AI / otomasyon mu) öneriyoruz.",
+              title: "Ücretsiz keşif görüşmesi (30 dk)",
+              text: "WhatsApp veya formdan ulaşın. Mevcut durumu, hedefi ve bütçeyi konuşuyoruz; size en uygun kulvarı (web sitesi mi, yapay zeka / otomasyon mu) öneriyoruz.",
             },
             {
               icon: CheckCircle2,
               num: "02",
-              title: "Plan ve sözleşme",
-              text: "Kapsam, teslim tarihi, fiyat ve revizyon politikası tek dokümanda. Onay alındığında işe başlıyoruz; ek talepler için şeffaf değişiklik yönetimi.",
+              title: "Plan ve yazılı sözleşme",
+              text: "Kapsam, teslim tarihi, fiyat ve revizyon politikası tek dökümanda. Onayınız alınınca işe başlıyoruz; ek talep gelirse şeffaf değişiklik yönetimi devreye giriyor.",
             },
             {
               icon: Rocket,
               num: "03",
-              title: "Teslim ve destek",
-              text: "Web paketlerinde 4-12 günde yayın; AI / özel yazılım projelerinde sprint bazlı çalışan teslim. Yayın sonrası bakım ve iyileştirme aylık plan ile.",
+              title: "Teslim ve sürekli destek",
+              text: "Web paketlerinde 4–12 iş gününde canlıya alım; yapay zeka ve özel yazılım projelerinde sprint bazlı çalışan teslim. Yayın sonrası bakım ve iyileştirme aylık plan ile mümkün.",
             },
           ],
         }

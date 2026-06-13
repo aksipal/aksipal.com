@@ -76,7 +76,7 @@ export default async function LocaleHomePage({
       <HeroSection locale={locale as Locale} />
       <TrustBar locale={locale as Locale} />
       <AdvancedServicesTeaser locale={locale as Locale} />
-      <CaseGrid locale={locale as Locale} limit={8} />
+      <CaseGrid locale={locale as Locale} showAllLink />
       <TemplatePreview locale={locale as Locale} />
       <Testimonials locale={locale as Locale} />
       <FaqSection locale={locale as Locale} />

@@ -12,6 +12,7 @@ export const templateSectorSchema = z.enum([
   "danismanlik",
   "oto-yikama",
   "butik",
+  "turizm",
 ]);
 
 export const templateSchema = z.object({
@@ -201,6 +202,24 @@ const rawTemplates = [
     demoUrl: "https://keen-snickerdoodle-dd8fc8.netlify.app",
   },
   {
+    id: "tpl-turizm",
+    slug: "turizm",
+    title: "Turizm & Seyahat",
+    sector: "turizm",
+    summary:
+      "Butik tur, seyahat acentesi ve kurumsal etkinlik (MICE) markaları için görsel ağırlıklı, premium ve çok dilli kurumsal site.",
+    features: [
+      "Görsel ağırlıklı butik tasarım ve deneyim galerileri",
+      "Tur / hizmet ve kurumsal etkinlik (MICE) bölümleri",
+      "Türkçe / İngilizce çift dil desteği",
+      "Bülten kaydı, çerez onayı ve iletişim entegrasyonu",
+    ],
+    deliveryTime: "5–7 gün",
+    startingPrice: "₺28.000",
+    image: "/images/cases/efsense.webp",
+    demoUrl: "https://splendid-cheesecake-0b4b6f.netlify.app",
+  },
+  {
     id: "tpl-startup",
     slug: "startup",
     title: "Startup",
@@ -236,4 +255,59 @@ export const templateSectorLabel: Record<TemplateSector, string> = {
   danismanlik: "Danışmanlık",
   "oto-yikama": "Oto Yıkama",
   butik: "Butik",
+  turizm: "Turizm & Seyahat",
 };
+
+/* ------------------------------------------------------------------ */
+/*  Üst Kategoriler — KOBİ/esnafın iş modeline göre gruplama          */
+/* ------------------------------------------------------------------ */
+
+export const templateCategorySchema = z.enum([
+  "esnaf",
+  "kurumsal",
+  "lojistik",
+  "perakende",
+]);
+export type TemplateCategory = z.infer<typeof templateCategorySchema>;
+
+export const templateCategories: ReadonlyArray<{
+  id: TemplateCategory;
+  tr: string;
+  en: string;
+  trSubtitle: string;
+  enSubtitle: string;
+  sectors: TemplateSector[];
+}> = [
+  {
+    id: "esnaf",
+    tr: "Esnaf & Yerel İşletme",
+    en: "Local Business & Trades",
+    trSubtitle: "Randevu, üyelik ve hızlı iletişim odaklı yerel işletmeler.",
+    enSubtitle: "Local businesses focused on bookings, membership and quick contact.",
+    sectors: ["gym", "oto-yikama", "danismanlik"],
+  },
+  {
+    id: "kurumsal",
+    tr: "Kurumsal & Sanayi",
+    en: "Corporate & Industry",
+    trSubtitle: "Kurumsal güven, proje ve ürün vitrini gerektiren işler.",
+    enSubtitle: "Businesses that need corporate trust, project and product showcases.",
+    sectors: ["teknoloji", "enerji", "insaat", "farma"],
+  },
+  {
+    id: "lojistik",
+    tr: "Lojistik & Taşımacılık",
+    en: "Logistics & Transport",
+    trSubtitle: "Teklif formu ve WhatsApp dönüşümü odaklı nakliye işleri.",
+    enSubtitle: "Logistics and transport focused on quotes and WhatsApp conversion.",
+    sectors: ["lojistik", "tasimacilik"],
+  },
+  {
+    id: "perakende",
+    tr: "Perakende, Turizm & Girişim",
+    en: "Retail, Travel & Startup",
+    trSubtitle: "Marka vitrini, deneyim ve ürün/hizmet tanıtımı odaklı işler.",
+    enSubtitle: "Brands focused on showcase, experiences and product launches.",
+    sectors: ["butik", "turizm", "startup"],
+  },
+];

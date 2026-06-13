@@ -29,7 +29,7 @@ const faqTr = [
   },
   {
     q: "Fiyatlar nedir, KDV nasıl uygulanıyor?",
-    a: "Sektörel hazır web paketleri 17.000 TL'den başlar; web paketleri 17.000 – 35.000 TL aralığında. Yapay zeka ajanı kurulumları 45.000 TL'den, WhatsApp ve süreç otomasyonu 25.000 TL'den başlar; e-ticaret ve özel yazılım kapsama göre fiyatlandırılır. Tüm fiyatlara KDV hariçtir (+KDV). Yazılı teklifte kapsam, fatura tipi ve ödeme koşulu açıkça belirtilir.",
+    a: "Sektörel hazır web paketleri 17.000 TL'den başlar; web paketleri 17.000 – 35.000 TL aralığında. Yapay zeka ajanı kurulumları 45.000 TL'den, WhatsApp ve süreç otomasyonu 35.000 TL'den başlar; e-ticaret ve özel yazılım kapsama göre fiyatlandırılır. Tüm fiyatlara KDV hariçtir (+KDV). Yazılı teklifte kapsam, fatura tipi ve ödeme koşulu açıkça belirtilir.",
   },
   {
     q: "Berber, kuaför, restoran, klinik gibi sektörlere özel şablonunuz var mı?",
@@ -84,7 +84,7 @@ const faqEn = [
   },
   {
     q: "How are prices structured, is VAT included?",
-    a: "Sector-specific web packages start at ₺17,000; web tiers range ₺17,000–35,000. AI agent setups from ₺45,000; WhatsApp & workflow automation from ₺25,000; e-commerce and custom software are scoped per project. All prices exclude VAT (+KDV). The written quote states scope, invoice type and payment terms clearly.",
+    a: "Sector-specific web packages start at ₺17,000; web tiers range ₺17,000–35,000. AI agent setups from ₺45,000; WhatsApp & workflow automation from ₺35,000; e-commerce and custom software are scoped per project. All prices exclude VAT (+KDV). The written quote states scope, invoice type and payment terms clearly.",
   },
   {
     q: "Do you build sites for barbershops, salons, restaurants or clinics?",

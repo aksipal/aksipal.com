@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Süreç otomasyonu görseli">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0a14"/>
+      <stop offset="1" stop-color="#12121f"/>
+    </linearGradient>
+    <radialGradient id="g1" cx="22%" cy="18%" r="55%">
+      <stop offset="0" stop-color="#7cff92" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#7cff92" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="82%" cy="86%" r="55%">
+      <stop offset="0" stop-color="#8464ff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#8464ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7cff92"/>
+      <stop offset="1" stop-color="#8464ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <rect width="1600" height="900" fill="url(#g1)"/>
+  <rect width="1600" height="900" fill="url(#g2)"/>
+
+  <!-- workflow connectors (n8n style) -->
+  <g fill="none" stroke="url(#accent)" stroke-width="3" stroke-opacity="0.5">
+    <path d="M360 450 C 470 450, 470 300, 600 300"/>
+    <path d="M360 450 C 470 450, 470 600, 600 600"/>
+    <path d="M760 300 C 870 300, 870 450, 1000 450"/>
+    <path d="M760 600 C 870 600, 870 450, 1000 450"/>
+    <path d="M1160 450 H 1280"/>
+  </g>
+
+  <!-- start node -->
+  <g transform="translate(280 410)">
+    <rect width="80" height="80" rx="40" fill="#0e0e1b" stroke="url(#accent)" stroke-width="3"/>
+    <path d="M30 26 L56 40 L30 54 Z" fill="#7cff92"/>
+  </g>
+
+  <!-- branch nodes -->
+  <g transform="translate(600 256)">
+    <rect width="160" height="88" rx="18" fill="#0e0e1b" stroke="url(#accent)" stroke-width="3"/>
+    <rect x="26" y="30" width="60" height="10" rx="5" fill="#ffffff" fill-opacity="0.35"/>
+    <rect x="26" y="50" width="100" height="8" rx="4" fill="#ffffff" fill-opacity="0.18"/>
+  </g>
+  <g transform="translate(600 556)">
+    <rect width="160" height="88" rx="18" fill="#0e0e1b" stroke="url(#accent)" stroke-width="3"/>
+    <rect x="26" y="30" width="80" height="10" rx="5" fill="#ffffff" fill-opacity="0.35"/>
+    <rect x="26" y="50" width="100" height="8" rx="4" fill="#ffffff" fill-opacity="0.18"/>
+  </g>
+
+  <!-- AI merge node (center) -->
+  <g transform="translate(1000 396)">
+    <rect width="160" height="108" rx="20" fill="#0e0e1b" stroke="#7cff92" stroke-width="3"/>
+    <circle cx="80" cy="40" r="20" fill="none" stroke="#7cff92" stroke-width="4"/>
+    <circle cx="72" cy="40" r="5" fill="#7cff92"/><circle cx="88" cy="40" r="5" fill="#8464ff"/>
+    <rect x="40" y="74" width="80" height="8" rx="4" fill="#cdbcff" fill-opacity="0.7"/>
+  </g>
+
+  <!-- output node -->
+  <g transform="translate(1280 408)">
+    <rect width="84" height="84" rx="20" fill="#0e0e1b" stroke="url(#accent)" stroke-width="3"/>
+    <path d="M26 44 l14 16 l24 -32" fill="none" stroke="#7cff92" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="800" y="800" text-anchor="middle" font-family="Inter, Segoe UI, sans-serif" font-size="34" letter-spacing="8" fill="#E9DFFF" fill-opacity="0.85" font-weight="600">SÜREÇ OTOMASYONU · n8n + AI</text>
+</svg>

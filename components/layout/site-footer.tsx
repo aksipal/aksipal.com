@@ -121,7 +121,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
           <ul className="space-y-2 text-sm text-zinc-400">
             <li>
               <Link href={withLocale(locale, "/templates")} className="hover:text-zinc-100">
-                {locale === "tr" ? "Hazır Web Sitesi Şablonları" : "Templates"}
+                {locale === "tr" ? "Sektörel Web Çözümleri" : "Solutions"}
               </Link>
             </li>
             <li>

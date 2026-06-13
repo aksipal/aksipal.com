@@ -5,10 +5,46 @@ const caseMetricSchema = z.object({
   value: z.string(),
 });
 
+export const caseCategorySchema = z.enum(["ai", "ecommerce", "web"]);
+export type CaseCategory = z.infer<typeof caseCategorySchema>;
+
+/** Referans projeleri ana sayfada ve /isler'de gruplamak için kategori başlıkları (sıralı). */
+export const caseCategories: ReadonlyArray<{
+  id: CaseCategory;
+  tr: string;
+  en: string;
+  trSubtitle: string;
+  enSubtitle: string;
+}> = [
+  {
+    id: "web",
+    tr: "Kurumsal Web Siteleri",
+    en: "Corporate Websites",
+    trSubtitle: "Sektöre özel, SEO ve dönüşüm odaklı kurumsal web siteleri.",
+    enSubtitle: "Sector-specific, SEO and conversion-focused corporate websites.",
+  },
+  {
+    id: "ecommerce",
+    tr: "E-Ticaret",
+    en: "E-Commerce",
+    trSubtitle: "Ürün yönetimi, ödeme ve sipariş akışlarıyla uçtan uca online mağazalar.",
+    enSubtitle: "End-to-end online stores with product management, payments and orders.",
+  },
+  {
+    id: "ai",
+    tr: "Yapay Zeka & Otomasyon",
+    en: "AI & Automation",
+    trSubtitle: "Claude/RAG tabanlı ajanlar, WhatsApp ve n8n süreç otomasyonları.",
+    enSubtitle: "Claude/RAG agents, WhatsApp and n8n workflow automation.",
+  },
+];
+
 export const caseSchema = z.object({
   slug: z.string(),
   title: z.string(),
   sector: z.string(),
+  /** Ana sayfa/işler gruplaması için kategori. */
+  category: caseCategorySchema,
   summary: z.string(),
   problem: z.string(),
   solution: z.string(),
@@ -29,6 +65,7 @@ export const caseSchema = z.object({
 const rawCases = [
   {
     slug: "b2b-saas-ai-agent",
+    category: "ai",
     title: "B2B SaaS — Satış Öncesi AI Ajanı",
     sector: "Yapay Zeka Ajanı",
     summary:
@@ -50,6 +87,7 @@ const rawCases = [
       { label: "Yanıt Süresi", value: "Saniyeler" },
       { label: "Yatırım Geri Dönüşü", value: "~2 ay" },
     ],
+    image: "/images/cases/ai-agent-case.png",
     visualTag: "AI Agent",
     confidential: true,
     seoKeywords: [
@@ -63,6 +101,7 @@ const rawCases = [
   },
   {
     slug: "estetik-klinik-whatsapp-otomasyon",
+    category: "ai",
     title: "Estetik Klinik — WhatsApp Randevu Otomasyonu",
     sector: "WhatsApp Otomasyonu",
     summary:
@@ -83,6 +122,7 @@ const rawCases = [
       { label: "Randevu Kaçırma", value: "%50 azalma" },
       { label: "Yayın", value: "5 iş günü" },
     ],
+    image: "/images/cases/whatsapp-otomasyon-case.png",
     visualTag: "WhatsApp",
     confidential: true,
     seoKeywords: [
@@ -95,6 +135,7 @@ const rawCases = [
   },
   {
     slug: "lojistik-surec-otomasyonu",
+    category: "ai",
     title: "Lojistik — Sürücü/Müşteri Eşleştirme Otomasyonu",
     sector: "Süreç Otomasyonu",
     summary:
@@ -115,6 +156,7 @@ const rawCases = [
       { label: "Manuel İş Yükü", value: "Belirgin azalma" },
       { label: "Yatırım Geri Dönüşü", value: "1–3 ay" },
     ],
+    image: "/images/cases/surec-otomasyonu-case.png",
     visualTag: "n8n + AI",
     confidential: true,
     seoKeywords: [
@@ -126,7 +168,87 @@ const rawCases = [
     ],
   },
   {
+    slug: "efsense-travel",
+    category: "web",
+    title: "Efsense Travel",
+    sector: "Lüks Seyahat & MICE",
+    summary:
+      "2006'dan bu yana faaliyet gösteren A grubu seyahat acentesi Efsense Travel için premium butik seyahat ve kurumsal etkinlik (MICE) markasını taşıyan, Astro ile geliştirilmiş görsel ağırlıklı TR/EN site. “Her an, bir imza” konsepti; butik turlar ve kurumsal organizasyonları aynı çatıda, hızlı ve şık bir deneyimle sunuyor.",
+    problem:
+      "Markanın hem bireysel butik seyahat (Fransa şatoları, büyülü Kapadokya, Ferrari deneyimi, gastronomi ve konser rotaları gibi temalı, kişiye özel kurgular) hem de kurumsal & MICE (kongre, konferans, lansman, gala, teşvik seyahatleri) tarafını; “paket tur” algısından uzak, lüks ve güven veren bir dille tek bir profesyonel platformda toplaması gerekiyordu. Görsellerin yoğun olduğu bir markada hız, mobil deneyim, TR/EN dil ve yasal uyum (çerez onayı, gizlilik) olmadan premium algı tam taşınmazdı.",
+    solution:
+      "Astro ile statik, yüksek performanslı bir mimari kuruldu: ana sayfa, Butik Seyahat, Kurumsal & MICE, Hakkımızda ve İletişim sayfaları; markanın “Dinle → Tasarla → İncelt → Uygula” sürecini anlatan akış ve deneyim galerileri. TR/EN çok dilli yapı, görsel optimizasyonu, çerez onayı ve gizlilik metinleri, bülten kaydı ve telefon/e-posta ile iletişim; teknik SEO ve Open Graph ile paylaşım önizlemeleri eksiksiz teslim edildi. Canlı site: efsense.com.",
+    stack: [
+      "Astro",
+      "TypeScript",
+      "Çok Dilli (TR/EN)",
+      "Görsel Optimizasyonu",
+      "SEO / Open Graph",
+      "Çerez Onayı & Gizlilik",
+      "Bülten Kaydı",
+    ],
+    metrics: [
+      { label: "Dil", value: "TR / EN" },
+      { label: "Hizmet Hattı", value: "Butik + MICE" },
+      { label: "Mimari", value: "Astro / Hızlı" },
+    ],
+    image: "/images/cases/efsense.webp",
+    demoUrl: "https://efsense.com/",
+    seoKeywords: [
+      "Efsense",
+      "Efsense Travel",
+      "butik seyahat web sitesi",
+      "lüks tur web tasarım",
+      "MICE Ankara",
+      "kurumsal etkinlik web sitesi",
+      "seyahat acentesi web sitesi",
+      "Astro web sitesi",
+      "Aksipal referans",
+    ],
+  },
+  {
+    slug: "tiny-bean-coffee",
+    category: "ecommerce",
+    title: "Tiny Bean Coffee Shop",
+    sector: "E-Ticaret",
+    summary:
+      "Ankara Balgat'taki Tiny Bean Coffee Shop için uçtan uca e-ticaret altyapısı: butik kahve, Türk kahvesi, bitki çayları, ekipman ve hediye paketlerini satan, iyzico ödeme entegrasyonlu Next.js mağazası. Sepet, favoriler, üyelik, kahve aboneliği ve B2B/toptan akışlarını tek platformda toplayan ilk e-ticaret projemiz. “Ev tadında, huzur kıvamında.”",
+    problem:
+      "10+ yıllık, Google'da 4.7 puanlı fiziksel bir kahve markasının; ürünlerini (espresso harmanları, single-origin filtre, Türk kahvesi çeşitleri, bitki çayları, ekipman, hediye paketleri) çevrim içi satışa açması, güvenli ödeme alması ve sadık müşteri kitlesini aboneliğe taşıması gerekiyordu. Ürün yönetimi, stok, sipariş takibi ve KVKK uyumlu pazarlama izni olmadan sürdürülebilir bir online mağaza kurulamazdı.",
+    solution:
+      "Next.js App Router ile performans odaklı bir mağaza kuruldu; ürün veritabanı Neon (PostgreSQL) üzerinde, yayın Vercel'de. iyzico ile güvenli ödeme; kategori bazlı ürün filtreleme, arama, sepet, favoriler ve üyelik/hesap sistemi. Kahve aboneliği, toptan & B2B talep akışı, hediye paketleri, demleme rehberi ve “Kahve Günlüğü” blogu; KVKK uyumlu bülten kaydı ve WhatsApp/Instagram iletişim entegrasyonu. Teknik SEO ve mobil öncelikli tasarımla teslim edildi.",
+    stack: [
+      "Next.js (App Router)",
+      "TypeScript",
+      "Neon (PostgreSQL)",
+      "Vercel",
+      "iyzico ödeme entegrasyonu",
+      "Sepet · Favori · Üyelik",
+      "Kahve Aboneliği & B2B",
+      "KVKK Bülten · SEO",
+    ],
+    metrics: [
+      { label: "Ürün Kategorisi", value: "6+" },
+      { label: "Ödeme", value: "iyzico" },
+      { label: "Altyapı", value: "Next.js + Neon" },
+    ],
+    image: "/images/cases/tiny-bean-coffee.webp",
+    demoUrl: "https://tinybeancoffeeshop.com/",
+    seoKeywords: [
+      "Tiny Bean Coffee Shop",
+      "tinybeancoffeeshop.com",
+      "kahve e-ticaret sitesi",
+      "Next.js e-ticaret",
+      "iyzico ödeme entegrasyonu",
+      "Neon PostgreSQL e-ticaret",
+      "Ankara e-ticaret web tasarım",
+      "online kahve mağazası",
+      "Aksipal e-ticaret referans",
+    ],
+  },
+  {
     slug: "korsis-teknoloji",
+    category: "web",
     title: "Korsis Teknoloji",
     sector: "Teknoloji",
     summary:
@@ -169,6 +291,7 @@ const rawCases = [
   },
   {
     slug: "dedpharma",
+    category: "web",
     title: "DedPharma",
     sector: "İlaç & Sağlık",
     summary:
@@ -210,6 +333,7 @@ const rawCases = [
   },
   {
     slug: "renk-lojistik",
+    category: "web",
     title: "RENK LOJİSTİK",
     sector: "Taşımacılık",
     summary:
@@ -229,6 +353,7 @@ const rawCases = [
   },
   {
     slug: "artel-energy",
+    category: "web",
     title: "Artel Energy",
     sector: "Enerji",
     summary:
@@ -248,6 +373,7 @@ const rawCases = [
   },
   {
     slug: "el-sa-mekanik",
+    category: "web",
     title: "EL&SA MEKANİK",
     sector: "İnşaat / Mekanik",
     summary:
@@ -267,6 +393,7 @@ const rawCases = [
   },
   {
     slug: "muscle-factory-sport-center",
+    category: "web",
     title: "Muscle Factory Sport Center",
     sector: "Spor / Fitness",
     summary:
@@ -286,6 +413,7 @@ const rawCases = [
   },
   {
     slug: "ankara-kamyonetciler-dernegi",
+    category: "web",
     title: "Ankara Kamyonetçiler Derneği",
     sector: "Taşımacılık",
     summary: "Ankara Kamyonetçi Nakliyeciler Derneği kurumsal sitesi; hizmetler, üyelik ve iletişim odaklı modern arayüz.",
@@ -304,6 +432,7 @@ const rawCases = [
   },
   {
     slug: "aksipal-web-systems-studio",
+    category: "web",
     title: "Aksipal Web Studio",
     sector: "Blog",
     summary:

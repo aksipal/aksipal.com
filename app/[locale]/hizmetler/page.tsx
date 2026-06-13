@@ -32,8 +32,8 @@ export async function generateMetadata({
         : "Services & Pricing | Aksipal Web Studio",
     description:
       locale === "tr"
-        ? "Web paketleri 17.000 TL'den, yapay zeka ajanı 45.000 TL'den, WhatsApp ve süreç otomasyonu 25.000 TL'den başlar (+KDV). Yazılı sözleşme, sabit fiyat. Web teslimi 4–12 iş günü."
-        : "Web packages from ₺17,000; AI agent from ₺45,000; WhatsApp & workflow automation from ₺25,000 (+VAT). Written contract, fixed price. Web delivery in 4–12 business days.",
+        ? "Web paketleri 17.000 TL'den, yapay zeka ajanı 45.000 TL'den, WhatsApp ve süreç otomasyonu 35.000 TL'den başlar (+KDV). Yazılı sözleşme, sabit fiyat. Web teslimi 4–12 iş günü."
+        : "Web packages from ₺17,000; AI agent from ₺45,000; WhatsApp & workflow automation from ₺35,000 (+VAT). Written contract, fixed price. Web delivery in 4–12 business days.",
     keywords:
       locale === "tr"
         ? [

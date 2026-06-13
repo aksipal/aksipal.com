@@ -24,8 +24,8 @@ export async function generateMetadata({
     pathname: "/templates",
     title:
       locale === "tr"
-        ? "Hazır Web Sitesi Şablonları | Aksipal Web Studio"
-        : "Industry Website Templates | Aksipal Web Studio",
+        ? "Sektörel Web Çözümleri — Hazır Web Siteleri | Aksipal Web Studio"
+        : "Sector Web Solutions — Ready Websites | Aksipal Web Studio",
     description:
       locale === "tr"
         ? "Berber, kuaför, klinik, lojistik, oto yıkama, danışmanlık ve daha fazlası için sektöre özel hazır web sitesi şablonları. 4–7 iş gününde canlıya alım, yazılı sözleşme, KVKK uyumlu (+KDV)."
@@ -56,7 +56,7 @@ export default async function TemplatesPage({
 
   const breadcrumbJsonLd = getBreadcrumbJsonLd([
     { name: locale === "tr" ? "Ana Sayfa" : "Home", url: absoluteUrl(`/${locale}`) },
-    { name: locale === "tr" ? "Şablonlar" : "Templates", url: absoluteUrl(`/${locale}/templates`) },
+    { name: locale === "tr" ? "Sektörel Çözümler" : "Solutions", url: absoluteUrl(`/${locale}/templates`) },
   ]);
 
   return (
@@ -71,20 +71,20 @@ export default async function TemplatesPage({
             </li>
             <li aria-hidden>/</li>
             <li className="text-zinc-300">
-              {locale === "tr" ? "Şablonlar" : "Templates"}
+              {locale === "tr" ? "Sektörel Çözümler" : "Solutions"}
             </li>
           </ol>
         </nav>
         <div className="mb-8 max-w-2xl space-y-3">
           <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
             {locale === "tr"
-              ? "Hazır Web Sitesi Şablonları — Sektöre Özel"
-              : "Website Templates by Industry"}
+              ? "Sektörel Web Çözümleri — İş Modelinize Özel"
+              : "Sector Web Solutions — Built for Your Business"}
           </h1>
           <p className="text-zinc-400">
             {locale === "tr"
-              ? "Hızlı yayına çıkmak isteyen KOBİ'ler için sektöre özel hazır paketler: berber & kuaför, klinik, lojistik & taşımacılık, oto yıkama, danışmanlık, enerji, inşaat, spor salonu, butik ve startup. 4–7 iş gününde canlıya alım, yazılı sözleşme, sabit fiyat (+KDV). Sektörünüzü filtreleyin, canlı demoları inceleyin, ücretsiz keşif görüşmesi ayırtın."
-              : "Industry-specific templates for SMBs: barber & salon, clinic, logistics & transport, car wash, consultancy, energy, construction, gym, boutique, startup. Live in 4–7 business days, written contract, fixed price (+VAT). Filter by sector, browse live demos, book a free discovery call."}
+              ? "Hızlı yayına çıkmak isteyen KOBİ ve esnaf için iş modeline göre gruplanmış hazır web çözümleri: yerel hizmet (spor salonu, oto yıkama, danışmanlık), kurumsal & sanayi (teknoloji, enerji, inşaat, sağlık), lojistik & taşımacılık ve perakende, turizm & girişim (butik, turizm, startup). 4–7 iş gününde canlıya alım, yazılı sözleşme, sabit fiyat (+KDV). İş modelinizi seçin, canlı demoları inceleyin, ücretsiz keşif görüşmesi ayırtın."
+              : "Ready web solutions for SMBs, grouped by business model: local services (gym, car wash, consultancy), corporate & industry (technology, energy, construction, health), logistics & transport and retail, travel & startup (boutique, travel, startup). Live in 4–7 business days, written contract, fixed price (+VAT). Pick your business model, browse live demos, book a free discovery call."}
           </p>
         </div>
         <Suspense fallback={null}>

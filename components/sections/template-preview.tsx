@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
 import { withLocale } from "@/lib/i18n";
-import { templateSectorLabel, templates } from "@/lib/templates";
+import { templateCategories, templateSectorLabel, templates } from "@/lib/templates";
 
 type TemplatePreviewProps = {
   locale: Locale;
@@ -17,27 +17,27 @@ type TemplatePreviewProps = {
 export function TemplatePreview({ locale }: TemplatePreviewProps) {
   const copy = {
     tr: {
-      title: "Sektöre Özel Hazır Web Sitesi Şablonları",
+      title: "Sektörel Web Çözümleri",
       subtitle:
-        "Hızlı yayına çıkmak isteyen KOBİ'ler için sektör paketleri: berber & kuaför, klinik, lojistik, oto yıkama, danışmanlık ve daha fazlası. 4–7 iş gününde canlıya alım, yazılı sözleşme, sabit fiyat — fiyatlara KDV hariçtir (+KDV).",
-      all: "Tüm Şablonlar",
-      select: "Bu Şablonu Seçin",
+        "Hızlı yayına çıkmak isteyen KOBİ ve esnaf için iş modeline göre hazır web çözümleri: yerel hizmet, kurumsal & sanayi, lojistik, perakende ve turizm. 4–7 iş gününde canlıya alım, yazılı sözleşme, sabit fiyat — fiyatlara KDV hariçtir (+KDV).",
+      all: "Tüm Çözümler",
+      select: "Bu Çözümü Seç",
       demo: "Canlı Demo",
       from: "Başlangıç",
     },
     en: {
-      title: "Sector-focused Templates",
+      title: "Sector Web Solutions",
       subtitle:
-        "Productized packages for SMBs that want to launch fast. Tailored to your business while preserving SEO and performance standards. Live in 4–7 business days, written contract, transparent pricing (+VAT).",
-      all: "All Templates",
-      select: "Choose This Template",
+        "Productized web solutions by business model for SMBs that want to launch fast: local services, corporate & industry, logistics, retail and travel. Live in 4–7 business days, written contract, transparent pricing (+VAT).",
+      all: "All Solutions",
+      select: "Choose Solution",
       demo: "View Demo",
       from: "Starting at",
     },
   }[locale];
 
   return (
-    <section className="section-shell mt-20 space-y-8" aria-labelledby="templates-heading">
+    <section className="section-shell mt-20 space-y-10" aria-labelledby="templates-heading">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl space-y-2">
           <h2
@@ -58,64 +58,85 @@ export function TemplatePreview({ locale }: TemplatePreviewProps) {
         </Link>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {templates.map((template, index) => (
-          <article
-            key={template.id}
-            className="glass-card overflow-hidden transition-colors hover:border-white/20"
-          >
-            <Image
-              src={template.image}
-              alt={`${template.title} web sitesi şablonu — ${templateSectorLabel[template.sector]} sektörü için hazır web sitesi`}
-              width={960}
-              height={640}
-              className="h-44 w-full object-cover"
-              loading={index < 3 ? "eager" : "lazy"}
-            />
-            <div className="space-y-4 p-5">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="text-lg font-semibold text-zinc-100">{template.title}</h3>
-                <Badge>{templateSectorLabel[template.sector]}</Badge>
-              </div>
-              <p className="text-sm text-zinc-400">{template.summary}</p>
-              <ul className="space-y-1.5 text-sm text-zinc-300">
-                {template.features.slice(0, 2).map((feature) => (
-                  <li key={feature}>• {feature}</li>
-                ))}
-              </ul>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-500">{template.deliveryTime}</span>
-                <span className="font-semibold text-[var(--accent)]">
-                  {copy.from} {template.startingPrice}
-                </span>
-              </div>
-              <div className="flex flex-wrap items-center justify-end gap-2">
-                <LeadDialog
-                  locale={locale}
-                  buttonText={copy.select}
-                  buttonVariant="secondary"
-                  defaultSector={templateSectorLabel[template.sector]}
-                  defaultTemplate={template.title}
-                />
-                {template.demoUrl ? (
-                  <Button asChild variant="outline" size="sm">
-                    <a
-                      href={template.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5"
-                      aria-label={`${template.title} — ${copy.demo}`}
-                    >
-                      <ExternalLink className="size-3.5" aria-hidden />
-                      {copy.demo}
-                    </a>
-                  </Button>
-                ) : null}
+      {templateCategories.map((category) => {
+        const items = templates.filter((item) => category.sectors.includes(item.sector));
+        if (items.length === 0) return null;
+
+        return (
+          <div key={category.id} className="space-y-5">
+            <div className="flex items-center gap-3">
+              <span className="h-5 w-1 rounded-full bg-[var(--accent)]" aria-hidden />
+              <div>
+                <h3 className="text-xl font-semibold tracking-tight text-[#E9DFFF]">
+                  {locale === "tr" ? category.tr : category.en}
+                </h3>
+                <p className="text-sm text-zinc-500">
+                  {locale === "tr" ? category.trSubtitle : category.enSubtitle}
+                </p>
               </div>
             </div>
-          </article>
-        ))}
-      </div>
+
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {items.map((template) => (
+                <article
+                  key={template.id}
+                  className="glass-card overflow-hidden transition-colors hover:border-white/20"
+                >
+                  <Image
+                    src={template.image}
+                    alt={`${template.title} web sitesi şablonu — ${templateSectorLabel[template.sector]} sektörü için hazır web sitesi`}
+                    width={960}
+                    height={640}
+                    className="h-44 w-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="space-y-4 p-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <h4 className="text-lg font-semibold text-zinc-100">{template.title}</h4>
+                      <Badge>{templateSectorLabel[template.sector]}</Badge>
+                    </div>
+                    <p className="text-sm text-zinc-400">{template.summary}</p>
+                    <ul className="space-y-1.5 text-sm text-zinc-300">
+                      {template.features.slice(0, 2).map((feature) => (
+                        <li key={feature}>• {feature}</li>
+                      ))}
+                    </ul>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-zinc-500">{template.deliveryTime}</span>
+                      <span className="font-semibold text-[var(--accent)]">
+                        {copy.from} {template.startingPrice}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap items-center justify-end gap-2">
+                      <LeadDialog
+                        locale={locale}
+                        buttonText={copy.select}
+                        buttonVariant="secondary"
+                        defaultSector={templateSectorLabel[template.sector]}
+                        defaultTemplate={template.title}
+                      />
+                      {template.demoUrl ? (
+                        <Button asChild variant="outline" size="sm">
+                          <a
+                            href={template.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5"
+                            aria-label={`${template.title} — ${copy.demo}`}
+                          >
+                            <ExternalLink className="size-3.5" aria-hidden />
+                            {copy.demo}
+                          </a>
+                        </Button>
+                      ) : null}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </section>
   );
 }

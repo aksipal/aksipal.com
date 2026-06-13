@@ -171,7 +171,7 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
       title: "WhatsApp ve Süreç Otomasyonu",
       description:
         "n8n + yapay zeka ile uçtan uca otomasyon: form → CRM → e-posta → WhatsApp → fatura akışları. Tekrar eden manuel işi sırtınızdan alır, yanıt süresini saatlerden saniyelere çeker.",
-      price: "25.000 TL'den başlayan",
+      price: "35.000 TL'den başlayan",
       priceNote: "Akış sayısı ve entegre edilen sistem adedine göre değişir (+KDV)",
       highlights: [
         "Resmi WhatsApp Cloud API entegrasyonu",
@@ -185,8 +185,8 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
       title: "E-Ticaret",
       description:
         "Ürün yönetimi, sepet, ödeme ve sipariş takibini kapsayan, performans odaklı e-ticaret kurulumu. Kapsama bağlı olarak özel temalı veya bütünleşik altyapı sunulur.",
-      price: "Görüşelim",
-      priceNote: "Ürün adedi, ödeme sağlayıcı ve entegrasyonlara göre detaylı teklif çıkarılır",
+      price: "40.000 TL'den başlayan",
+      priceNote: "Ürün adedi, ödeme sağlayıcı ve entegrasyonlara göre detaylı teklif çıkarılır (+KDV)",
       highlights: [
         "Ürün kataloğu ve yönetim paneli",
         "Sepet, ödeme ve iyzico/Stripe entegrasyonu",
@@ -243,7 +243,7 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
       title: "WhatsApp & Workflow Automation",
       description:
         "End-to-end automation with n8n + AI: form → CRM → email → WhatsApp → invoice. Takes repetitive manual work off your team and slashes response time from hours to seconds.",
-      price: "from ₺25,000",
+      price: "from ₺35,000",
       priceNote: "Varies with number of flows and integrated systems (+VAT)",
       highlights: [
         "Official WhatsApp Cloud API integration",
@@ -257,8 +257,8 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
       title: "E-Commerce",
       description:
         "Performance-focused e-commerce build with product management, cart, payments and order tracking. Delivered with a custom theme or integrated stack depending on scope.",
-      price: "Let's talk",
-      priceNote: "Detailed quote based on product count, payment provider and integrations",
+      price: "from ₺40,000",
+      priceNote: "Detailed quote based on product count, payment provider and integrations (+VAT)",
       highlights: [
         "Product catalog and admin panel",
         "Cart, payments and iyzico/Stripe integration",

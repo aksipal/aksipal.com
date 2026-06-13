@@ -32,8 +32,8 @@ export const navItems = [
   {
     href: "/templates",
     label: {
-      tr: "Şablonlar",
-      en: "Templates",
+      tr: "Sektörel Çözümler",
+      en: "Solutions",
     },
   },
   {

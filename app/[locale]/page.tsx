@@ -16,7 +16,6 @@ import {
   createPageMetadata,
   getLocalBusinessJsonLd,
   getOrganizationJsonLd,
-  getPersonJsonLd,
   getServiceJsonLd,
   getWebSiteJsonLd,
 } from "@/lib/seo";
@@ -69,7 +68,6 @@ export default async function LocaleHomePage({
   const serviceJsonLd = getServiceJsonLd();
   const webSiteJsonLd = getWebSiteJsonLd();
   const organizationJsonLd = getOrganizationJsonLd();
-  const personJsonLd = getPersonJsonLd();
 
   return (
     <>
@@ -98,10 +96,6 @@ export default async function LocaleHomePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
     </>
   );

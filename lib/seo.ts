@@ -110,9 +110,9 @@ export function getCaseStudyJsonLd(input: {
     image: imageUrl,
     inLanguage: input.locale === "tr" ? "tr-TR" : "en-US",
     author: {
-      "@type": "Person",
-      name: "Barış Akşipal",
-      url: absoluteUrl("/tr/hakkimda"),
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
     },
     publisher: {
       "@type": "Organization",
@@ -248,13 +248,6 @@ export function getOrganizationJsonLd() {
     email: siteConfig.email,
     image: absoluteUrl("/favicon.png"),
     logo: absoluteUrl("/favicon.png"),
-    founder: {
-      "@type": "Person",
-      name: "Barış Akşipal",
-      jobTitle: "Senior Full-Stack & AI Engineer",
-      url: absoluteUrl("/tr/hakkimda"),
-      sameAs: [...siteConfig.sameAs],
-    },
     address: {
       "@type": "PostalAddress",
       ...siteConfig.address,
@@ -411,9 +404,9 @@ export function getBlogPostingJsonLd(input: {
     dateModified: input.publishedAt,
     inLanguage: "tr-TR",
     author: {
-      "@type": "Person",
-      name: "Barış Akşipal",
-      url: absoluteUrl("/tr/hakkimda"),
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
     },
     publisher: {
       "@type": "Organization",

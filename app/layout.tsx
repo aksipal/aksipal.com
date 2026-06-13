@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  authors: [{ name: "Barış Akşipal", url: siteConfig.url }],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.legalName,
   publisher: siteConfig.legalName,
   alternates: {

@@ -5,7 +5,7 @@ const caseMetricSchema = z.object({
   value: z.string(),
 });
 
-export const caseCategorySchema = z.enum(["ai", "ecommerce", "web"]);
+export const caseCategorySchema = z.enum(["web", "ecommerce", "lab", "ai"]);
 export type CaseCategory = z.infer<typeof caseCategorySchema>;
 
 /** Referans projeleri ana sayfada ve /isler'de gruplamak için kategori başlıkları (sıralı). */
@@ -17,13 +17,6 @@ export const caseCategories: ReadonlyArray<{
   enSubtitle: string;
 }> = [
   {
-    id: "web",
-    tr: "Kurumsal Web Siteleri",
-    en: "Corporate Websites",
-    trSubtitle: "Sektöre özel, SEO ve dönüşüm odaklı kurumsal web siteleri.",
-    enSubtitle: "Sector-specific, SEO and conversion-focused corporate websites.",
-  },
-  {
     id: "ecommerce",
     tr: "E-Ticaret",
     en: "E-Commerce",
@@ -31,11 +24,29 @@ export const caseCategories: ReadonlyArray<{
     enSubtitle: "End-to-end online stores with product management, payments and orders.",
   },
   {
+    id: "lab",
+    tr: "Ar-Ge ve Oyun Projeleri",
+    en: "R&D and Game Projects",
+    trSubtitle:
+      "Müşteri işi değil: teknik sınırları zorlamak için geliştirdiğimiz, kaynak kodu ve videosu açık kişisel projeler. Ne yapabildiğimizi gösterir.",
+    enSubtitle:
+      "Not client work: personal projects built to push technical limits, with public source code and video. They show what we can do.",
+  },
+  {
+    id: "web",
+    tr: "Kurumsal Web Siteleri",
+    en: "Corporate Websites",
+    trSubtitle: "Sektöre özel, SEO ve dönüşüm odaklı kurumsal web siteleri.",
+    enSubtitle: "Sector-specific, SEO and conversion-focused corporate websites.",
+  },
+  {
     id: "ai",
     tr: "Yapay Zeka & Otomasyon",
     en: "AI & Automation",
-    trSubtitle: "Claude/RAG tabanlı ajanlar, WhatsApp ve n8n süreç otomasyonları.",
-    enSubtitle: "Claude/RAG agents, WhatsApp and n8n workflow automation.",
+    trSubtitle:
+      "Örnek çözüm senaryoları: Claude/RAG tabanlı ajanlar, WhatsApp ve süreç otomasyonlarını nasıl kurduğumuzu gösterir. Bu kategoride henüz yayınlanmış müşteri referansı yoktur.",
+    enSubtitle:
+      "Illustrative solution scenarios showing how we build Claude/RAG agents, WhatsApp and workflow automation. No published client reference in this category yet.",
   },
 ];
 
@@ -56,124 +67,181 @@ export const caseSchema = z.object({
   visualTag: z.string().optional(),
   /** Canlı demo URL; varsa kartta "Canlı Demo" butonu gösterilir */
   demoUrl: z.string().url().optional(),
-  /** Müşterinin adı gizli mi? (anonim müşteri için yazılı izin durumu) */
-  confidential: z.boolean().optional(),
+  /**
+   * "client": yayında olan gerçek müşteri işi (varsayılan).
+   * "scenario": henüz müşteri referansı olmayan, kurulum yaklaşımını anlatan örnek çözüm senaryosu —
+   * kartta ve detayda açıkça etiketlenir; gerçek referans gibi sunulmaz.
+   * "lab": kendi geliştirdiğimiz gerçek ama müşteri işi olmayan Ar-Ge / oyun projesi (açık kaynak + video).
+   */
+  kind: z.enum(["client", "scenario", "lab"]).optional().default("client"),
+  /** Açık kaynak depo (Ar-Ge projeleri) */
+  repoUrl: z.string().url().optional(),
+  /** YouTube video kimliği (örn. "bQCZgWsVJQY") — detay sayfasında gömülü oynatıcı */
+  youtubeId: z.string().optional(),
+  /** Referansın canlı yayında olduğu müşteri sitesi (gerçek işlerde demoUrl ile aynı) — JSON-LD için. */
+  clientName: z.string().optional(),
+  /**
+   * Öne çıkan teknik özellikler. "3d" olanlar /isler sayfasında ayrı "3D ve Animasyonlu Arayüzler"
+   * bölümünde toplanır; kartta küçük etiket olarak görünür (ana sayfa kalabalık olmasın diye yalnızca etiket).
+   */
+  highlights: z.array(z.enum(["3d", "motion", "multilingual", "ecommerce-revision"])).optional(),
   /** Meta keywords; arama görünürlüğü için (özellikle marka + sektör sorguları) */
   seoKeywords: z.array(z.string()).optional(),
 });
 
 const rawCases = [
   {
+    slug: "ironveil-mmorpg",
+    category: "lab",
+    kind: "lab",
+    highlights: ["3d", "motion", "multilingual"],
+    title: "Ironveil",
+    sector: "Oyun / Ar-Ge",
+    summary:
+      "Tarayıcıda indirme gerektirmeden çalışan, sunucu yetkili karanlık fantezi MMORPG. Babylon.js 3D istemci, Java + Netty gerçek zamanlı sunucu, Next.js hesap katmanı; dört sınıf, kalıcı karakterler. Açık kaynak (MIT), tanıtım videosu bize ait. Canlı sunucu yok; Ar-Ge projesi.",
+    problem:
+      "Tek mühendisin, tarayıcıda çalışan ve tüm hesaplamaların sunucuda yapıldığı çok oyunculu bir 3D oyunu uçtan uca kurabileceğini göstermek: gerçek zamanlı ağ kodu, istemci tahmini, kalıcı veri ve gözlemlenebilirlik.",
+    solution:
+      "İstemci: Babylon.js + TypeScript, dört sınıf, hedefleme, ganimet ve ekipman, TR/EN. Sunucu: Java 25 + Netty, 30 Hz simülasyon, 15 Hz Protobuf yayın; istemci yalnızca niyet gönderir. Postgres'te kalıcı karakterler, Redis'te geçici durum, Prometheus + Grafana ile izleme; otomatik ağ kodu botları ve sunucu testleri. Claude ile birlikte geliştirildi.",
+    stack: [
+      "Babylon.js (3D istemci)",
+      "TypeScript",
+      "Next.js (App Router)",
+      "Java 25 + Netty (oyun sunucusu)",
+      "Protobuf (ikili ağ protokolü)",
+      "PostgreSQL + Redis",
+      "Prometheus + Grafana",
+      "Claude ile geliştirme",
+      "MIT lisans",
+    ],
+    metrics: [
+      { label: "Mimari", value: "Sunucu yetkili" },
+      { label: "Simülasyon", value: "30 Hz / 15 Hz yayın" },
+      { label: "Kaynak Kod", value: "Açık (MIT)" },
+    ],
+    image: "/images/cases/ironveil.png",
+    repoUrl: "https://github.com/aksipal/ironveil",
+    youtubeId: "bQCZgWsVJQY",
+    seoKeywords: [
+      "Ironveil",
+      "tarayıcı tabanlı MMORPG",
+      "Babylon.js oyun",
+      "Java Netty oyun sunucusu",
+      "server authoritative multiplayer",
+      "Claude ile oyun geliştirme",
+      "Barış Akşipal oyun projesi",
+      "açık kaynak MMORPG",
+    ],
+  },
+  {
     slug: "b2b-saas-ai-agent",
     category: "ai",
-    title: "B2B SaaS — Satış Öncesi AI Ajanı",
+    kind: "scenario",
+    title: "Satış Öncesi Yapay Zeka Ajanı — Örnek Senaryo",
     sector: "Yapay Zeka Ajanı",
     summary:
-      "Bir B2B yazılım firması için Claude tabanlı, şirket içi dökümanlara ve ürün dokümantasyonuna RAG ile eğitilmiş satış öncesi yapay zeka ajanı. Web widget ve WhatsApp Cloud API üzerinden çalışıyor; tekrar eden satış öncesi soruların büyük bölümünü saniyeler içinde yanıtlıyor, sıcak fırsatı insan ekibe aktarıyor.",
+      "Örnek senaryo: B2B firma için Claude tabanlı, şirket dökümanlarına RAG ile bağlı satış öncesi yapay zeka ajanı. Web widget ve WhatsApp Cloud API üzerinden 7/24 yanıt, nitelikli fırsatı ekibe aktarım.",
     problem:
-      "Satış ekibi, ürün dökümantasyonunda tekrar eden aynı sorulara günde 2–3 saat ayırıyordu; yanıt süreleri uzun, takipte düşüş yüksek, lead skorlama tutarsızdı. Mesai dışı sorular ertesi güne sarkıyor, anlık karar veren KOBİ alıcıları rakip ürüne yöneliyordu.",
+      "Tipik durum: satış ekibi ürün ve hizmet dokümantasyonundaki aynı sorulara her gün saatler ayırır; mesai dışı gelen sorular ertesi güne sarkar; lead takibi kişiye bağlı ve tutarsızdır. Hızlı karar veren alıcılar bu bekleme sırasında rakibe yönelir.",
     solution:
-      "Claude (Anthropic) üzerine RAG (vektör veritabanı) ile şirketin tüm satış öncesi dökümanları (ürün PDF, fiyat tablosu, SSS, çözüm sayfaları) indekslendi. Ajan web widget ve WhatsApp Cloud API üzerinden 7/24 yanıtlıyor; nitelikli ipucu (qualified lead) tespit edince ekibe Slack ve CRM bildirimi geçiyor. Loglama, kullanım paneli ve aylık maliyet kontrolü standart kuruldu.",
+      "Kurulum yaklaşımımız: Claude (Anthropic) üzerine RAG (vektör veritabanı) ile satış öncesi dökümanlar (ürün PDF, fiyat tablosu, SSS, çözüm sayfaları) indekslenir. Ajan web widget ve WhatsApp Cloud API üzerinden 7/24 yanıt verir; nitelikli fırsat tespit edince ekibe e-posta/Slack ve CRM bildirimi geçer. Loglama, kullanım paneli ve aylık model maliyeti kontrolü standart olarak teslim edilir. Kapsam ve veri kaynakları keşif görüşmesinde netleşir.",
     stack: [
       "Claude (Anthropic) · RAG",
-      "OpenAI embeddings · vektör DB",
+      "Embedding · vektör veritabanı",
       "WhatsApp Cloud API",
       "Web widget (Next.js)",
-      "n8n + CRM webhook",
+      "CRM / e-posta webhook",
       "Loglama ve kullanım paneli",
     ],
     metrics: [
-      { label: "Tekrar Eden Soru", value: "%70 azalma" },
-      { label: "Yanıt Süresi", value: "Saniyeler" },
-      { label: "Yatırım Geri Dönüşü", value: "~2 ay" },
+      { label: "Hedef", value: "7/24 yanıt" },
+      { label: "Kanal", value: "Web + WhatsApp" },
+      { label: "Teslim", value: "Sprint bazlı" },
     ],
     image: "/images/cases/ai-agent-case.png",
     visualTag: "AI Agent",
-    confidential: true,
     seoKeywords: [
       "yapay zeka ajanı geliştirme",
-      "AI agent B2B SaaS",
+      "AI agent B2B",
       "Claude RAG entegrasyonu",
-      "satış öncesi chatbot",
-      "WhatsApp AI ajan",
-      "Aksipal AI referans",
+      "satış öncesi yapay zeka asistanı",
+      "WhatsApp yapay zeka ajanı",
     ],
   },
   {
     slug: "estetik-klinik-whatsapp-otomasyon",
     category: "ai",
-    title: "Estetik Klinik — WhatsApp Randevu Otomasyonu",
+    kind: "scenario",
+    title: "WhatsApp Randevu Otomasyonu — Örnek Senaryo",
     sector: "WhatsApp Otomasyonu",
     summary:
-      "İstanbul'da bir estetik & sağlık kliniği için resmi WhatsApp Cloud API üzerinden uçtan uca randevu, hatırlatma ve sonrası iletişim otomasyonu. Ortalama yanıt süresi 4 saatten 90 saniyeye, randevu kaçırma oranı yarı yarıya indi.",
+      "Örnek senaryo: randevuyla çalışan işletmeler için resmi WhatsApp Cloud API üzerinden randevu alma, hatırlatma ve randevu sonrası iletişim otomasyonu.",
     problem:
-      "Klinik reklam bütçesi yüksekti; ancak gelen WhatsApp mesajlarının önemli kısmı resepsiyon yoğunluğunda gecikiyor, reklamlardan gelen sıcak ilgi soğuyordu. Randevu hatırlatması manuel yapılıyor, no-show oranı bütçeyi yiyordu.",
+      "Tipik durum: reklamdan gelen WhatsApp mesajları resepsiyon yoğunluğunda geç yanıtlanır, sıcak ilgi soğur; randevu hatırlatmaları elle yapılır ve randevuya gelmeme (no-show) oranı reklam bütçesini eritir.",
     solution:
-      "Resmi WhatsApp Cloud API üzerinden hızlı yanıt akışları kuruldu: hizmet bilgisi, fiyat aralığı, randevu rezervasyonu (takvim entegrasyonu) ve KVKK aydınlatma onayı. Otomatik hatırlatma 24 saat ve 1 saat öncesi; randevu sonrası bakım iletişimi. n8n üzerinden CRM, takvim ve faturalama sistemleri bağlandı.",
+      "Kurulum yaklaşımımız: resmi WhatsApp Cloud API üzerinden hizmet bilgisi, fiyat aralığı, randevu rezervasyonu (takvim entegrasyonu) ve KVKK aydınlatma onayı akışları kurulur. Randevudan 24 saat ve 1 saat önce otomatik hatırlatma; randevu sonrası bakım/memnuniyet mesajı. CRM, takvim ve faturalama sistemleri webhook veya n8n ile bağlanır. Toplu mesaj/spam aracı değildir; müşteri size yazdığında akış tetiklenir.",
     stack: [
       "Resmi WhatsApp Cloud API",
-      "n8n otomasyon",
       "Takvim entegrasyonu",
-      "CRM webhook",
+      "CRM webhook / n8n",
       "KVKK aydınlatma akışı",
+      "Loglama",
     ],
     metrics: [
-      { label: "Yanıt Süresi", value: "4 sa → 90 sn" },
-      { label: "Randevu Kaçırma", value: "%50 azalma" },
-      { label: "Yayın", value: "5 iş günü" },
+      { label: "Hedef", value: "Anında yanıt" },
+      { label: "Hatırlatma", value: "24 sa + 1 sa" },
+      { label: "Altyapı", value: "Resmi Meta API" },
     ],
     image: "/images/cases/whatsapp-otomasyon-case.png",
     visualTag: "WhatsApp",
-    confidential: true,
     seoKeywords: [
       "WhatsApp randevu otomasyonu",
-      "WhatsApp Cloud API klinik",
-      "estetik klinik otomasyonu",
-      "n8n WhatsApp bot",
-      "Aksipal otomasyon referans",
+      "WhatsApp Cloud API entegrasyonu",
+      "klinik WhatsApp otomasyonu",
+      "WhatsApp bot kurulumu",
     ],
   },
   {
     slug: "lojistik-surec-otomasyonu",
     category: "ai",
-    title: "Lojistik — Sürücü/Müşteri Eşleştirme Otomasyonu",
+    kind: "scenario",
+    title: "Lojistik Süreç Otomasyonu — Örnek Senaryo",
     sector: "Süreç Otomasyonu",
     summary:
-      "Ankara merkezli şehirler arası taşımacılık firması için n8n + Claude tabanlı sürücü–müşteri eşleştirme ve teklif akışı. WhatsApp gruplarındaki manuel koordinasyonun yerini alan AI destekli pipeline; ortalama eşleştirme süresi 8 saatten 30 dakikaya indi.",
+      "Örnek senaryo: form ve WhatsApp'tan gelen talepleri tek akışta toplayan, yapay zeka destekli teklif ve ekip atama otomasyonu; WhatsApp gruplarındaki manuel koordinasyonun yerine geçer.",
     problem:
-      "Sürücü atama, müşteri bilgilendirme, teklif paylaşımı ve onay süreçleri farklı WhatsApp grupları üzerinden manuel yürütülüyordu. Operasyon yoğunluğunda yanıt veren kişiye göre değişen kalite ve ortalama 8 saatlik gecikme, gelen iş sayısını sınırlıyordu.",
+      "Tipik durum: sürücü/ekip atama, müşteri bilgilendirme, teklif paylaşımı ve onay süreçleri farklı WhatsApp grupları üzerinden elle yürütülür. Kalite yanıt veren kişiye göre değişir, gecikmeler alınabilecek iş sayısını sınırlar.",
     solution:
-      "Form ve WhatsApp'tan gelen talepler n8n üzerinden tek pipeline'a alındı; Claude ile rota, tip ve aciliyet analizi yapılıyor, uygun sürücü(ler) eşleştirilip otomatik teklif ve onay akışı tetikleniyor. KVKK aydınlatma süreci ve loglama eksiksiz; süreç yazılı sözleşmeyle teslim edildi.",
+      "Kurulum yaklaşımımız: form ve WhatsApp'tan gelen talepler tek bir otomasyon hattına (n8n veya özel backend) alınır; yapay zeka ile rota, yük tipi ve aciliyet sınıflandırılır; uygun ekip eşleştirilip teklif ve onay akışı otomatik tetiklenir. Google Sheets veya CRM'e kayıt, KVKK aydınlatma ve loglama dahildir. Entegrasyon sayısı ve akış karmaşıklığı keşif görüşmesinde netleşir.",
     stack: [
-      "n8n pipeline",
+      "n8n veya özel backend",
       "Claude (Anthropic)",
       "Resmi WhatsApp Cloud API",
       "Google Sheets / CRM entegrasyonu",
       "KVKK aydınlatma akışı",
     ],
     metrics: [
-      { label: "Eşleştirme Süresi", value: "8 sa → 30 dk" },
-      { label: "Manuel İş Yükü", value: "Belirgin azalma" },
-      { label: "Yatırım Geri Dönüşü", value: "1–3 ay" },
+      { label: "Hedef", value: "Tek akış" },
+      { label: "Girdi", value: "Form + WhatsApp" },
+      { label: "Çıktı", value: "Teklif + atama" },
     ],
     image: "/images/cases/surec-otomasyonu-case.png",
     visualTag: "n8n + AI",
-    confidential: true,
     seoKeywords: [
       "lojistik süreç otomasyonu",
-      "n8n türkçe rehber",
-      "Claude n8n entegrasyonu",
-      "WhatsApp sürücü atama",
-      "Aksipal otomasyon referans",
+      "n8n otomasyon Türkiye",
+      "iş süreçleri otomasyonu",
+      "WhatsApp teklif otomasyonu",
     ],
   },
   {
     slug: "efsense-travel",
     category: "web",
+    highlights: ["multilingual"],
     title: "Efsense Travel",
     sector: "Lüks Seyahat & MICE",
     summary:
-      "2006'dan bu yana faaliyet gösteren A grubu seyahat acentesi Efsense Travel için premium butik seyahat ve kurumsal etkinlik (MICE) markasını taşıyan, Astro ile geliştirilmiş görsel ağırlıklı TR/EN site. “Her an, bir imza” konsepti; butik turlar ve kurumsal organizasyonları aynı çatıda, hızlı ve şık bir deneyimle sunuyor.",
+      "2006'dan bu yana faaliyet gösteren A grubu seyahat acentesi Efsense Travel için butik seyahat ve kurumsal etkinlik (MICE) markasını taşıyan, Astro ile geliştirilmiş görsel ağırlıklı TR/EN kurumsal site.",
     problem:
       "Markanın hem bireysel butik seyahat (Fransa şatoları, büyülü Kapadokya, Ferrari deneyimi, gastronomi ve konser rotaları gibi temalı, kişiye özel kurgular) hem de kurumsal & MICE (kongre, konferans, lansman, gala, teşvik seyahatleri) tarafını; “paket tur” algısından uzak, lüks ve güven veren bir dille tek bir profesyonel platformda toplaması gerekiyordu. Görsellerin yoğun olduğu bir markada hız, mobil deneyim, TR/EN dil ve yasal uyum (çerez onayı, gizlilik) olmadan premium algı tam taşınmazdı.",
     solution:
@@ -207,12 +275,50 @@ const rawCases = [
     ],
   },
   {
+    slug: "ankaragucu-store",
+    category: "ecommerce",
+    highlights: ["ecommerce-revision"],
+    title: "Ankaragücü Store",
+    sector: "E-Ticaret",
+    summary:
+      "MKE Ankaragücü resmi online mağazası. ikas altyapısı üzerinde tema, vitrin, kategori düzeni ve mobil deneyim revizyonu; forma, giyim ve aksesuar kategorileriyle canlı mağaza.",
+    problem:
+      "Hazır altyapıdaki mağazanın görünümü kulüp kimliğini tam taşımıyordu; ürün vitrini, kategori düzeni ve mobil deneyim, altyapı değiştirilmeden iyileştirilmeliydi.",
+    solution:
+      "ikas tema katmanında kulüp renklerine uygun düzen, vitrin ve kampanya blokları, kategori menüsü, ürün kartı ve detay sayfası, mobil görünüm ve tipografi revize edildi. Ürün, ödeme ve kargo akışı korunarak canlı mağaza kesintisiz güncellendi.",
+    stack: [
+      "ikas e-ticaret altyapısı",
+      "Tema ve stil özelleştirme",
+      "Vitrin ve kampanya düzeni",
+      "Kategori ve ürün kartı düzeni",
+      "Mobil deneyim iyileştirmesi",
+      "Canlı mağazada kesintisiz güncelleme",
+    ],
+    metrics: [
+      { label: "Kapsam", value: "Arayüz revizyonu" },
+      { label: "Altyapı", value: "ikas" },
+      { label: "Kategori", value: "6 ana kategori" },
+    ],
+    image: "/images/cases/ankaragucu-store.png",
+    demoUrl: "https://ankaragucustore.com.tr/",
+    seoKeywords: [
+      "Ankaragücü Store",
+      "ankaragucustore.com.tr",
+      "Ankaragücü resmi mağaza",
+      "ikas tema özelleştirme",
+      "ikas e-ticaret arayüz revizyonu",
+      "spor kulübü e-ticaret sitesi",
+      "e-ticaret sitesi revizyon",
+      "Aksipal e-ticaret referans",
+    ],
+  },
+  {
     slug: "tiny-bean-coffee",
     category: "ecommerce",
     title: "Tiny Bean Coffee Shop",
     sector: "E-Ticaret",
     summary:
-      "Ankara Balgat'taki Tiny Bean Coffee Shop için uçtan uca e-ticaret altyapısı: butik kahve, Türk kahvesi, bitki çayları, ekipman ve hediye paketlerini satan, iyzico ödeme entegrasyonlu Next.js mağazası. Sepet, favoriler, üyelik, kahve aboneliği ve B2B/toptan akışlarını tek platformda toplayan ilk e-ticaret projemiz. “Ev tadında, huzur kıvamında.”",
+      "Ankara Balgat'taki Tiny Bean Coffee Shop için iyzico ödeme entegrasyonlu Next.js e-ticaret mağazası: ürün kataloğu, sepet, favoriler, üyelik, kahve aboneliği ve toptan/B2B talep akışı tek platformda.",
     problem:
       "10+ yıllık, Google'da 4.7 puanlı fiziksel bir kahve markasının; ürünlerini (espresso harmanları, single-origin filtre, Türk kahvesi çeşitleri, bitki çayları, ekipman, hediye paketleri) çevrim içi satışa açması, güvenli ödeme alması ve sadık müşteri kitlesini aboneliğe taşıması gerekiyordu. Ürün yönetimi, stok, sipariş takibi ve KVKK uyumlu pazarlama izni olmadan sürdürülebilir bir online mağaza kurulamazdı.",
     solution:
@@ -247,12 +353,97 @@ const rawCases = [
     ],
   },
   {
+    slug: "oditron-siber-guvenlik",
+    category: "web",
+    highlights: ["multilingual", "motion"],
+    title: "Oditron Teknoloji",
+    sector: "Siber Güvenlik",
+    summary:
+      "Ankara merkezli siber güvenlik şirketi Oditron Teknoloji için sıfırdan kurumsal web sitesi. Gazete mizanpajlı ana sayfa, çözümler, 23 iş ortağı vitrini, haberler ve iletişim; TR/EN, KVKK ve teknik SEO ile Next.js üzerinde.",
+    problem:
+      "Siber güvenlik danışmanlığı, proaktif güvenlik, Ar-Ge ve eğitim hizmetleri ile yerli ve global ürün portföyünün kurumsal müşterilere tek sitede, sektördeki benzer sitelerden ayrışan bir kurguyla anlatılması gerekiyordu.",
+    solution:
+      "Next.js App Router ile Hakkımızda, Çözümler, İş Ortakları, Haberler, İletişim ve yasal sayfalar. Ana sayfada manşet, köşe yazısı ve sütunlu haber bloklarından oluşan gazete mizanpajı; mobilde tek akışa inen düzen. Görseller markaya özel üretildi; sayfa bazlı meta, Open Graph ve yapılandırılmış veri ile teknik SEO.",
+    stack: [
+      "Next.js (App Router)",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "Çok Dilli (TR/EN)",
+      "Gazete mizanpajı & tipografi",
+      "Geçiş animasyonları",
+      "SEO / Open Graph",
+      "KVKK & çerez uyumu",
+    ],
+    metrics: [
+      { label: "Konsept", value: "Gazete düzeni" },
+      { label: "İş Ortağı Vitrini", value: "23 marka" },
+      { label: "Dil", value: "TR / EN" },
+    ],
+    image: "/images/cases/oditron.png",
+    demoUrl: "https://oditron.com/tr/",
+    seoKeywords: [
+      "Oditron",
+      "Oditron Teknoloji",
+      "oditron.com",
+      "siber güvenlik şirketi web sitesi",
+      "siber güvenlik firması kurumsal web tasarım",
+      "gazete konseptli web sitesi",
+      "Next.js kurumsal web sitesi Ankara",
+      "Aksipal referans",
+    ],
+  },
+  {
+    slug: "obsolix-dns-security",
+    category: "web",
+    highlights: ["multilingual", "motion"],
+    title: "Obsolix",
+    sector: "Siber Güvenlik / SaaS",
+    summary:
+      "Dubai merkezli Obsolix'in DNS güvenlik platformu için üç dilli (EN/TR/AR) kurumsal ürün sitesi. Platform, kaynaklar ve şirket bölümleri, demo talebi akışı; ürün videoları ve görseller tarafımızca üretildi, şirketin kendi sunucularında yayında.",
+    problem:
+      "Teknik derinliği yüksek bir güvenlik ürününün kamu, finans ve savunma alıcılarına üç dilde, sade ve güven veren bir yapıyla anlatılması; ürün, uyumluluk, kaynak ve basın sayfalarının hızlı ve SEO uyumlu tek sitede toplanması gerekiyordu.",
+    solution:
+      "Next.js App Router ile EN/TR/AR dil yapısı ve hreflang; Platform (genel bakış, nasıl çalışır, karşılaştırma, uyumluluk), Kaynaklar (SSS, destek), Şirket ve iletişim sayfaları. Neon vurgulu koyu tema, geçiş animasyonları, her sayfada demo talebi. Tanıtım ve ürün videoları ile görseller stok değil, markaya özel üretildi. Şirketin kendi sunucusunda yayınlandı.",
+    stack: [
+      "Next.js (App Router)",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "Çok Dilli (EN / TR / AR)",
+      "Özgün video & görsel üretimi",
+      "Geçiş animasyonları",
+      "Demo talebi akışı",
+      "SEO / hreflang / Open Graph",
+      "Self-host yayın",
+    ],
+    metrics: [
+      { label: "Dil", value: "EN / TR / AR" },
+      { label: "Video & Görsel", value: "Özgün üretim" },
+      { label: "Yayın", value: "Kendi sunucusu" },
+    ],
+    image: "/images/cases/obsolix.png",
+    demoUrl: "https://obsolix.com/",
+    seoKeywords: [
+      "Obsolix",
+      "obsolix.com",
+      "DNS güvenlik platformu web sitesi",
+      "siber güvenlik SaaS web sitesi",
+      "çok dilli kurumsal web sitesi",
+      "Arapça İngilizce Türkçe web sitesi",
+      "Next.js ürün sitesi",
+      "Dubai şirketi web sitesi",
+      "Aksipal referans",
+    ],
+  },
+  {
     slug: "korsis-teknoloji",
     category: "web",
+    highlights: ["3d", "motion", "multilingual"],
     title: "Korsis Teknoloji",
     sector: "Teknoloji",
     summary:
-      "Korsis Teknoloji A.Ş. kurumsal web sitesi: siber güvenlik, kurumsal ağ altyapısı ve uç nokta koruması odaklı çok sayfalı Next.js uygulaması; Obsolix ürün vitrini, sektör/hizmet modülleri, TR/EN dil, çerez ve KVKK uyumu, teknik SEO ve üst düzey görsel etkiler (3D, motion, glass UI).",
+      "Korsis Teknoloji A.Ş. kurumsal web sitesi: siber güvenlik ve ağ altyapısı odaklı çok sayfalı Next.js uygulaması; Obsolix ürün vitrini, TR/EN dil, KVKK uyumu, teknik SEO ve 3D / motion görsel efektler.",
     problem:
       "Kurumsal siber güvenlik ve ağ mühendisliği alanında faaliyet gösteren şirketin; teknik güvenilirlik, ürün (Obsolix) ve hizmet portföyünün aynı anda anlaşılır şekilde sunulması, Obsolix ve hizmet sayfalarında dönüşüm, referans ve çözüm ortakları görünürlüğü ile profesyonel bir ilk izlenim gerekiyordu. Çok dilli (TR/EN) yapı, yasal sayfalar (KVKK, gizlilik, çerez) ve cookie consent olmadan kurumsal uyum tamamlanamazdı. Rakip teknoloji siteleri arasında ayrışmak için yalnız statik sayfa değil; ileri seviye etkileşim, performans ve SEO sinyalleri bir arada taşınmalıydı.",
     solution:
@@ -295,7 +486,7 @@ const rawCases = [
     title: "DedPharma",
     sector: "İlaç & Sağlık",
     summary:
-      "DedPharma (DeD Farma İlaç Sağlık Tic. San. Ltd. Şti.) kurumsal web sitesi: medikal ürün distribütörü için çok sayfalı Next.js yapı, ürün ve bilim danışma kurulu içerikleri, CE/KFDA ile güven mesajları, KVKK ve gizlilik sayfaları, form ve CTA; teknik SEO, Open Graph ve performans odaklı teslim.",
+      "DedPharma kurumsal web sitesi: medikal ürün distribütörü için çok sayfalı Next.js yapı, ürün ve bilim danışma kurulu içerikleri, KVKK ve gizlilik sayfaları, teknik SEO ve performans odaklı teslim.",
     problem:
       "İlaç ve medikal alanda faaliyet gösteren markanın; kurumsal güven, regülasyonlara uygun içerik sunumu ve sağlık profesyonellerine yönelik net bilgi mimarisi tek bir sitede toplanmalıydı. Ürün bilgileri, bilim danışma kurulu, şirket kimliği ve iletişim kanallarının ayrı ayrı dağınık veya güncelliğini yitirmiş kaynaklarda olması, hem marka aramalarında hem de «DeD Farma», «DedPharma», «Ultracol» gibi niyetli sorgularda görünürlüğü zayıflatıyordu. Yasal gereklilikler (KVKK, gizlilik politikası) ve erişilebilir, hızlı, mobil uyumlu deneyim olmadan kurumsal itibar tam taşınmıyordu.",
     solution:
@@ -408,7 +599,7 @@ const rawCases = [
       { label: "Sertifika / Ödül", value: "Vurgulu" },
       { label: "Sınıf Programı", value: "Entegre" },
     ],
-    image: "/images/templates/gym.png",
+    image: "/images/cases/musclefactory-gym.png",
     demoUrl: "https://musclefactorysportcenter.com/",
   },
   {
@@ -436,7 +627,7 @@ const rawCases = [
     title: "Aksipal Web Studio",
     sector: "Blog",
     summary:
-      "Kişisel satış ve stüdyo tanıtım sitesi. Sektöre özel şablon galerisi (teknoloji, lojistik, spor salonu, enerji, inşaat, taşımacılık vb.), hizmetler, referans projeler, blog ve teklif akışı; premium koyu tema, TR/EN dil desteği, WhatsApp ve form ile dönüşüm odaklı.",
+      "Stüdyo tanıtım sitesi: hizmetler, sektörel paketler, referans projeler, blog ve teklif akışı; koyu tema, TR/EN dil desteği, WhatsApp ve form ile dönüşüm odaklı.",
     problem:
       "Stüdyonun hizmetlerini, şablonları ve referansları tek bir premium sitede sunması; küçük işletmelere net mesaj, filtrelenebilir şablon seçimi ve «Teklif Al» akışı ile erişmesi gerekiyordu.",
     solution:
@@ -453,5 +644,18 @@ const rawCases = [
 ] as const;
 
 export const cases = z.array(caseSchema).parse(rawCases);
+
+export type CaseHighlight = NonNullable<CaseItem["highlights"]>[number];
+
+/** Kart etiketleri için kısa adlar */
+export const caseHighlightLabel: Record<CaseHighlight, { tr: string; en: string }> = {
+  "3d": { tr: "3D", en: "3D" },
+  motion: { tr: "Motion", en: "Motion" },
+  multilingual: { tr: "TR / EN", en: "TR / EN" },
+  "ecommerce-revision": { tr: "Revizyon", en: "Revision" },
+};
+
+/** /isler sayfasında ayrı bölümde gösterilecek 3D / animasyonlu işler */
+export const cases3d = cases.filter((c) => c.highlights?.includes("3d"));
 
 export type CaseItem = z.infer<typeof caseSchema>;

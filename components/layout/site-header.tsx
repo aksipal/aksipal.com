@@ -58,7 +58,7 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
           </div>
         </div>
         <nav className="mb-3 flex gap-2 overflow-x-auto pb-1 md:hidden">
-          {navItems.slice(0, 5).map((item) => (
+          {navItems.map((item) => (
             <Button key={item.href} asChild variant="ghost" size="sm">
               <Link href={withLocale(locale, item.href)}>{item.label[locale]}</Link>
             </Button>

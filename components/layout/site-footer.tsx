@@ -7,13 +7,13 @@ import type { Locale } from "@/lib/i18n";
 import { withLocale } from "@/lib/i18n";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
-const sectorLinks: { slug: string; tr: string; en: string }[] = [
-  { slug: "lojistik", tr: "Lojistik web sitesi", en: "Logistics website" },
-  { slug: "gym", tr: "Spor salonu web sitesi", en: "Gym website" },
-  { slug: "enerji", tr: "Enerji firması web sitesi", en: "Energy company website" },
-  { slug: "danismanlik", tr: "Danışmanlık web sitesi", en: "Consultancy website" },
-  { slug: "oto-yikama", tr: "Oto yıkama web sitesi", en: "Car wash website" },
-  { slug: "insaat", tr: "İnşaat firması web sitesi", en: "Construction website" },
+const serviceLinks: { href: string; tr: string; en: string }[] = [
+  { href: "/hizmetler/kurumsal-web-sitesi", tr: "Kurumsal web sitesi", en: "Corporate website" },
+  { href: "/hizmetler/e-ticaret", tr: "E-ticaret sitesi", en: "E-commerce website" },
+  { href: "/hizmetler/ozel-yazilim", tr: "Kişiye özel yazılım", en: "Custom software" },
+  { href: "/hizmetler", tr: "Yapay zeka ve otomasyon", en: "AI & automation" },
+  { href: "/templates?s=lojistik", tr: "Lojistik firması web sitesi", en: "Logistics website" },
+  { href: "/templates?s=teknoloji", tr: "Teknoloji firması web sitesi", en: "Technology website" },
 ];
 
 const socialConfig = [
@@ -48,7 +48,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
   const copy = {
     tr: {
       pitch:
-        "Yapay zeka ajanları, WhatsApp & süreç otomasyonu ve kurumsal web — Ankara'dan Türkiye geneline. Yazılı sözleşme, sabit fiyat, tek muhatap.",
+        "Kurumsal web sitesi, e-ticaret ve kişiye özel yazılım; yapay zeka ve otomasyon entegrasyonları — Ankara'dan Türkiye geneline. Yazılı sözleşme, sabit fiyat, tek muhatap.",
       quickLinks: "Hızlı Bağlantılar",
       contact: "İletişim",
       legal: "Yasal Metinler",
@@ -59,7 +59,7 @@ export function SiteFooter({ locale }: SiteFooterProps) {
     },
     en: {
       pitch:
-        "AI agents, WhatsApp & workflow automation and premium corporate web — from Ankara across Turkey. Written contract, fixed price, one point of contact.",
+        "Corporate websites, e-commerce and custom software; AI and automation integrations — from Ankara across Turkey. Written contract, fixed price, one point of contact.",
       quickLinks: "Quick Links",
       contact: "Contact",
       legal: "Legal",
@@ -175,19 +175,16 @@ export function SiteFooter({ locale }: SiteFooterProps) {
                 {siteConfig.phone}
               </a>
             </li>
-            <li>{siteConfig.address.addressLocality}, Turkey</li>
+            <li>{locale === "tr" ? "Ankara · Türkiye geneline uzaktan hizmet" : "Ankara · serving all of Turkey remotely"}</li>
           </ul>
           <div className="pt-4">
             <p className="mb-2 text-sm font-semibold text-zinc-200">
-              {locale === "tr" ? "Sektörler" : "Sectors"}
+              {locale === "tr" ? "Hizmetler" : "Services"}
             </p>
             <ul className="space-y-1.5 text-sm text-zinc-400">
-              {sectorLinks.map((s) => (
-                <li key={s.slug}>
-                  <Link
-                    href={`${withLocale(locale, "/templates")}?s=${s.slug}`}
-                    className="hover:text-zinc-100"
-                  >
+              {serviceLinks.map((s) => (
+                <li key={s.href}>
+                  <Link href={withLocale(locale, s.href)} className="hover:text-zinc-100">
                     {locale === "tr" ? s.tr : s.en}
                   </Link>
                 </li>

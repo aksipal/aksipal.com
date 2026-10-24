@@ -35,8 +35,8 @@ export function LeadDialog({
 }: LeadDialogProps) {
   const [sector, setSector] = useState(defaultSector);
   const [template, setTemplate] = useState(defaultTemplate);
-  const [city, setCity] = useState(locale === "tr" ? "İstanbul" : "Istanbul");
-  const [budget, setBudget] = useState(locale === "tr" ? "₺20k-₺40k" : "20k-40k TRY");
+  const [city, setCity] = useState("");
+  const [budget, setBudget] = useState(locale === "tr" ? "Konuşalım" : "Let's discuss");
 
   const copy = {
     tr: {
@@ -45,7 +45,7 @@ export function LeadDialog({
         "Kısa bilgileri doldurun, WhatsApp mesajı otomatik hazırlansın.",
       sector: "Sektör",
       template: "İlgilendiğiniz Hizmet",
-      templatePlaceholder: "AI agent, WhatsApp otomasyon, web sitesi vb.",
+      templatePlaceholder: "Kurumsal web sitesi, e-ticaret, özel yazılım vb.",
       city: "Şehir",
       budget: "Bütçe",
       whatsapp: "WhatsApp'ta Gönder",
@@ -57,7 +57,7 @@ export function LeadDialog({
         "Fill in brief details and we will prepare an automatic WhatsApp message.",
       sector: "Sector",
       template: "Service of Interest",
-      templatePlaceholder: "AI agent, WhatsApp automation, website, etc.",
+      templatePlaceholder: "Corporate website, e-commerce, custom software, etc.",
       city: "City",
       budget: "Budget",
       whatsapp: "Send via WhatsApp",

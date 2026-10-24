@@ -13,7 +13,7 @@ export function buildWhatsAppMessage(payload: WhatsAppPayload) {
   const city = payload.city ?? "[CITY]";
   const budget = payload.budget ?? "[BUDGET]";
 
-  return `Merhaba, ${sector} için web sitesi istiyorum. Şablon: ${template}. Şehir: ${city}. Bütçe: ${budget}.`;
+  return `Merhaba, ${sector} sektöründe faaliyet gösteriyoruz. İlgilendiğimiz hizmet: ${template}. Şehir: ${city}. Bütçe: ${budget}. Bilgi almak istiyorum.`;
 }
 
 export function buildWhatsAppLink(payload: WhatsAppPayload) {

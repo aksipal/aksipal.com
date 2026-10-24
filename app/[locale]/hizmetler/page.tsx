@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 
 import { ContactCta } from "@/components/sections/contact-cta";
 import { FaqSection } from "@/components/sections/faq";
@@ -11,6 +13,8 @@ import {
   getProcessSteps,
   getRevisionPolicy,
 } from "@/lib/pricing";
+import { getServices } from "@/lib/services";
+import { withLocale } from "@/lib/i18n";
 import { absoluteUrl, createPageMetadata, getBreadcrumbJsonLd, getServiceJsonLd } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -32,14 +36,13 @@ export async function generateMetadata({
         : "Services & Pricing | Aksipal Web Studio",
     description:
       locale === "tr"
-        ? "Web paketleri 17.000 TL'den, yapay zeka ajanı 45.000 TL'den, WhatsApp ve süreç otomasyonu 35.000 TL'den başlar (+KDV). Yazılı sözleşme, sabit fiyat. Web teslimi 4–12 iş günü."
-        : "Web packages from ₺17,000; AI agent from ₺45,000; WhatsApp & workflow automation from ₺35,000 (+VAT). Written contract, fixed price. Web delivery in 4–12 business days.",
+        ? "Kurumsal web sitesi paketleri 20.000 TL'den başlar (+KDV); e-ticaret, yapay zeka, otomasyon ve özel yazılım kapsama göre yazılı teklifle. Sabit fiyat, yazılı sözleşme."
+        : "Corporate website packages from ₺20,000 (+VAT); e-commerce, AI, automation and custom software quoted per scope. Fixed price, written contract.",
     keywords:
       locale === "tr"
         ? [
             ...seoKeywordsTr,
             "yapay zeka ajanı fiyat",
-            "WhatsApp bot fiyat",
             "n8n otomasyon fiyat",
             "web sitesi paketi fiyat",
             "özel yazılım Ankara fiyat",
@@ -66,10 +69,51 @@ export default async function ServicesPage({
   const enterprise = getEnterpriseServices(locale);
   const steps = getProcessSteps(locale);
   const policy = getRevisionPolicy(locale);
+  const services = getServices(locale);
 
   return (
     <>
+      {/* Ana hizmet alanları — ayrıntılı sayfalara giriş */}
+      <section className="section-shell pt-16">
+        <div className="space-y-3">
+          <h2 className="text-3xl font-semibold tracking-tight text-white">
+            {locale === "tr" ? "Hizmet Alanlarımız" : "Our Service Areas"}
+          </h2>
+          <p className="max-w-2xl text-zinc-400">
+            {locale === "tr"
+              ? "Üç ana hizmet alanımız: kurumsal web sitesi, e-ticaret altyapısı ve kişiye özel yazılım. Her birinin kapsam, süreç, fiyat ve referanslarını kendi sayfasında ayrıntılı anlattık. Yapay zeka ve otomasyon, bu projelere entegre katman olarak eklenir."
+              : "Our three core service areas: corporate websites, e-commerce platforms and custom software. Each has its own page with scope, process, pricing and references. AI and automation are added as an integrated layer on these projects."}
+          </p>
+        </div>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {services.map((svc) => (
+            <Link
+              key={svc.slug}
+              href={withLocale(locale, `/hizmetler/${svc.slug}`)}
+              className="glass-card group flex flex-col justify-between p-6 transition-colors hover:border-white/20"
+            >
+              <div>
+                <h2 className="text-xl font-semibold text-zinc-100 group-hover:text-[var(--accent)]">
+                  {svc.name}
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-zinc-400">{svc.metaDescription}</p>
+              </div>
+              <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--accent)]">
+                {locale === "tr" ? "Ayrıntılar, fiyat ve referanslar" : "Details, pricing and references"}
+                <ArrowRight className="size-4" aria-hidden />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <PricingSection locale={locale} />
+      <p className="section-shell mt-6 text-sm text-zinc-500">
+        {locale === "tr" ? "Hızlı yayın için sektöre göre hazırlanmış paketler: " : "Sector-ready packages for a fast launch: "}
+        <Link href={withLocale(locale, "/templates")} className="text-[var(--accent)] hover:brightness-110">
+          {locale === "tr" ? "Sektörel Web Çözümleri" : "Sector Web Solutions"}
+        </Link>
+      </p>
 
       {/* Daha Büyük İşler */}
       <section className="section-shell mt-20">

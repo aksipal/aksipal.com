@@ -6,7 +6,8 @@ import { ContactCta } from "@/components/sections/contact-cta";
 import { CaseGrid } from "@/components/sections/case-grid";
 import { seoKeywordsTr } from "@/lib/constants";
 import { isLocale, withLocale } from "@/lib/i18n";
-import { absoluteUrl, createPageMetadata, getBreadcrumbJsonLd } from "@/lib/seo";
+import { cases } from "@/lib/cases";
+import { absoluteUrl, createPageMetadata, getBreadcrumbJsonLd, getItemListJsonLd } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -27,15 +28,17 @@ export async function generateMetadata({
         : "Case Studies | Aksipal Web Studio",
     description:
       locale === "tr"
-        ? "Aksipal Web Studio referans projeleri: yapay zeka ajanları, WhatsApp ve süreç otomasyonu, kurumsal web siteleri. Problem, çözüm, kullanılan teknoloji ve ölçülebilir metriklerle."
-        : "Aksipal Web Studio case studies: AI agents, WhatsApp & workflow automation and corporate websites. Problem, solution, stack and measurable outcomes.",
+        ? "Türkiye genelinde firmalar için yayına aldığımız kurumsal web siteleri ve e-ticaret projeleri — canlı site bağlantılarıyla. Her projede ihtiyaç, çözüm ve kullanılan teknoloji."
+        : "Corporate websites and e-commerce projects we shipped for companies across Turkey — with live site links. Need, solution and stack for every project.",
     keywords:
       locale === "tr"
         ? [
             ...seoKeywordsTr,
             "kurumsal web sitesi referans",
             "web sitesi yaptırma örnekleri",
-            "portfolio Ankara",
+            "e-ticaret sitesi örnekleri",
+            "web yazılım firması referansları",
+            "kurumsal web tasarım portföy",
           ]
         : undefined,
   });
@@ -56,6 +59,14 @@ export default async function WorkPage({
     { name: locale === "tr" ? "Referans Projeler" : "Case Studies", url: absoluteUrl(`/${locale}/isler`) },
   ]);
 
+  const itemListJsonLd = getItemListJsonLd({
+    name: locale === "tr" ? "Aksipal Web Studio referans projeleri" : "Aksipal Web Studio case studies",
+    locale,
+    items: cases
+      .filter((c) => c.kind === "client")
+      .map((c) => ({ name: c.title, url: absoluteUrl(`/${locale}/isler/${c.slug}`) })),
+  });
+
   return (
     <>
       <section className="section-shell pt-16">
@@ -75,21 +86,25 @@ export default async function WorkPage({
         <div className="max-w-2xl space-y-3">
           <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
             {locale === "tr"
-              ? "Referans Projeler — Yapay Zeka, Otomasyon ve Web"
-              : "Case Studies — AI, Automation and Web"}
+              ? "Referans Projeler — Kurumsal Web, E-Ticaret ve Yazılım"
+              : "Case Studies — Corporate Web, E-Commerce and Software"}
           </h1>
           <p className="text-zinc-400">
             {locale === "tr"
-              ? "Sahadan gerçek referanslar: yapay zeka ajanları, WhatsApp ve süreç otomasyonu kurulumları ve sektörel kurumsal web siteleri. Her vakada problem, çözüm, kullanılan teknoloji ve ölçülebilir sonuçlar yer alır. Müşteri kimliği gizli olan vakalar yazılı izinli olarak yayınlanmıştır; ek doğrulama için referans görüşmesi talep edebilirsiniz."
-              : "Real-world references: AI agents, WhatsApp & workflow automation deployments, and sector-specific corporate websites. Every case lists problem, solution, stack and measurable outcomes. Confidential clients are published with written consent — reference calls available on request."}
+              ? "Türkiye genelinde firmalar için yayına aldığımız gerçek projeler: kurumsal web siteleri ve e-ticaret altyapıları. Her projede ihtiyaç, çözüm ve kullanılan teknoloji yer alır; bağlantılar müşterinin canlı sitesine açılır. Yapay zeka ve otomasyon başlığı altındaki kayıtlar, kurulum yaklaşımımızı gösteren örnek senaryolardır ve ayrıca etiketlenmiştir. Dilerseniz referans görüşmesi de ayarlayabiliriz."
+              : "Real projects we shipped for companies across Turkey: corporate websites and e-commerce platforms. Each entry lists the need, the solution and the stack; links open the client's live site. Entries under AI & automation are illustrative scenarios showing our build approach and are labelled accordingly. Reference calls available on request."}
           </p>
         </div>
       </section>
-      <CaseGrid locale={locale} />
+      <CaseGrid locale={locale} show3dSection />
       <ContactCta locale={locale} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
     </>
   );

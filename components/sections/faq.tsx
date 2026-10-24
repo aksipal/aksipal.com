@@ -20,20 +20,20 @@ const faqTr = [
     a: "İhtiyacınıza göre seçiyoruz. Claude (Anthropic) uzun bağlam ve döküman analizinde, OpenAI ailesi ise çok dilli ve geniş ekosistem entegrasyonu olan akışlarda öne çıkıyor. Çoğu projede ikisi birlikte kullanılır; karar maliyet, gecikme (latency) ve senaryoya göre verilir. Veriniz RAG ile modele kontrollü şekilde sunulur — şirket verisi modelin eğitimine girmez.",
   },
   {
-    q: "Otomasyon yatırımı ne kadar sürede kendini amorti eder?",
-    a: "Ölçek olarak: WhatsApp ve süreç otomasyonu yatırımları çoğunlukla 1–3 ay içinde geri döner (haftada 5–10 saatlik manuel iş ortadan kalktığında). Yapay zeka ajanı projelerinde geri dönüş 2–6 ay arasında değişir; 7/24 müşteri desteği veya satış öncesi soru yükü senaryolarında daha hızlıdır. Keşif görüşmesinde sizin operasyonunuz için somut bir tahmin çıkarıyoruz.",
+    q: "Otomasyon veya yapay zeka yatırımı kendini ne zaman amorti eder?",
+    a: "Buna dürüst cevap: operasyonunuza bağlı. Hesap basit — otomasyonun ortadan kaldırdığı haftalık manuel saat × o saatin maliyeti, proje ve aylık model/altyapı giderine bölünür. Keşif görüşmesinde bu hesabı sizin rakamlarınızla birlikte yapıyoruz; geri dönüş süresi makul çıkmıyorsa projeyi önermiyoruz.",
   },
   {
-    q: "Web sitesi süreci nasıl işliyor, ne kadar sürede yayında olur?",
-    a: "Hazır şablon paketlerinde içerikleriniz hazırsa 4–12 iş gününde yayına alıyoruz. Akış: kısa keşif (1 gün) → içerik ve marka uyarlama (2–5 gün) → teknik SEO ve mobil testi (1–2 gün) → canlıya alım. Özel projelerde sprint bazlı çalışıyoruz; her sprintte çalışan teslim alıyorsunuz, toplam süre kapsama göre netleşir.",
+    q: "Kurumsal web sitesi süreci nasıl işliyor, ne kadar sürede yayında olur?",
+    a: "İçerikleriniz hazırsa kurumsal web paketlerinde 4–12 iş gününde yayına alıyoruz. Akış: kısa keşif (1 gün) → bilgi mimarisi, içerik ve marka uyarlama (2–5 gün) → teknik SEO ve mobil testi (1–2 gün) → canlıya alım. E-ticaret ve özel yazılım projelerinde sprint bazlı çalışıyoruz; her sprintte çalışan teslim alıyorsunuz, toplam süre kapsama göre yazılı teklifte netleşir.",
   },
   {
     q: "Fiyatlar nedir, KDV nasıl uygulanıyor?",
-    a: "Sektörel hazır web paketleri 17.000 TL'den başlar; web paketleri 17.000 – 35.000 TL aralığında. Yapay zeka ajanı kurulumları 45.000 TL'den, WhatsApp ve süreç otomasyonu 35.000 TL'den başlar; e-ticaret ve özel yazılım kapsama göre fiyatlandırılır. Tüm fiyatlara KDV hariçtir (+KDV). Yazılı teklifte kapsam, fatura tipi ve ödeme koşulu açıkça belirtilir.",
+    a: "Kurumsal web paketleri 20.000 – 50.000 TL aralığında. E-ticaret, yapay zeka ajanı, WhatsApp ve süreç otomasyonu ile kişiye özel yazılım kapsama göre yazılı teklifle fiyatlandırılır. Tüm fiyatlara KDV hariçtir (+KDV). Yazılı teklifte kapsam, fatura tipi ve ödeme koşulu açıkça belirtilir.",
   },
   {
-    q: "Berber, kuaför, restoran, klinik gibi sektörlere özel şablonunuz var mı?",
-    a: "Evet. Sektöre özel hazır şablonlarımız mevcut: berber & kuaför, klinik ve estetik, lojistik ve taşımacılık, oto yıkama, restoran, butik, danışmanlık, enerji, inşaat, spor salonu, startup ve daha fazlası. İçerik ve görsellerinizi işletmenize göre uyarlıyor, kısa sürede yayına alıyoruz.",
+    q: "Hangi sektörlerde kurumsal web sitesi yaptınız?",
+    a: "Yayında olan referanslarımız: teknoloji ve siber güvenlik (Korsis Teknoloji, Oditron Teknoloji, Dubai merkezli Obsolix), ilaç ve medikal (DedPharma), lüks seyahat ve MICE (Efsense Travel), lojistik ve taşımacılık (Renk Lojistik, Ankara Kamyonetçiler Derneği), enerji (Artel Energy), inşaat ve mekanik tesisat (EL&SA Mekanik), spor ve fitness (Muscle Factory) ve e-ticaret (MKE Ankaragücü resmi mağazası Ankaragücü Store — ikas üzerinde arayüz revizyonu, Tiny Bean Coffee Shop). Hepsini Referans Projeler sayfasından canlı olarak inceleyebilirsiniz. Sektöre özel hazır başlangıç paketlerimiz de hızlı yayın isteyen firmalar için mevcuttur.",
   },
   {
     q: "SEO (arama motoru optimizasyonu) pakete dahil mi?",
@@ -75,8 +75,8 @@ const faqEn = [
     a: "We pick per use case. Claude (Anthropic) shines on long-context document tasks; OpenAI on multilingual, broad-ecosystem flows. Most projects use both. The decision is based on cost, latency and scenario. Your data is exposed via RAG — company data is never used to train the model.",
   },
   {
-    q: "How fast does automation pay back?",
-    a: "Rough scale: WhatsApp + workflow automation usually pays back in 1–3 months (when 5–10 hours/week of manual work disappear). AI agent projects 2–6 months — faster on 24/7 support or pre-sales question load. We give a concrete estimate during the discovery call.",
+    q: "When does an automation or AI investment pay back?",
+    a: "Honest answer: it depends on your operation. The math is simple — weekly manual hours removed × the cost of those hours, divided by project plus monthly model/infrastructure cost. We run that calculation with your numbers in the discovery call; if the payback period isn't reasonable we won't recommend the project.",
   },
   {
     q: "How does the website process work and how long does it take?",
@@ -84,11 +84,11 @@ const faqEn = [
   },
   {
     q: "How are prices structured, is VAT included?",
-    a: "Sector-specific web packages start at ₺17,000; web tiers range ₺17,000–35,000. AI agent setups from ₺45,000; WhatsApp & workflow automation from ₺35,000; e-commerce and custom software are scoped per project. All prices exclude VAT (+KDV). The written quote states scope, invoice type and payment terms clearly.",
+    a: "Corporate web packages range ₺20,000–50,000. E-commerce, AI agents, WhatsApp & workflow automation and custom software are quoted per project. All prices exclude VAT (+KDV). The written quote states scope, invoice type and payment terms clearly.",
   },
   {
-    q: "Do you build sites for barbershops, salons, restaurants or clinics?",
-    a: "Yes — sector-specific templates: barber/salon, clinic & aesthetic, logistics & transport, car wash, restaurant, boutique, consultancy, energy, construction, gym, startup and more. We adapt copy and visuals to your business and launch fast.",
+    q: "Which industries have you built corporate websites for?",
+    a: "Live references: technology & cybersecurity (Korsis Teknoloji, Oditron Teknoloji, Dubai-based Obsolix), pharma & medical (DedPharma), luxury travel & MICE (Efsense Travel), logistics & transport (Renk Lojistik, Ankara Kamyonetçiler Derneği), energy (Artel Energy), construction & mechanical (EL&SA Mekanik), sports & fitness (Muscle Factory) and e-commerce (the official MKE Ankaragücü club store — UI revision on ikas, Tiny Bean Coffee Shop). All are browsable live on the Case Studies page. Sector-specific starter packages are also available for companies that want a fast launch.",
   },
   {
     q: "Is SEO included?",
@@ -131,7 +131,7 @@ export function FaqSection({ locale }: FaqSectionProps) {
       >
         <GradientText colors={["#E9DFFF", "#a78bfa", "#7cff92", "#E9DFFF"]} animationSpeed={10}>
           {locale === "tr"
-            ? "Sık Sorulan Sorular — Yapay Zeka, Otomasyon ve Web"
+            ? "Sık Sorulan Sorular — Kurumsal Web, E-Ticaret, Yazılım ve Yapay Zeka"
             : "Frequently Asked Questions"}
         </GradientText>
       </h2>

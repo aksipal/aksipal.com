@@ -4,12 +4,14 @@ import { cases } from "@/lib/cases";
 import { siteConfig } from "@/lib/constants";
 import { defaultLocale, locales } from "@/lib/i18n";
 import { getAllPostSlugs } from "@/lib/mdx";
+import { serviceSlugs } from "@/lib/services";
 import { templates } from "@/lib/templates";
 
 const staticRoutes: { path: string; freq: "weekly" | "monthly" | "yearly"; priority: number }[] = [
   { path: "", freq: "weekly", priority: 1.0 },
   { path: "/templates", freq: "weekly", priority: 0.9 },
   { path: "/hizmetler", freq: "weekly", priority: 0.9 },
+  ...serviceSlugs.map((slug) => ({ path: `/hizmetler/${slug}`, freq: "weekly" as const, priority: 0.95 })),
   { path: "/isler", freq: "weekly", priority: 0.9 },
   { path: "/iletisim", freq: "monthly", priority: 0.85 },
   { path: "/blog", freq: "weekly", priority: 0.8 },

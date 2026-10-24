@@ -86,13 +86,23 @@ export function createPageMetadata({
   };
 }
 
-/** Vaka çalışması detay sayfaları için yapılandırılmış veri (Article + yayıncı) */
+/**
+ * Vaka çalışması detay sayfaları için yapılandırılmış veri.
+ * Gerçek işlerde (kind=client) `about` ile müşterinin canlı sitesi işaretlenir — arama motoru ve
+ * AI sistemleri "Aksipal şu firmanın sitesini yaptı" ilişkisini kurabilsin. Senaryolarda eklenmez.
+ */
 export function getCaseStudyJsonLd(input: {
   title: string;
   description: string;
   pathname: string;
   locale: Locale;
   image?: string;
+  clientUrl?: string;
+  clientName?: string;
+  isScenario?: boolean;
+  isLab?: boolean;
+  repoUrl?: string;
+  youtubeId?: string;
 }) {
   const pageUrl = absoluteUrl(`/${input.locale}${input.pathname}`);
   const imageUrl = absoluteUrl(input.image ?? "/favicon.png");
@@ -102,6 +112,30 @@ export function getCaseStudyJsonLd(input: {
     "@type": "Article",
     headline: input.title,
     description: input.description,
+    genre: input.isScenario ? "Solution scenario" : input.isLab ? "R&D project" : "Case study",
+    ...(input.isLab && input.repoUrl
+      ? {
+          about: {
+            "@type": "SoftwareSourceCode",
+            name: input.title,
+            codeRepository: input.repoUrl,
+            author: { "@id": `${siteConfig.url}#barisaksipal` },
+          },
+        }
+      : {}),
+    ...(input.youtubeId
+      ? {
+          video: {
+            "@type": "VideoObject",
+            name: input.title,
+            description: input.description,
+            thumbnailUrl: `https://i.ytimg.com/vi/${input.youtubeId}/hqdefault.jpg`,
+            embedUrl: `https://www.youtube-nocookie.com/embed/${input.youtubeId}`,
+            contentUrl: `https://www.youtube.com/watch?v=${input.youtubeId}`,
+            uploadDate: "2026-10-01",
+          },
+        }
+      : {}),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": pageUrl,
@@ -109,8 +143,18 @@ export function getCaseStudyJsonLd(input: {
     url: pageUrl,
     image: imageUrl,
     inLanguage: input.locale === "tr" ? "tr-TR" : "en-US",
+    ...(input.clientUrl && !input.isScenario
+      ? {
+          about: {
+            "@type": "Organization",
+            name: input.clientName ?? input.title,
+            url: input.clientUrl,
+          },
+        }
+      : {}),
     author: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}#organization`,
       name: siteConfig.name,
       url: siteConfig.url,
     },
@@ -143,10 +187,15 @@ export function getLocalBusinessJsonLd() {
       ...siteConfig.address,
     },
     areaServed: [
-      { "@type": "Country", name: "TR" },
+      { "@type": "Country", name: "Türkiye" },
       { "@type": "City", name: "Ankara" },
       { "@type": "City", name: "İstanbul" },
       { "@type": "City", name: "İzmir" },
+      { "@type": "City", name: "Bursa" },
+      { "@type": "City", name: "Antalya" },
+      { "@type": "City", name: "Kocaeli" },
+      { "@type": "City", name: "Konya" },
+      { "@type": "City", name: "Gaziantep" },
     ],
     openingHoursSpecification: [
       {
@@ -190,8 +239,8 @@ export function getServiceJsonLd() {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType:
-      "Yapay zeka ajanı (AI agent) geliştirme, resmi WhatsApp Cloud API ve n8n süreç otomasyonu, özel yazılım geliştirme, kurumsal web sitesi geliştirme ve sektöre özel hazır web sitesi şablonları",
-    areaServed: { "@type": "Country", name: "TR" },
+      "Kurumsal web sitesi geliştirme, e-ticaret yazılımı, kişiye özel yazılım geliştirme, yapay zeka ajanı (AI agent) entegrasyonu, resmi WhatsApp Cloud API ve n8n süreç otomasyonu",
+    areaServed: { "@type": "Country", name: "Türkiye" },
     provider: {
       "@type": "Organization",
       name: siteConfig.legalName,
@@ -241,21 +290,26 @@ export function getOrganizationJsonLd() {
     "@type": "ProfessionalService",
     "@id": `${siteConfig.url}#organization`,
     name: siteConfig.legalName,
-    alternateName: siteConfig.name,
+    alternateName: ["Aksipal", "Akşipal Web Studio", "Aksipal Web Systems Studio"],
+    slogan: "Kurumsal web sitesi, e-ticaret ve özel yazılım — yazılı sözleşme, sabit fiyat, tek muhatap.",
     url: siteConfig.url,
     description: siteConfig.description,
     telephone: siteConfig.phone,
     email: siteConfig.email,
     image: absoluteUrl("/favicon.png"),
     logo: absoluteUrl("/favicon.png"),
+    foundingDate: "2020",
+    founder: { "@id": `${siteConfig.url}#barisaksipal` },
+    numberOfEmployees: { "@type": "QuantitativeValue", value: 1 },
     address: {
       "@type": "PostalAddress",
       ...siteConfig.address,
     },
     areaServed: {
       "@type": "Country",
-      name: "TR",
+      name: "Türkiye",
     },
+    availableLanguage: ["tr", "en"],
     geo: {
       "@type": "GeoCoordinates",
       latitude: 39.9334,
@@ -264,25 +318,30 @@ export function getOrganizationJsonLd() {
     priceRange: "₺₺",
     sameAs: [...siteConfig.sameAs],
     knowsAbout: [
-      "Yapay Zeka Ajanı Geliştirme",
-      "AI Agent Development",
-      "Yapay Zeka Entegrasyonu",
-      "Claude API",
-      "OpenAI API",
-      "RAG (Retrieval-Augmented Generation)",
-      "WhatsApp Otomasyonu",
-      "WhatsApp Cloud API",
-      "Süreç Otomasyonu (n8n)",
-      "İş Süreçleri Otomasyonu",
-      "Özel Yazılım Geliştirme",
-      "Web Sitesi Geliştirme",
+      "Kurumsal Web Sitesi Geliştirme",
       "Kurumsal Web Tasarım",
+      "E-Ticaret Yazılımı",
+      "E-Ticaret Sitesi Kurulumu",
+      "B2B Portal Geliştirme",
+      "Özel Yazılım Geliştirme",
+      "Kuruma Özel Uygulama",
       "Teknik SEO",
+      "Çok Dilli Web Sitesi",
       "Next.js",
       "React",
       "TypeScript",
       "Java",
       "Python",
+      "Node.js",
+      "PostgreSQL",
+      "iyzico Entegrasyonu",
+      "Yapay Zeka Entegrasyonu",
+      "AI Agent Development",
+      "Claude API",
+      "OpenAI API",
+      "RAG (Retrieval-Augmented Generation)",
+      "WhatsApp Cloud API",
+      "Süreç Otomasyonu (n8n)",
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -290,23 +349,33 @@ export function getOrganizationJsonLd() {
       itemListElement: [
         {
           "@type": "OfferCatalog",
-          name: "Yapay Zeka Ajanı (AI Agent) Geliştirme",
+          name: "Kurumsal Web Sitesi Geliştirme",
+          url: absoluteUrl("/tr/hizmetler/kurumsal-web-sitesi"),
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "E-Ticaret Sitesi Geliştirme",
+          url: absoluteUrl("/tr/hizmetler/e-ticaret"),
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "Kişiye Özel Yazılım Geliştirme",
+          url: absoluteUrl("/tr/hizmetler/ozel-yazilim"),
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "Yapay Zeka Ajanı (AI Agent) Entegrasyonu",
+          url: absoluteUrl("/tr/hizmetler"),
         },
         {
           "@type": "OfferCatalog",
           name: "WhatsApp ve Süreç Otomasyonu",
+          url: absoluteUrl("/tr/hizmetler"),
         },
         {
           "@type": "OfferCatalog",
-          name: "Özel Yazılım Projeleri",
-        },
-        {
-          "@type": "OfferCatalog",
-          name: "Kurumsal Web Sitesi Geliştirme",
-        },
-        {
-          "@type": "OfferCatalog",
-          name: "Sektöre Özel Hazır Web Sitesi Şablonları",
+          name: "Sektöre Özel Hazır Web Sitesi Paketleri",
+          url: absoluteUrl("/tr/templates"),
         },
       ],
     },
@@ -322,9 +391,9 @@ export function getPersonJsonLd() {
     name: "Barış Akşipal",
     givenName: "Barış",
     familyName: "Akşipal",
-    jobTitle: "Senior Full-Stack & AI Engineer",
+    jobTitle: "Senior Full-Stack Engineer · Kurucu",
     description:
-      "6+ yıl senior full-stack mühendislik. Yapay zeka ajanı (AI agent) geliştirme, WhatsApp ve süreç otomasyonu, özel yazılım ve premium kurumsal web — Ankara.",
+      "Aksipal Web Studio kurucusu. 6+ yıl senior full-stack mühendislik: kurumsal web sitesi, e-ticaret ve kişiye özel yazılım geliştirme; Java/Python backend, Next.js ve yapay zeka entegrasyonları — Ankara'dan Türkiye geneline.",
     url: absoluteUrl("/tr/hakkimda"),
     image: absoluteUrl("/favicon.png"),
     email: `mailto:${siteConfig.email}`,
@@ -340,16 +409,23 @@ export function getPersonJsonLd() {
       url: siteConfig.url,
     },
     knowsAbout: [
-      "Yapay Zeka Ajanı",
-      "AI Agent",
+      "Kurumsal Web Sitesi Geliştirme",
+      "E-Ticaret Yazılımı",
+      "Özel Yazılım Geliştirme",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Java",
+      "Python",
+      "Node.js",
+      "PostgreSQL",
+      "Teknik SEO",
+      "Yapay Zeka Entegrasyonu",
       "Claude",
       "OpenAI",
       "RAG",
-      "n8n",
       "WhatsApp Cloud API",
-      "Next.js",
-      "Java",
-      "Python",
+      "n8n",
     ],
     knowsLanguage: ["tr", "en"],
     sameAs: [...siteConfig.sameAs],
@@ -369,6 +445,27 @@ export function getFaqJsonLd(
         "@type": "Answer",
         text: item.answer,
       },
+    })),
+  };
+}
+
+/** /isler listesi için ItemList — gerçek referansların toplu işareti */
+export function getItemListJsonLd(input: {
+  name: string;
+  locale: Locale;
+  items: { name: string; url: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: input.name,
+    inLanguage: input.locale === "tr" ? "tr-TR" : "en-US",
+    numberOfItems: input.items.length,
+    itemListElement: input.items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      url: item.url,
     })),
   };
 }
@@ -404,12 +501,14 @@ export function getBlogPostingJsonLd(input: {
     dateModified: input.publishedAt,
     inLanguage: "tr-TR",
     author: {
-      "@type": "Organization",
-      name: siteConfig.name,
-      url: siteConfig.url,
+      "@type": "Person",
+      "@id": `${siteConfig.url}#barisaksipal`,
+      name: "Barış Akşipal",
+      url: absoluteUrl("/tr/hakkimda"),
     },
     publisher: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}#organization`,
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",

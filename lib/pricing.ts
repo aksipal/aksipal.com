@@ -40,7 +40,7 @@ const tiersByLocale: Record<Locale, readonly RawTier[]> = {
       name: "Başlangıç",
       description:
         "Sektörünüze özel, hızlı yayın paketi. Kurumsal web varlığınızı kısa sürede ve şeffaf fiyatla canlıya alın.",
-      price: "17.000 TL + KDV",
+      price: "20.000 TL + KDV",
       delivery: "4–5 iş günü",
       revisions: "1 revizyon turu",
       includes: [
@@ -56,7 +56,7 @@ const tiersByLocale: Record<Locale, readonly RawTier[]> = {
       name: "Gelişim",
       description:
         "Dönüşüm odaklı premium paket: gelişmiş arayüz, performans ve sektöre özel içerik blokları ile markanızı bir adım öne taşır.",
-      price: "22.000 TL + KDV",
+      price: "35.000 TL + KDV",
       delivery: "6–8 iş günü",
       revisions: "2 revizyon turu",
       highlighted: true,
@@ -73,7 +73,7 @@ const tiersByLocale: Record<Locale, readonly RawTier[]> = {
       name: "Kurumsal",
       description:
         "Tamamen size özel kurgu, çok dil, ileri düzey entegrasyonlar ve kullanıcı yönetimi içeren kapsamlı kurumsal paket.",
-      price: "35.000 TL + KDV",
+      price: "50.000 TL + KDV",
       delivery: "8–12 iş günü",
       revisions: "3 revizyon turu",
       includes: [
@@ -95,7 +95,7 @@ const tiersByLocale: Record<Locale, readonly RawTier[]> = {
       name: "Launch",
       description:
         "A sector-specific starter package to get your corporate web presence live fast at a transparent price.",
-      price: "₺17,000 + VAT",
+      price: "₺20,000 + VAT",
       delivery: "4–5 business days",
       revisions: "1 revision round",
       includes: [
@@ -111,7 +111,7 @@ const tiersByLocale: Record<Locale, readonly RawTier[]> = {
       name: "Growth",
       description:
         "Conversion-focused premium package: advanced UI, performance and sector-specific content blocks to step ahead.",
-      price: "₺22,000 + VAT",
+      price: "₺35,000 + VAT",
       delivery: "6–8 business days",
       revisions: "2 revision rounds",
       highlighted: true,
@@ -128,7 +128,7 @@ const tiersByLocale: Record<Locale, readonly RawTier[]> = {
       name: "Scale",
       description:
         "A fully custom solution with multi-language, advanced integrations and user management for enterprise needs.",
-      price: "₺35,000 + VAT",
+      price: "₺50,000 + VAT",
       delivery: "8–12 business days",
       revisions: "3 revision rounds",
       includes: [
@@ -157,8 +157,8 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
       title: "Yapay Zeka Ajanı (AI Agent)",
       description:
         "Claude veya OpenAI tabanlı, şirket verinizi (PDF, web, CRM, Notion) bilen ve gerçek işlem yapabilen ajan. Müşteri desteği, satış öncesi soru yanıtlama veya iç verimlilik senaryoları için RAG, function calling ve WhatsApp / web entegrasyonu dahil teslim edilir.",
-      price: "45.000 TL'den başlayan",
-      priceNote: "Veri kaynağı ve entegrasyon sayısına göre kapsam keşif görüşmesinde netleştirilir (+KDV)",
+      price: "Görüşelim",
+      priceNote: "Veri kaynağı ve entegrasyon sayısına göre kapsam keşif görüşmesinde netleştirilir",
       highlights: [
         "Claude / OpenAI · RAG (vektör veritabanı)",
         "WhatsApp, web widget, Slack veya Discord entegrasyonu",
@@ -171,8 +171,8 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
       title: "WhatsApp ve Süreç Otomasyonu",
       description:
         "n8n + yapay zeka ile uçtan uca otomasyon: form → CRM → e-posta → WhatsApp → fatura akışları. Tekrar eden manuel işi sırtınızdan alır, yanıt süresini saatlerden saniyelere çeker.",
-      price: "35.000 TL'den başlayan",
-      priceNote: "Akış sayısı ve entegre edilen sistem adedine göre değişir (+KDV)",
+      price: "Görüşelim",
+      priceNote: "Akış sayısı ve entegre edilen sistem adedine göre keşif görüşmesinde netleştirilir",
       highlights: [
         "Resmi WhatsApp Cloud API entegrasyonu",
         "Otomatik teklif, randevu ve sipariş akışları",
@@ -185,8 +185,8 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
       title: "E-Ticaret",
       description:
         "Ürün yönetimi, sepet, ödeme ve sipariş takibini kapsayan, performans odaklı e-ticaret kurulumu. Kapsama bağlı olarak özel temalı veya bütünleşik altyapı sunulur.",
-      price: "40.000 TL'den başlayan",
-      priceNote: "Ürün adedi, ödeme sağlayıcı ve entegrasyonlara göre detaylı teklif çıkarılır (+KDV)",
+      price: "Görüşelim",
+      priceNote: "Ürün adedi, ödeme sağlayıcı ve entegrasyonlara göre detaylı teklif çıkarılır",
       highlights: [
         "Ürün kataloğu ve yönetim paneli",
         "Sepet, ödeme ve iyzico/Stripe entegrasyonu",
@@ -229,8 +229,8 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
       title: "AI Agent",
       description:
         "Claude or OpenAI agent that knows your company data (PDFs, web, CRM, Notion) and can take real actions. For support, pre-sales question handling or internal productivity — with RAG, function calling and WhatsApp / web integration included.",
-      price: "from ₺45,000",
-      priceNote: "Final scope set by data sources and integration count (+VAT)",
+      price: "Let's talk",
+      priceNote: "Scope set by data sources and integration count in discovery",
       highlights: [
         "Claude / OpenAI · RAG (vector DB)",
         "WhatsApp, web widget, Slack or Discord integration",
@@ -243,8 +243,8 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
       title: "WhatsApp & Workflow Automation",
       description:
         "End-to-end automation with n8n + AI: form → CRM → email → WhatsApp → invoice. Takes repetitive manual work off your team and slashes response time from hours to seconds.",
-      price: "from ₺35,000",
-      priceNote: "Varies with number of flows and integrated systems (+VAT)",
+      price: "Let's talk",
+      priceNote: "Set by number of flows and integrated systems in discovery",
       highlights: [
         "Official WhatsApp Cloud API integration",
         "Automated quote, appointment and order flows",
@@ -257,8 +257,8 @@ const enterpriseByLocale: Record<Locale, readonly RawEnterprise[]> = {
       title: "E-Commerce",
       description:
         "Performance-focused e-commerce build with product management, cart, payments and order tracking. Delivered with a custom theme or integrated stack depending on scope.",
-      price: "from ₺40,000",
-      priceNote: "Detailed quote based on product count, payment provider and integrations (+VAT)",
+      price: "Let's talk",
+      priceNote: "Detailed quote based on product count, payment provider and integrations",
       highlights: [
         "Product catalog and admin panel",
         "Cart, payments and iyzico/Stripe integration",

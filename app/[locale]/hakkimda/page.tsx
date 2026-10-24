@@ -32,8 +32,8 @@ export async function generateMetadata({
         : "About — Barış Akşipal | Aksipal Web Studio",
     description:
       locale === "tr"
-        ? "Barış Akşipal: 6+ yıl senior full-stack mühendisi. Yapay zeka ajanı (Claude / OpenAI / RAG), WhatsApp ve n8n otomasyonu, Java/Python backend ve Next.js — Ankara'dan, yazılı sözleşmeyle, tek muhatap."
-        : "Barış Akşipal: 6+ years senior full-stack engineer. AI agents (Claude/OpenAI/RAG), WhatsApp & n8n automation, Java/Python backend and Next.js — Ankara, written contract, single point of contact.",
+        ? "Barış Akşipal: 6+ yıl senior full-stack mühendisi. Kurumsal web sitesi, e-ticaret ve kişiye özel yazılım; Java/Python backend, Next.js ve yapay zeka entegrasyonları — Ankara'dan Türkiye geneline, yazılı sözleşmeyle, tek muhatap."
+        : "Barış Akşipal: 6+ years senior full-stack engineer. Corporate websites, e-commerce and custom software; Java/Python backend, Next.js and AI integrations — from Ankara across Turkey, written contract, single point of contact.",
     keywords:
       locale === "tr"
         ? [
@@ -62,8 +62,8 @@ export default async function AboutPage({
       ? [
           {
             icon: Bot,
-            title: "Yapay Zeka ve Otomasyon",
-            text: "Claude / OpenAI tabanlı yapay zeka ajanı geliştirme, RAG (vektör veritabanı), function calling ve n8n + resmi WhatsApp Cloud API ile süreç otomasyonu — sahadan ölçülebilir sonuçlar.",
+            title: "Yapay Zeka ve Otomasyon Entegrasyonu",
+            text: "Claude / OpenAI tabanlı asistanlar, RAG (vektör veritabanı), function calling ve resmi WhatsApp Cloud API / n8n ile süreç otomasyonu — mevcut web ve yazılım projelerinize entegre katman olarak.",
           },
           {
             icon: Code2,
@@ -85,7 +85,7 @@ export default async function AboutPage({
           {
             icon: Bot,
             title: "AI & Automation",
-            text: "Claude / OpenAI based AI agent development, RAG, function calling, n8n workflow + WhatsApp automation — measurable answers to real operational problems.",
+            text: "Claude / OpenAI based assistants, RAG, function calling, n8n workflow + WhatsApp automation — as an integrated layer on your web and software projects.",
           },
           {
             icon: Code2,
@@ -116,8 +116,8 @@ export default async function AboutPage({
         <div className="glass-card p-8 sm:p-12">
           <Badge variant="accent" className="w-fit">
             {locale === "tr"
-              ? "6+ Yıl Senior Mühendislik • Yapay Zeka ve Otomasyon"
-              : "6+ Years Senior Engineering • AI & Automation"}
+              ? "6+ Yıl Senior Mühendislik • Web, E-Ticaret ve Yazılım"
+              : "6+ Years Senior Engineering • Web, E-Commerce & Software"}
           </Badge>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
             {locale === "tr"
@@ -126,13 +126,13 @@ export default async function AboutPage({
           </h1>
           <p className="mt-4 max-w-3xl text-zinc-400">
             {locale === "tr"
-              ? "Ankara merkezli, 6+ yıllık senior full-stack mühendisim. Kurumsal web ve özel yazılımın yanı sıra son 2 yıldır ağırlıklı olarak yapay zeka ajanı (AI agent) ve süreç otomasyonu projeleri geliştiriyorum. Backend tarafında Java, Python ve Node ile API ve entegrasyonlar; frontend tarafında Next.js, React ve TypeScript ile dönüşüm odaklı arayüzler. Yapay zeka tarafında Claude ve OpenAI tabanlı ajanlar, RAG (vektör veritabanı) sistemleri ve resmi WhatsApp Cloud API + n8n ile uçtan uca süreç otomasyonu kuruyorum. Çalışma prensibim sade: yazılı sözleşme, sabit fiyat, sözünde durulan teslim tarihi ve yayın sonrası Türkçe destek — tek muhatap."
-              : "Ankara-based, 6+ years senior full-stack engineer. Corporate web and custom software, plus (for the past 2 years intensively) AI agent and workflow automation projects. Backend: Java, Python, Node — APIs and integrations. Frontend: Next.js / React / TypeScript focused on conversion. AI: Claude / OpenAI agents, RAG (vector DB) systems, and official WhatsApp Cloud API + n8n end-to-end automation. My principle is simple: written contract, fixed price, delivery dates kept, post-launch support in Turkish or English — one point of contact."}
+              ? "Ankara merkezli, 6+ yıllık senior full-stack mühendisim; Türkiye genelinde firmalarla uzaktan çalışıyorum. Ana işim kurumsal web siteleri, e-ticaret altyapıları ve kişiye özel yazılım geliştirmek: backend tarafında Java, Python ve Node ile API ve entegrasyonlar; frontend tarafında Next.js, React ve TypeScript ile hızlı, çok dilli ve dönüşüm odaklı arayüzler. Projelere ihtiyaç duyulduğunda Claude / OpenAI tabanlı yapay zeka asistanları, RAG ve resmi WhatsApp Cloud API ile otomasyon katmanı ekliyorum. Boş zamanımda teknik sınırları zorlayan Ar-Ge projeleri geliştiriyorum; tarayıcıda çalışan açık kaynak MMORPG Ironveil bunlardan biri. Çalışma prensibim sade: yazılı sözleşme, sabit fiyat, sözünde durulan teslim tarihi, kaynak kodun size ait olması ve yayın sonrası Türkçe destek — tek muhatap."
+              : "Ankara-based senior full-stack engineer with 6+ years of experience, working remotely with companies across Turkey. My core work is corporate websites, e-commerce platforms and custom software: Java, Python and Node on the backend for APIs and integrations; Next.js, React and TypeScript on the frontend for fast, multilingual, conversion-focused interfaces. Where a project needs it, I add Claude / OpenAI based AI assistants, RAG and official WhatsApp Cloud API automation. In my spare time I build R&D projects that push technical limits — the open-source browser MMORPG Ironveil is one of them. My principles are simple: written contract, fixed price, delivery dates kept, you own the source code, and post-launch support — one point of contact."}
           </p>
           <p className="mt-3 text-sm text-zinc-500">
             {locale === "tr"
-              ? "6+ yıl deneyim · 40+ ürün ve servis yayını · Ankara merkezli · KVKK uyumlu çalışma"
-              : "6+ years experience · 40+ product/service launches · Ankara · KVKK aware delivery"}
+              ? "6+ yıl deneyim · Yayında 10+ kurumsal referans · Google'da 5 yıldız · Ankara merkezli, Türkiye geneli"
+              : "6+ years experience · 10+ live corporate references · 5 stars on Google · Ankara-based, serving all of Turkey"}
           </p>
         </div>
 

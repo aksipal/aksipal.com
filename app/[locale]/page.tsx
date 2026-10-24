@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { AdvancedServicesTeaser } from "@/components/sections/advanced-services";
 import { CaseGrid } from "@/components/sections/case-grid";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { HeroSection } from "@/components/sections/hero";
@@ -32,15 +31,15 @@ export async function generateMetadata({
 
   const copy = {
     tr: {
-      title: "Aksipal Web Studio | Yapay Zeka, Otomasyon, Premium Web",
+      title: "Kurumsal Web Sitesi, E-Ticaret ve Özel Yazılım | Aksipal",
       description:
-        "Yapay zeka ajanı, WhatsApp ve süreç otomasyonu ve premium kurumsal web siteleri. 4–12 iş gününde canlıda, yazılı sözleşme, KVKK uyumlu — Ankara'dan senior mühendislik.",
+        "Türkiye genelinde firmalar için kurumsal web sitesi, e-ticaret altyapısı ve kişiye özel yazılım. Yayında 10+ referans, yazılı sözleşme, sabit fiyat, 4–12 iş gününde canlıda — Ankara'dan senior mühendislik.",
       keywords: [...seoKeywordsTr],
     },
     en: {
-      title: "Aksipal Web Studio | AI Agents, Automation & Premium Web",
+      title: "Corporate Websites, E-Commerce & Custom Software | Aksipal",
       description:
-        "AI agents, WhatsApp & workflow automation and premium corporate websites. Live in 4–12 business days, contracted, KVKK aware — senior engineering from Ankara.",
+        "Corporate websites, e-commerce platforms and custom software for companies across Turkey. 10+ live references, written contract, fixed price, live in 4–12 business days — senior engineering from Ankara.",
       keywords: [...seoKeywordsEn],
     },
   }[locale];
@@ -73,12 +72,11 @@ export default async function LocaleHomePage({
     <>
       <HeroSection locale={locale as Locale} />
       <TrustBar locale={locale as Locale} />
-      <AdvancedServicesTeaser locale={locale as Locale} />
       <CaseGrid locale={locale as Locale} showAllLink />
-      <TemplatePreview locale={locale as Locale} />
       <Testimonials locale={locale as Locale} />
-      <FaqSection locale={locale as Locale} />
       <MiniInteractive locale={locale as Locale} />
+      <TemplatePreview locale={locale as Locale} />
+      <FaqSection locale={locale as Locale} />
       <ContactCta locale={locale as Locale} />
 
       <script

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Bot, Braces, MessageSquare, Workflow } from "lucide-react";
+import { ArrowRight, Bot, Braces, Globe, ShoppingCart } from "lucide-react";
 
 import GradientText from "@/components/ui/gradient-text";
 import { Badge } from "@/components/ui/badge";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
 import { withLocale } from "@/lib/i18n";
 
-const icons = [Bot, MessageSquare, Workflow, Braces] as const;
+const icons = [Globe, ShoppingCart, Braces, Bot] as const;
 
 type AdvancedServicesTeaserProps = {
   locale: Locale;
@@ -18,52 +18,60 @@ type AdvancedServicesTeaserProps = {
 export function AdvancedServicesTeaser({ locale }: AdvancedServicesTeaserProps) {
   const copy = {
     tr: {
-      badge: "Yüksek Etkili · Stratejik İş Ortaklığı",
-      title: "Yapay Zeka, Otomasyon ve Özel Yazılım",
+      badge: "Hizmetler",
+      title: "Kurumsal Web, E-Ticaret, Özel Yazılım ve Otomasyon",
       subtitle:
-        "Tek başına web sitesinin yetmediği noktada devreye giriyoruz. Bot değil — sizin diliniz konuşan, sizin verinizi bilen yapay zeka ajanları (AI agent), resmi WhatsApp Cloud API otomasyonu ve özel yazılım ile ekibinizin haftada saatlerce harcadığı tekrar eden işi sırtınızdan alıyoruz. Aşağıdaki rakamlar gerçek kurulumlarımızdan ölçülen metriklerdir.",
+        "Web sitesinin tek başına yetmediği noktada devreye giriyoruz. Kurumsal web sitesinden e-ticaret altyapısına, kişiye özel yazılımdan yapay zeka ve süreç otomasyonuna kadar firmanızın dijital tarafını tek muhatapla yürütüyoruz: yazılı sözleşme, sabit fiyat, kaynak kod sizde. Siber güvenlik, sağlık, lojistik, enerji, turizm ve spor sektörlerinde yayında referanslarımızı inceleyebilirsiniz.",
       items: [
         {
-          title: "Yapay Zeka Ajanı (AI Agent)",
-          desc: "Claude / OpenAI tabanlı, şirket verinizi (PDF, web, CRM, Notion) RAG ile bilen ajan. Örnek: B2B yazılım firmasında satış öncesi tekrar eden sorularda %70 yük azalması; ekip yalnızca sıcak fırsata bakıyor.",
+          title: "Kurumsal Web Sitesi",
+          desc: "Next.js ile hızlı açılan, çok dilli (TR/EN ve ötesi), teknik SEO'su ve KVKK sayfaları hazır kurumsal siteler. İstenirse 3D ve animasyonlu arayüz. Örnek: Korsis Teknoloji, Oditron, Obsolix. 4–12 iş gününde yayında.",
+          href: "/hizmetler/kurumsal-web-sitesi",
         },
         {
-          title: "WhatsApp Otomasyonu",
-          desc: "Resmi WhatsApp Cloud API üzerinden teklif, randevu ve sipariş akışları — toplu mesaj/spam aracı değil. Örnek: Estetik klinikte yanıt süresi 4 saatten 90 saniyeye, randevu kaçırma oranı yarı yarıya.",
+          title: "E-Ticaret Altyapısı",
+          desc: "Ürün ve stok yönetimi, sepet, iyzico/Stripe ödeme, üyelik, abonelik ve B2B/toptan akışları; aylık lisans yok, kaynak kod sizde. Sıfırdan mağaza (Tiny Bean Coffee) veya mevcut mağazada arayüz revizyonu (Ankaragücü Store).",
+          href: "/hizmetler/e-ticaret",
         },
         {
-          title: "Süreç Otomasyonu (n8n)",
-          desc: "Form → CRM → e-posta → fatura → WhatsApp gibi tekrar eden zincirleri yapay zeka destekli pipeline'a dönüştürüyoruz. Örnek: Lojistikte sürücü–müşteri eşleştirme 8 saatten 30 dakikaya indi.",
+          title: "Kişiye Özel Yazılım",
+          desc: "Excel ve WhatsApp gruplarında yürüyen operasyonu tek panele taşıyan iç uygulamalar, bayi/B2B portalları, sistemler arası entegrasyon katmanı veya SaaS MVP. Java / Python / Node backend + Next.js arayüz; iki haftalık sprintler, her sprintte çalışan teslim.",
+          href: "/hizmetler/ozel-yazilim",
         },
         {
-          title: "Özel Yazılım",
-          desc: "İç panel, B2B portal, e-ticaret, entegrasyon, SaaS MVP — Java / Python backend + Next.js ile uçtan uca. Sprint bazlı, her sprintte çalışan teslim, ek kalem yok.",
+          title: "Yapay Zeka ve Otomasyon",
+          desc: "Claude / OpenAI tabanlı, şirket dökümanlarınızı RAG ile bilen asistanlar; resmi WhatsApp Cloud API üzerinden teklif, randevu ve sipariş akışları; n8n ile tekrar eden iş zincirlerinin otomasyonu. Mevcut web veya yazılım projenize entegre katman olarak.",
+          href: "/hizmetler",
         },
       ],
       cta: "Ücretsiz Keşif Görüşmesi Ayırın",
       explore: "Hizmetler ve Şeffaf Fiyatlar",
     },
     en: {
-      badge: "High-impact · Strategic Partnership",
-      title: "AI, Automation and Custom Software",
+      badge: "Services",
+      title: "Corporate Web, E-Commerce, Custom Software and Automation",
       subtitle:
-        "Where a website alone isn't enough. Not a bot — AI agents that speak your team's language and know your data, plus official WhatsApp Cloud API automations and custom software. We take hours of repetitive work off your team every week. The numbers below are measured from real deployments.",
+        "Where a website alone isn't enough. From corporate websites to e-commerce platforms, custom software to AI and workflow automation, we run your company's digital side with one point of contact: written contract, fixed price, you own the code. Live references in cybersecurity, healthcare, logistics, energy, travel and sports.",
       items: [
         {
-          title: "AI Agent",
-          desc: "Claude / OpenAI agents that know your data (PDFs, web, CRM, Notion) via RAG. Example: B2B SaaS — 70% drop in repetitive pre-sales questions; team focuses only on warm leads.",
+          title: "Corporate Website",
+          desc: "Fast-loading, multilingual (TR/EN and beyond) Next.js corporate sites with technical SEO and KVKK pages built in; 3D and animated UI on request. Examples: Korsis Teknoloji, Oditron, Obsolix. Live in 4–12 business days.",
+          href: "/hizmetler/kurumsal-web-sitesi",
         },
         {
-          title: "WhatsApp Automation",
-          desc: "Official WhatsApp Cloud API quote, appointment and order flows — not bulk-messaging/spam tooling. Example: aesthetic clinic — response time 4h → 90s, no-shows halved.",
-        },
-        {
-          title: "Workflow Automation (n8n)",
-          desc: "Repetitive Form → CRM → email → invoice → WhatsApp loops turned into AI-augmented pipelines. Example: logistics — driver-to-customer match 8h → 30min.",
+          title: "E-Commerce Platform",
+          desc: "Product and stock management, cart, iyzico/Stripe payments, membership, subscriptions and B2B/wholesale flows; no monthly license, you own the code. A new store (Tiny Bean Coffee) or a UI revision of an existing one (Ankaragücü Store).",
+          href: "/hizmetler/e-ticaret",
         },
         {
           title: "Custom Software",
-          desc: "Internal tools, B2B portals, e-commerce, integrations, SaaS MVPs — Java/Python backend + Next.js. Sprint-based, working delivery each cycle, no extra line items.",
+          desc: "Internal tools that move Excel-and-WhatsApp operations into one panel, dealer/B2B portals, integration layers between systems or SaaS MVPs. Java / Python / Node backend + Next.js UI; two-week sprints, working delivery each cycle.",
+          href: "/hizmetler/ozel-yazilim",
+        },
+        {
+          title: "AI & Automation",
+          desc: "Claude / OpenAI assistants that know your documents via RAG; quote, appointment and order flows over the official WhatsApp Cloud API; n8n automation of repetitive work chains. Integrated as a layer on your existing web or software project.",
+          href: "/hizmetler",
         },
       ],
       cta: "Book a Free Discovery Call",
@@ -97,7 +105,11 @@ export function AdvancedServicesTeaser({ locale }: AdvancedServicesTeaserProps) 
                   className="rounded-2xl border border-white/10 bg-black/30 p-5 transition-colors hover:border-white/20"
                 >
                   <Icon className="mb-2 size-5 text-[var(--accent)]" aria-hidden />
-                  <h3 className="text-base font-semibold text-[#E9DFFF]">{item.title}</h3>
+                  <h3 className="text-base font-semibold text-[#E9DFFF]">
+                    <Link href={withLocale(locale, item.href)} className="hover:text-[var(--accent)]">
+                      {item.title}
+                    </Link>
+                  </h3>
                   <p className="mt-1.5 text-xs leading-6 text-[#B8B3D1]">{item.desc}</p>
                 </article>
               );

@@ -30,13 +30,6 @@ export const navItems = [
     },
   },
   {
-    href: "/templates",
-    label: {
-      tr: "Sektörel Çözümler",
-      en: "Solutions",
-    },
-  },
-  {
     href: "/hizmetler",
     label: {
       tr: "Hizmetler",
@@ -46,7 +39,7 @@ export const navItems = [
   {
     href: "/isler",
     label: {
-      tr: "İşler",
+      tr: "Referanslar",
       en: "Work",
     },
   },

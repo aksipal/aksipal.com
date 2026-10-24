@@ -21,32 +21,20 @@ export function HeroSection({ locale }: HeroSectionProps) {
       title: "Markanıza Özel Dijital Çözümler Geliştiriyoruz",
       subtitle: "WEB · E-TİCARET · MOBİL · OTOMASYON · YAPAY ZEKA",
       description:
-        "Kurumsal firmalar, KOBİ'ler ve esnaflar için web sitesi, e-ticaret altyapısı, mobil uygulama, yapay zeka ajanları, otomasyon sistemleri ve özel yazılım projelerini markanıza özel geliştiriyoruz.",
+        "Kurumsal firmalar, büyüyen işletmeler ve girişimler için web sitesi, e-ticaret altyapısı, mobil uygulama, yapay zeka ajanları, otomasyon sistemleri ve özel yazılım projelerini markanıza özel geliştiriyoruz.",
       quote: "WhatsApp'tan Yazın",
-      templates: "Çözümleri İnceleyin",
+      templates: "Referansları İnceleyin",
       quickForm: "Keşif Görüşmesi Yapın",
-      bullets: [
-        "Modern Tasarım",
-        "Güçlü Altyapı",
-        "SEO Uyumlu",
-        "Bakım ve Destek",
-      ],
     },
     en: {
       badge: "AI · Automation · Custom Software",
       title: "We Build Brand-Tailored Digital Solutions",
       subtitle: "WEB · E-COMMERCE · MOBILE · AUTOMATION · AI",
       description:
-        "For enterprises, SMBs and local businesses we build brand-tailored websites, e-commerce infrastructure, mobile applications, AI agents, automation systems and custom software.",
+        "For enterprises, growing businesses and startups we build brand-tailored websites, e-commerce infrastructure, mobile applications, AI agents, automation systems and custom software.",
       quote: "Message on WhatsApp",
-      templates: "Explore Solutions",
+      templates: "See Our Work",
       quickForm: "Book a Discovery Call",
-      bullets: [
-        "Modern Design",
-        "Solid Infrastructure",
-        "SEO Friendly",
-        "Maintenance & Support",
-      ],
     },
   }[locale];
 
@@ -103,7 +91,7 @@ export function HeroSection({ locale }: HeroSectionProps) {
               </a>
             </Button>
             <Button asChild size="lg" variant="secondary">
-              <Link href={withLocale(locale, "/templates")} data-cta="hero-templates">
+              <Link href={withLocale(locale, "/isler")} data-cta="hero-work">
                 {copy.templates}
                 <ArrowRight className="size-4" aria-hidden />
               </Link>
@@ -111,14 +99,6 @@ export function HeroSection({ locale }: HeroSectionProps) {
             <LeadDialog locale={locale} buttonText={copy.quickForm} buttonVariant="outline" />
           </div>
 
-          <ul className="grid w-full grid-cols-1 gap-x-5 gap-y-2 text-left text-sm text-[#B8B3D1] sm:grid-cols-2 sm:text-[15px] lg:grid-cols-4">
-            {copy.bullets.map((b) => (
-              <li key={b} className="flex items-start gap-2">
-                <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>

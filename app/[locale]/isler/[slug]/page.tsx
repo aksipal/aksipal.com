@@ -2,12 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Bot, ExternalLink, Lock } from "lucide-react";
+import { Bot, ExternalLink, FlaskConical, Github } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cases } from "@/lib/cases";
-import { siteConfig } from "@/lib/constants";
 import { isLocale, locales, withLocale } from "@/lib/i18n";
 import { absoluteUrl, createPageMetadata, getBreadcrumbJsonLd, getCaseStudyJsonLd } from "@/lib/seo";
 
@@ -71,6 +70,12 @@ export default async function CaseDetailPage({
     pathname: `/isler/${slug}`,
     locale,
     image: found.image,
+    clientUrl: found.demoUrl,
+    clientName: found.title,
+    isScenario: found.kind === "scenario",
+    isLab: found.kind === "lab",
+    repoUrl: found.repoUrl,
+    youtubeId: found.youtubeId,
   });
 
   const breadcrumbJsonLd = getBreadcrumbJsonLd([
@@ -103,7 +108,11 @@ export default async function CaseDetailPage({
         {found.image ? (
           <Image
             src={found.image}
-            alt={`${found.title} — ${found.sector} referans projesi | Aksipal Web Studio`}
+            alt={
+              found.kind === "scenario"
+                ? `${found.title} — ${found.sector} örnek çözüm senaryosu | Aksipal Web Studio`
+                : `${found.title} — ${found.sector} referans projesi | Aksipal Web Studio`
+            }
             width={1200}
             height={700}
             className="h-64 w-full object-cover sm:h-80"
@@ -116,12 +125,10 @@ export default async function CaseDetailPage({
               <p className="text-xl font-semibold tracking-tight text-[#E9DFFF]">
                 {found.visualTag ?? found.sector}
               </p>
-              {found.confidential ? (
+              {found.kind === "scenario" ? (
                 <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.18em] text-zinc-400">
-                  <Lock className="size-3.5" aria-hidden />
-                  {locale === "tr"
-                    ? "Müşteri gizli — yazılı izin gerekiyor"
-                    : "Confidential client — written consent required"}
+                  <FlaskConical className="size-3.5" aria-hidden />
+                  {locale === "tr" ? "Örnek çözüm senaryosu" : "Example solution scenario"}
                 </span>
               ) : null}
             </div>
@@ -131,6 +138,27 @@ export default async function CaseDetailPage({
           <header className="space-y-3">
             <div className="flex flex-wrap items-center gap-3">
               <Badge>{found.sector}</Badge>
+              {found.kind === "scenario" ? (
+                <Badge variant="accent">
+                  {locale === "tr" ? "Örnek Senaryo" : "Example Scenario"}
+                </Badge>
+              ) : null}
+              {found.kind === "lab" ? (
+                <Badge variant="accent">{locale === "tr" ? "Ar-Ge Projesi" : "R&D Project"}</Badge>
+              ) : null}
+              {found.repoUrl ? (
+                <Button asChild variant="outline" size="sm">
+                  <a
+                    href={found.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5"
+                  >
+                    <Github className="size-3.5" />
+                    {locale === "tr" ? "Kaynak Kod (GitHub)" : "Source Code (GitHub)"}
+                  </a>
+                </Button>
+              ) : null}
               {found.demoUrl ? (
                 <Button asChild variant="outline" size="sm">
                   <a
@@ -140,19 +168,60 @@ export default async function CaseDetailPage({
                     className="inline-flex items-center gap-1.5"
                   >
                     <ExternalLink className="size-3.5" />
-                    {locale === "tr" ? "Canlı Demo" : "View Demo"}
+                    {locale === "tr" ? "Canlı Siteyi Aç" : "Open Live Site"}
                   </a>
                 </Button>
               ) : null}
             </div>
             <h1 className="text-4xl font-semibold tracking-tight text-white">{found.title}</h1>
             <p className="max-w-2xl text-zinc-400">{found.summary}</p>
+            {found.kind === "lab" ? (
+              <p className="max-w-2xl rounded-xl border border-[var(--accent)]/30 bg-[var(--accent)]/5 p-4 text-sm leading-6 text-zinc-300">
+                {locale === "tr"
+                  ? "Müşteri projesi değil, kendi geliştirdiğimiz Ar-Ge projesi. Kaynak kodu açık, süreç videoda; şu an canlı sunucu yok."
+                  : "Not a client project — an R&D project we built ourselves. Source is public, the process is on video; no live server at the moment."}
+              </p>
+            ) : null}
+            {found.kind === "scenario" ? (
+              <p className="max-w-2xl rounded-xl border border-[var(--accent)]/30 bg-[var(--accent)]/5 p-4 text-sm leading-6 text-zinc-300">
+                {locale === "tr"
+                  ? "Bu bir müşteri referansı değil; bu tür bir projeyi nasıl kurguladığımızı gösteren örnek senaryodur. Değerler hedef ve kapsamdır, ölçülmüş sonuç değildir."
+                  : "Not a client reference; an example scenario showing how we would build this kind of project. Values are targets and scope, not measured results."}
+              </p>
+            ) : null}
           </header>
+
+          {found.youtubeId ? (
+            <section aria-label={locale === "tr" ? "Tanıtım videosu" : "Video"}>
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-black">
+                <iframe
+                  className="aspect-video w-full"
+                  src={`https://www.youtube-nocookie.com/embed/${found.youtubeId}`}
+                  title={`${found.title} — ${locale === "tr" ? "tanıtım videosu" : "video"}`}
+                  loading="lazy"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              <p className="mt-2 text-xs text-zinc-500">
+                {locale === "tr"
+                  ? "Video YouTube'un gizlilik dostu (youtube-nocookie) oynatıcısıyla gömülüdür; oynatmadan çerez bırakmaz."
+                  : "Embedded with YouTube's privacy-enhanced (youtube-nocookie) player; no cookies until you press play."}
+              </p>
+            </section>
+          ) : null}
 
           <div className="grid gap-6 lg:grid-cols-2">
             <section>
               <h2 className="text-xl font-semibold text-zinc-100">
-                {locale === "tr" ? "Problem" : "Problem"}
+                {locale === "tr"
+                  ? found.kind === "lab"
+                    ? "Neden yaptık?"
+                    : "Problem"
+                  : found.kind === "lab"
+                    ? "Why we built it"
+                    : "Problem"}
               </h2>
               <p className="mt-3 leading-7 text-zinc-300">{found.problem}</p>
             </section>
@@ -180,7 +249,13 @@ export default async function CaseDetailPage({
             </section>
             <section>
               <h3 className="text-lg font-semibold text-zinc-100">
-                {locale === "tr" ? "Metrikler" : "Metrics"}
+                {found.kind === "scenario"
+                  ? locale === "tr"
+                    ? "Hedef ve Kapsam"
+                    : "Targets & Scope"
+                  : locale === "tr"
+                    ? "Öne Çıkanlar"
+                    : "Highlights"}
               </h3>
               <div className="mt-3 grid grid-cols-3 gap-3">
                 {found.metrics.map((metric) => (

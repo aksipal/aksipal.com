@@ -33,8 +33,8 @@ export async function generateMetadata({
         : "Contact | Aksipal Web Studio",
     description:
       locale === "tr"
-        ? "Yapay zeka ajanı, WhatsApp ve süreç otomasyonu, özel yazılım veya web sitesi için WhatsApp, telefon, e-posta veya formdan ulaşın. 24 saat içinde yazılı yanıt."
-        : "Reach out for AI agent, WhatsApp / workflow automation, custom software or website quotes — WhatsApp, phone, email or form. Written reply within 24 hours.",
+        ? "Kurumsal web sitesi, e-ticaret, kişiye özel yazılım veya yapay zeka / otomasyon projeniz için WhatsApp, telefon, e-posta veya formdan ulaşın. 24 saat içinde yazılı yanıt."
+        : "Reach out for corporate website, e-commerce, custom software or AI / automation quotes — WhatsApp, phone, email or form. Written reply within 24 hours.",
     keywords:
       locale === "tr"
         ? [...seoKeywordsTr, "iletişim", "yapay zeka teklif", "otomasyon teklif", "web sitesi teklif"]
@@ -78,8 +78,8 @@ export default async function ContactPage({
         </h1>
         <p className="text-zinc-400">
           {locale === "tr"
-            ? "Yapay zeka ajanı, WhatsApp ve süreç otomasyonu, özel yazılım veya web sitesi — projenizi kısaca anlatın, 24 saat içinde net aksiyon planı, yazılı sözleşmeli fiyat ve teslim tarihi ile yanıtlayayım. Acil ihtiyaçlar için WhatsApp en hızlısı."
-            : "AI agent, WhatsApp & workflow automation, custom software or website — share a short brief and I'll respond within 24 hours with a clear plan, contracted price and delivery date. WhatsApp is fastest for urgent needs."}
+            ? "Kurumsal web sitesi, e-ticaret, kişiye özel yazılım veya yapay zeka / otomasyon — projenizi kısaca anlatın, 24 saat içinde net aksiyon planı, yazılı sözleşmeli fiyat ve teslim tarihi ile yanıtlayayım. Türkiye'nin her yerinden uzaktan çalışıyoruz; acil ihtiyaçlar için WhatsApp en hızlısı."
+            : "Corporate website, e-commerce, custom software or AI / automation — share a short brief and I'll respond within 24 hours with a clear plan, contracted price and delivery date. We work remotely with companies anywhere in Turkey; WhatsApp is fastest for urgent needs."}
         </p>
       </div>
 

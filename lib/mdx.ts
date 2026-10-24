@@ -49,7 +49,7 @@ const parsePost = async (slug: string): Promise<BlogPost> => {
     description: String(data.description ?? ""),
     publishedAt: String(data.publishedAt ?? new Date().toISOString()),
     tags: parseStringArray(data.tags),
-    coverImage: String(data.coverImage ?? "/images/cases/emlak-case.svg"),
+    coverImage: String(data.coverImage ?? "/images/blog/kurumsal-web-sitesi-fiyatlari.png"),
     readingMinutes: minutes,
     keywords: parseStringArray(data.keywords),
     faq: parseFaq(data.faq),
